@@ -1,15 +1,46 @@
 package uo.sdi.acciones;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import uo.sdi.business.Services;
+import uo.sdi.business.TaskService;
+import uo.sdi.business.exception.BusinessException;
+import uo.sdi.dto.Task;
+import uo.sdi.dto.User;
+import alb.util.log.Log;
 
 public class ListarTareasInboxAction implements Accion {
 
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		return null;
+		String resultado="EXITO";
+		HttpSession session=request.getSession();
+		User user = (User) session.getAttribute("user");
+		
+		//All not finished tasks in the user's inbox (without category)
+		List<Task> listaTareasInbox;
+		
+		try {
+			TaskService taskService = Services.getTaskService();
+			listaTareasInbox=taskService.findInboxTasksByUserId(Long.valueOf(user.getId()));
+			
+			request.setAttribute("listaTareasInbox", listaTareasInbox);
+			Log.debug("Obtenida lista de tareas del día conteniendo [%d] tareas", 
+					listaTareasInbox.size());
+		}
+		catch (BusinessException b) {
+			Log.debug("Algo ha ocurrido obteniendo lista de tareas: %s",
+					b.getMessage());
+			resultado="FRACASO";
+		}
+		return resultado;
 	}
 	
 	@Override

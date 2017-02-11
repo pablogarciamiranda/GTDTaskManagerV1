@@ -8,7 +8,7 @@ import uo.sdi.business.TaskService;
 import uo.sdi.business.exception.BusinessException;
 import alb.util.log.Log;
 
-public class DuplicarCategoria implements Accion {
+public class DuplicarCategoriaAction implements Accion {
 
 	@Override
 	public String execute(HttpServletRequest request,

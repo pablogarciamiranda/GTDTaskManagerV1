@@ -26,7 +26,6 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		crearMapaDeNavegacion();
     }
 	
-
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 				throws IOException, ServletException {
 		

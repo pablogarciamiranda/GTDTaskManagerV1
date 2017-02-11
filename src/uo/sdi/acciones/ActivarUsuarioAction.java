@@ -18,7 +18,7 @@ public class ActivarUsuarioAction implements Accion {
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) {
 		
-String resultado = "EXITO";
+		String resultado = "EXITO";
 		
 		HttpSession session = request.getSession();
 		User user = ((User) session.getAttribute("user"));

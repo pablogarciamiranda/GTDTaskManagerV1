@@ -18,20 +18,24 @@ public class ValidarseAction implements Accion {
 		
 		String resultado="EXITO";
 		String nombreUsuario=request.getParameter("nombreUsuario");
+		String passwordUsuario = request.getParameter("passwordUsuario");
 		HttpSession session=request.getSession();
+		
+		
 		if (session.getAttribute("user")==null) {
 			UserService userService = Services.getUserService();
 			User userByLogin=null;
 			try {
-				userByLogin = userService.findLoggableUser(nombreUsuario, 
-						nombreUsuario+"123");
-			} catch (BusinessException b) {
+				userByLogin = userService.findLoggableUser(nombreUsuario, passwordUsuario);
+			} catch (BusinessException b) { 
+				//Si ocurre alguna excepción de negocio.					
 				session.invalidate();
 				Log.debug("Algo ha ocurrido intentando iniciar sesión [%s]: %s", 
 						nombreUsuario,b.getMessage());
-				request.setAttribute("mensajeParaElUsuario", b.getMessage());
+				request.setAttribute("error", b.getMessage());
 				resultado="FRACASO";
 			}
+			//Si el login es correcto.
 			if (userByLogin!=null) {
 				session.setAttribute("user", userByLogin);
 				int contador=Integer.parseInt((String)request.getServletContext()
@@ -41,6 +45,7 @@ public class ValidarseAction implements Accion {
 				session.setAttribute("fechaInicioSesion", new java.util.Date());
 				Log.info("El usuario [%s] ha iniciado sesión",nombreUsuario);
 			}
+			//Si el login es incorrecto
 			else {
 				session.invalidate();
 				Log.info("El usuario [%s] no está registrado",nombreUsuario);
@@ -50,6 +55,7 @@ public class ValidarseAction implements Accion {
 			}
 		}
 		else
+			//Si se intenta iniciar sesión teniendo la sesion iniciada
 			if (!nombreUsuario.equals(session.getAttribute("user"))) {
 				Log.info("Se ha intentado iniciar sesión como [%s] teniendo la sesión iniciada como [%s]",
 						nombreUsuario,((User)session.getAttribute("user")).getLogin());

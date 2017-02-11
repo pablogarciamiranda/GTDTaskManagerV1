@@ -37,29 +37,27 @@ public class RegistrarseAction implements Accion {
 			if (!password.equals(confirmContraseña)) {
 				errors.add("Las contraseñas deben de ser iguales.");
 				Log.debug("El usuario ha introducido contraseñas diferentes");
-			}
-			try {
-				User user = new User();
-				user.setLogin(login);
-				user.setEmail(email);
-				user.setPassword(password);
-				user.setStatus(UserStatus.ENABLED);
+			} else {
+				try {
+					User user = new User();
+					user.setLogin(login);
+					user.setEmail(email);
+					user.setPassword(password);
+					user.setStatus(UserStatus.ENABLED);
 
-				// Ya te comprueba que el usuario no esta registrado
-				UserService userService = Services.getUserService();
-				userService.registerUser(user);
-			} catch (BusinessException b) {
-				// Aqui hay que hacer lo que tu dices de pillar la excepcion y
-				// mostrar al cliente que el usuario ya está registrado.
-
-				resultado = "FRACASO";
+					UserService userService = Services.getUserService();
+					userService.registerUser(user);
+				} catch (BusinessException b) {
+					errors.add(b.getMessage());
+					Log.debug("Ha ocurrido algo durante el registro y no se ha completado ");
+				}
 			}
 		}
 
-		if (errors.size() > 0)
+		if (errors.size() > 0) {
 			resultado = "FRACASO";
-
-		request.setAttribute("errors", errors);
+			request.setAttribute("errors", errors);
+		}
 		return resultado;
 	}
 

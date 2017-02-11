@@ -32,35 +32,35 @@ public class ModificarDatosAction implements Accion {
 		User userClone = Cloner.clone(user);
 
 		// If new fields are empty
-		if (FieldsCheck.invalidFieldCheck(newEmail, newPassword, newPassword2)){
+		if (FieldsCheck.invalidFieldCheck(newEmail, newPassword, newPassword2)) {
 			errors.add("Existen campos vacios, por favor, rellenalos todos.");
 			Log.debug(
 					"El usuario [%s] no ha rellando los 3 campos al actualizar datos",
 					user.getLogin());
-		}
-		else{
-			//Logica relacionada con la Vista
-			if (!user.getEmail().equals(newEmail)){
+		} else {
+			// Logica relacionada con la Vista
+			if (!user.getEmail().equals(newEmail)) {
 				userClone.setEmail(newEmail);
 				Log.debug("Modificado el email de [%s] con el valor [%s]",
 						userClone.getLogin(), newEmail);
 			}
-			if  (user.getEmail().equals(newEmail)){
+			if (user.getEmail().equals(newEmail)) {
 				errors.add("El email no se ha modificado porque coincide con el anterior.");
 				Log.debug("El email no se ha modificado porque coincide con el anterior.");
-				
+
 			}
-			if (!user.getPassword().equals(newPassword) && newPassword.equals(newPassword2)){
+			if (!user.getPassword().equals(newPassword)
+					&& newPassword.equals(newPassword2)) {
 				userClone.setPassword(newPassword);
 				Log.debug("Modificada la password de [%s]",
 						userClone.getLogin());
 			}
-			if (!newPassword.equals(newPassword2)){
+			if (!newPassword.equals(newPassword2)) {
 				errors.add("Las nuevas passwords no coinciden");
 				Log.debug("Las nuevas passwords no coinciden");
 
 			}
-			if (user.getPassword().equals(newPassword)){
+			if (user.getPassword().equals(newPassword)) {
 				errors.add("La nueva password debe de ser distinta a la anterior.");
 				Log.debug("La password introducida coincide con el anterior");
 			}
@@ -69,19 +69,19 @@ public class ModificarDatosAction implements Accion {
 				userService.updateUserDetails(userClone);
 
 				session.setAttribute("user", userClone);
-			} catch (BusinessException b) { //Excepciones que tienen que ver con la capa de business.
-											//Ej: la password no cumple los caracteres mínimos o el email no es valido
-				errors.add("Algo ha ocurrido actualizando los datos del usuario " + user.getLogin());
+			} catch (BusinessException b) {
+				errors.add("Algo ha ocurrido actualizando los datos del usuario. "
+						+ b.getMessage());
 				Log.debug(
 						"Algo ha ocurrido actualizando los datos del usuario [%s]",
 						user.getLogin());
 			}
 		}
-		
-		if (errors.size() > 0)
+
+		if (errors.size() > 0) {
 			resultado = "FRACASO";
-		
-		request.setAttribute("errors", errors);
+			request.setAttribute("errors", errors);
+		}
 		return resultado;
 	}
 

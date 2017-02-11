@@ -26,7 +26,7 @@ public class ValidarseAction implements Accion {
 			UserService userService = Services.getUserService();
 			User userByLogin=null;
 			try {
-				userByLogin = userService.findLoggableUser(nombreUsuario, passwordUsuario);
+				userByLogin = userService.findLoggableUser(nombreUsuario);
 			} catch (BusinessException b) { 
 				//Si ocurre alguna excepción de negocio.					
 				session.invalidate();
@@ -35,17 +35,29 @@ public class ValidarseAction implements Accion {
 				request.setAttribute("error", b.getMessage());
 				resultado="FRACASO";
 			}
-			//Si el login es correcto.
+			//Si el nombre de usuario existe
 			if (userByLogin!=null) {
-				session.setAttribute("user", userByLogin);
-				int contador=Integer.parseInt((String)request.getServletContext()
-						.getAttribute("contador"));
-				request.getServletContext().setAttribute("contador", 
-						String.valueOf(contador+1));
-				session.setAttribute("fechaInicioSesion", new java.util.Date());
-				Log.info("El usuario [%s] ha iniciado sesión",nombreUsuario);
+				//Si la contraseña es correcta
+				if (userByLogin.getPassword().equals(passwordUsuario)){
+					session.setAttribute("user", userByLogin);
+					int contador=Integer.parseInt((String)request.getServletContext()
+							.getAttribute("contador"));
+					request.getServletContext().setAttribute("contador", 
+							String.valueOf(contador+1));
+					session.setAttribute("fechaInicioSesion", new java.util.Date());
+					Log.info("El usuario [%s] ha iniciado sesión",nombreUsuario);
+				}
+				//Si la contraseña es incorrecta
+				else{
+					session.invalidate();
+					Log.info("La contraseña del usuario [%s] es incorrecta",nombreUsuario);
+					request.setAttribute("mensajeParaElUsuario", "La contraseña del usuario ["+
+							nombreUsuario+"] es incorrecta");
+					resultado="FRACASO";
+				}
+				
 			}
-			//Si el login es incorrecto
+			//Si el nombre de usuario no existe
 			else {
 				session.invalidate();
 				Log.info("El usuario [%s] no está registrado",nombreUsuario);

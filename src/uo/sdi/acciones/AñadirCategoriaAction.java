@@ -21,7 +21,7 @@ public class AñadirCategoriaAction implements Accion {
 		//Datos de la categoria
 		HttpSession session = request.getSession();
 		User user = ((User) session.getAttribute("user"));
-		String name = (String) session.getAttribute("categoryName");
+		String name = request.getParameter("name");
 		
 		Category category = new Category();
 		category.setUserId(user.getId());

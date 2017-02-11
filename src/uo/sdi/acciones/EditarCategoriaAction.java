@@ -22,7 +22,7 @@ public class EditarCategoriaAction implements Accion {
 		//Datos de la categoria
 		HttpSession session = request.getSession();
 		Category category = (Category) session.getAttribute("category");
-		String newName = (String) session.getAttribute("newNameCategory");
+		String newName = request.getParameter("name");
 		
 		Category cloneCategory = Cloner.clone(category);
 		cloneCategory.setName(newName);

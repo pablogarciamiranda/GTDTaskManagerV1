@@ -2,12 +2,10 @@ package uo.sdi.acciones;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import uo.sdi.business.Services;
 import uo.sdi.business.TaskService;
 import uo.sdi.business.exception.BusinessException;
-import uo.sdi.dto.Category;
 import alb.util.log.Log;
 
 public class DuplicarCategoria implements Accion {
@@ -19,13 +17,11 @@ public class DuplicarCategoria implements Accion {
 		String resultado = "EXITO";
 		
 		//Datos de la categoria
-		HttpSession session = request.getSession();
-		Category category = (Category) session.getAttribute("category");
-		
+		long categoryid = Long.parseLong(request.getParameter("categoryID"));
 		
 		try {
 			TaskService taskService = Services.getTaskService();
-			taskService.duplicateCategory(category.getId());
+			taskService.duplicateCategory(categoryid);
 		}
 		catch (BusinessException b) {
 			request.setAttribute("error", b.getMessage());

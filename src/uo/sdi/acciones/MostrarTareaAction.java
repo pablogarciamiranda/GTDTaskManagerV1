@@ -2,38 +2,34 @@ package uo.sdi.acciones;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import uo.sdi.business.Services;
 import uo.sdi.business.TaskService;
 import uo.sdi.business.exception.BusinessException;
-import uo.sdi.dto.Category;
-import uo.sdi.dto.User;
+import uo.sdi.dto.Task;
 import alb.util.log.Log;
 
-public class AñadirCategoriaAction implements Accion {
+public class MostrarTareaAction implements Accion {
 
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) {
+		
 		String resultado = "EXITO";
 		
 		//Datos de la categoria
-		HttpSession session = request.getSession();
-		User user = ((User) session.getAttribute("user"));
-		String name = request.getParameter("name");
-		
-		Category category = new Category();
-		category.setUserId(user.getId());
-		category.setName(name);
+		Long taskid = Long.parseLong(request.getParameter("taskID"));
 		
 		try {
 			TaskService taskService = Services.getTaskService();
-			taskService.createCategory(category);
+			
+			Task task = taskService.findTaskById(taskid);
+			
+			request.setAttribute("task", task);
 		}
 		catch (BusinessException b) {
 			request.setAttribute("error", b.getMessage());
-			Log.debug("Algo ha ocurrido creando la categoria: %s",
+			Log.debug("Algo ha ocurrido buscando la tarea: %s",
 					b.getMessage());
 			resultado="FRACASO";
 		}

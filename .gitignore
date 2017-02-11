@@ -1,6 +1,8 @@
 .metadata
 bin/
 tmp/
+build/
+data/test.properties
 *.tmp
 *.bak
 *.swp

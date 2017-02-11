@@ -16,7 +16,7 @@
 		<c:forEach var="entry" items="${listaTareasDia}" varStatus="i">
 			<tr id="item_${i.index}">
 				<td>${entry.id}</td>
-				<td>${entry.tittle}</td>
+				<td>${entry.title}</td>
 				<td>${entry.planned}</td>
 			</tr>
 		</c:forEach>

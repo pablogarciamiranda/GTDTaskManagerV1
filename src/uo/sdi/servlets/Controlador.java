@@ -124,15 +124,15 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		
 		Map<String,Accion> mapaRegistrado=new HashMap<String,Accion>();
 		mapaRegistrado.put("modificarDatos", new ModificarDatosAction());
-		mapaRegistrado.put("cerrarSesionAction", new CerrarSesionAction());
-		mapaRegistrado.put("listarTareasDiaAction", new ListarTareasDiaAction());
+		mapaRegistrado.put("cerrarSesion", new CerrarSesionAction());
+		mapaRegistrado.put("listarTareasDia", new ListarTareasDiaAction());
 		mapaDeAcciones.put("USUARIO", mapaRegistrado);
 		
 		
 		Map<String,Accion> mapaAdministrador=new HashMap<String,Accion>();
 		mapaAdministrador.put("modificarDatos", new ModificarDatosAction());
-		mapaAdministrador.put("cerrarSesionAction", new CerrarSesionAction());
-		mapaAdministrador.put("listarTareasDiaAction", new ListarTareasDiaAction());
+		mapaAdministrador.put("cerrarSesion", new CerrarSesionAction());
+		mapaAdministrador.put("listarTareasDia", new ListarTareasDiaAction());
 		mapaDeAcciones.put("ADMIN", mapaAdministrador);
 	}
 	

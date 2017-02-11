@@ -3,6 +3,8 @@ bin/
 tmp/
 build/
 data/test.properties
+data/test.log
+data/test.properties
 *.tmp
 *.bak
 *.swp

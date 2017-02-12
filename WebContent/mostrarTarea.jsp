@@ -42,9 +42,9 @@
 			</tr>
 
 	</table>
-			<form method="POST" action="editarTarea" class="formDark">
-			<input type="hidden" value="${task.id}" name="taskId" /> 
-			<input type="submit" class="button" value="Editar tarea" />
+			<form method="POST" action="modificarTarea">
+				<input type="hidden" value="${task.id}" name="taskId" /> 
+				<input type="submit" class="button" value="Editar tarea" />
 			</form>
 	<%@ include file="pieDePagina.jsp" %>
 </body>

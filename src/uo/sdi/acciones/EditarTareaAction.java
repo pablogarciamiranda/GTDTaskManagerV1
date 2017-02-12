@@ -34,19 +34,17 @@ public class EditarTareaAction implements Accion {
 		// Datos del task
 		String taskId = request.getParameter("taskId");
 		
-		String newName = request.getParameter("name");
-		String newPlannedDate = request.getParameter("plannedDate");
-		String newComment = request.getParameter("comment");
-		String newCategoryId = request.getParameter("categoryId");
+		String newTitle = request.getParameter("newTitle");
+		String newPlannedDate = request.getParameter("newPlannedDate");
+		String newComment = request.getParameter("newComment");
+		//String newCategoryId = request.getParameter("newCategoryId");
 		
 		//Find task
 		TaskService taskService = Services.getTaskService();
 		Task task;
 		try {
 			//Find categories from user to add to the model
-			User user = ((User) session.getAttribute("user"));
-			List<Category> categories = taskService.findCategoriesByUserId(user.getId());
-			request.setAttribute("categories", categories);
+		
 
 			task = taskService.findTaskById(Long.parseLong(taskId));
 		} catch (BusinessException b) {
@@ -60,16 +58,16 @@ public class EditarTareaAction implements Accion {
 		
 		// If new fields are empty
 
-		if (FieldsCheck.invalidFieldCheck(newName, newPlannedDate, newComment, newCategoryId)) {
+		if (FieldsCheck.invalidFieldCheck(newTitle, newPlannedDate, newComment)) {
 			errors.add("Existen campos vacios, por favor, rellenalos todos.");
 			Log.debug(
 					"El usuario no ha rellado los campos al actualizar datos");
 			return "FRACASO";
 		}
 		//Set new fields
-		cloneTask.setTitle(newName);
+		cloneTask.setTitle(newTitle);
 		cloneTask.setComments(newComment);
-		cloneTask.setCategoryId(Long.valueOf(newCategoryId));
+		//cloneTask.setCategoryId(Long.valueOf(newCategoryId));
 		
 		DateFormat formatter = new SimpleDateFormat("d-MMM-yyyy,HH:mm:ss aaa");
 
@@ -86,7 +84,7 @@ public class EditarTareaAction implements Accion {
 		try {
 			taskService.updateTask(cloneTask);
 
-			request.setAttribute("task", cloneTask);
+			//request.setAttribute("task", cloneTask);
 		} catch (BusinessException b) {
 			request.setAttribute("error", b.getMessage());
 			Log.debug("Algo ha ocurrido editando la tarea: %s", b.getMessage());

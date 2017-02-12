@@ -12,12 +12,15 @@
 				<th>ID</th>
 				<th>Tittle</th>
 				<th>Planned</th>
+				<th>Options</th>
 			</tr>
-		<c:forEach var="entry" items="${listaTareasDia}" varStatus="i">
+		<c:forEach var="task" items="${listaTareasDia}" varStatus="i">
 			<tr id="item_${i.index}">
-				<td>${entry.id}</td>
-				<td>${entry.title}</td>
-				<td>${entry.planned}</td>
+				<td>${task.id}</td>
+				<td>${task.title}</td>
+				<td>${task.planned}</td>
+				<td><a href="mostrarTarea?taskId=${task.id}">Ver</a>
+				</td>
 			</tr>
 		</c:forEach>
 	</table>

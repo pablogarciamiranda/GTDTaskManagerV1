@@ -9,12 +9,15 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import uo.sdi.business.Services;
 import uo.sdi.business.TaskService;
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.business.impl.util.FieldsCheck;
+import uo.sdi.dto.Category;
 import uo.sdi.dto.Task;
+import uo.sdi.dto.User;
 import uo.sdi.dto.util.Cloner;
 import alb.util.log.Log;
 
@@ -26,7 +29,8 @@ public class EditarTareaAction implements Accion {
 		
 		String resultado = "EXITO";
 		List<String> errors = new ArrayList<String>();
-
+		HttpSession session = request.getSession();
+		
 		// Datos del task
 		String taskId = request.getParameter("taskId");
 		
@@ -39,6 +43,11 @@ public class EditarTareaAction implements Accion {
 		TaskService taskService = Services.getTaskService();
 		Task task;
 		try {
+			//Find categories from user to add to the model
+			User user = ((User) session.getAttribute("user"));
+			List<Category> categories = taskService.findCategoriesByUserId(user.getId());
+			request.setAttribute("categories", categories);
+
 			task = taskService.findTaskById(Long.parseLong(taskId));
 		} catch (BusinessException b) {
 			request.setAttribute("error", b.getMessage());
@@ -50,6 +59,7 @@ public class EditarTareaAction implements Accion {
 		Task cloneTask = Cloner.clone(task);
 		
 		// If new fields are empty
+
 		if (FieldsCheck.invalidFieldCheck(newName, newPlannedDate, newComment, newCategoryId)) {
 			errors.add("Existen campos vacios, por favor, rellenalos todos.");
 			Log.debug(

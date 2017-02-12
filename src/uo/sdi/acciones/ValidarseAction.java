@@ -39,6 +39,7 @@ public class ValidarseAction implements Accion {
 			if (userByLogin!=null) {
 				//Si la contraseña es correcta
 				if (userByLogin.getPassword().equals(passwordUsuario)){
+					//Solo introducimos al usuario en session una vez que hace login
 					session.setAttribute("user", userByLogin);
 					int contador=Integer.parseInt((String)request.getServletContext()
 							.getAttribute("contador"));

@@ -208,7 +208,7 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		resultadoYJSP.put("FRACASO","/editarTarea.jsp");
 		opcionResultadoYJSP.put("editarTarea", resultadoYJSP);
 		
-		resultadoYJSP.put("EXITO","/mostrarTarea.jsp");
+		resultadoYJSP.put("EXITO","/editarTarea.jsp");
 		resultadoYJSP.put("FRACASO","/modificarTarea.jsp");
 		opcionResultadoYJSP.put("modificarTarea", resultadoYJSP);
 		

@@ -9,22 +9,22 @@
 <body>
 	<table border="1" align="center">
 			<tr>
-				<th>ID</th>
-				<th>Nombre</th>
+				<th>Lista</th>
+				<th>Acciones</th>
 			</tr>	
 			<tr id="inbox">
-				<td>Inbox</td>
+				<td><a href="listarTareasInbox">Inbox</a></td>
 			</tr>
 			<tr id="hoy">
-				<td>Hoy</td>
+				<td><a href="listarTareasHoy">Hoy</a></td>
 			</tr>
 			<tr id="semana">
-				<td>Esta semana</td>
+				<td><a href="listarTareasSemana">Esta semana</a></td>
 			</tr>
 		<c:forEach var="entry" items="${listaCategorias}" varStatus="i">
-			<tr id="item_${i.index}">
-				<td><a href="mostrarCategoria?id=${entry.id}">${entry.id}</a></td>
-				<td>${entry.name}</td>
+			<tr id="item_${i.index}">	
+				<td><a href="listarTareas?id=${entry.id}">${entry.name}</a></td>
+				<td><a href="mostrarCategoria?id=${entry.id}">Editar</a></td>
 			</tr>
 		</c:forEach>
 	</table>

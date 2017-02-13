@@ -130,10 +130,12 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		mapaRegistrado.put("modificarDatos", new ModificarDatosAction());
 		mapaRegistrado.put("cerrarSesion", new CerrarSesionAction());
 		
+		
 		//Listar tareareas
-		mapaRegistrado.put("listarTareasDia", new ListarTareasDiaAction());
+		mapaRegistrado.put("listarTareasHoy", new ListarTareasHoyAction());
 		mapaRegistrado.put("listarTareasSemana", new ListarTareasSemanaAction());
 		mapaRegistrado.put("listarTareasInbox", new ListarTareasInboxAction());
+		mapaRegistrado.put("listarTareas", new ListarTareasAction());
 		
 		//Gestionar Tareas
 		mapaRegistrado.put("mostrarTarea", new MostrarTareaAction());
@@ -220,9 +222,9 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		opcionResultadoYJSP.put("listarCategorias", resultadoYJSP);
 			
 		resultadoYJSP=new HashMap<String, String>();
-		resultadoYJSP.put("EXITO","/listarTareasDia.jsp");
-		resultadoYJSP.put("FRACASO","/listarTareasDia.jsp");
-		opcionResultadoYJSP.put("listarTareasDia", resultadoYJSP);
+		resultadoYJSP.put("EXITO","/listarTareasHoy.jsp");
+		resultadoYJSP.put("FRACASO","/listarTareasHoy.jsp");
+		opcionResultadoYJSP.put("listarTareasHoy", resultadoYJSP);
 		
 		resultadoYJSP=new HashMap<String, String>();
 		resultadoYJSP.put("EXITO","/listarTareasInbox.jsp");
@@ -233,6 +235,11 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		resultadoYJSP.put("EXITO","/listarTareasSemana.jsp");
 		resultadoYJSP.put("FRACASO","/listarTareasSemana.jsp");
 		opcionResultadoYJSP.put("listarTareasSemana", resultadoYJSP);
+		
+		resultadoYJSP=new HashMap<String, String>();
+		resultadoYJSP.put("EXITO","/listarTareas.jsp");
+		resultadoYJSP.put("FRACASO","/listarTareas.jsp");
+		opcionResultadoYJSP.put("listarTareas", resultadoYJSP);
 		
 		//Mostrar Tarea
 		resultadoYJSP=new HashMap<String, String>();

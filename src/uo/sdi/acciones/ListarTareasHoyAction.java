@@ -8,14 +8,12 @@ import javax.servlet.http.HttpSession;
 
 import uo.sdi.business.Services;
 import uo.sdi.business.TaskService;
-import uo.sdi.business.UserService;
 import uo.sdi.business.exception.BusinessException;
-import uo.sdi.dto.Category;
 import uo.sdi.dto.Task;
 import uo.sdi.dto.User;
 import alb.util.log.Log;
 
-public class ListarTareasDiaAction implements Accion {
+public class ListarTareasHoyAction implements Accion {
 
 	@Override
 	public String execute(HttpServletRequest request,
@@ -25,15 +23,15 @@ public class ListarTareasDiaAction implements Accion {
 		HttpSession session=request.getSession();
 		User user = (User) session.getAttribute("user");
 		
-		List<Task> listaTareasDia;
+		List<Task> listaTareasHoy;
 		
 		try {
 			TaskService taskService = Services.getTaskService();
-			listaTareasDia=taskService.findTodayTasksByUserId(Long.valueOf(user.getId()));
+			listaTareasHoy=taskService.findTodayTasksByUserId(Long.valueOf(user.getId()));
 			
-			request.setAttribute("listaTareasDia", listaTareasDia);
+			request.setAttribute("listaTareasHoy", listaTareasHoy);
 			Log.debug("Obtenida lista de tareas del día conteniendo [%d] tareas", 
-					listaTareasDia.size());
+					listaTareasHoy.size());
 		}
 		catch (BusinessException b) {
 			Log.debug("Algo ha ocurrido obteniendo lista de tareas: %s",

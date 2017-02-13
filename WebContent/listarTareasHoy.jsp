@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-<title>TaskManager - Listado de tareas del Inbox</title>
+<title>TaskManager - Listado de tareas del día</title>
 </head>
 <body>
 	<table border="1" align="center">
@@ -14,7 +14,7 @@
 				<th>Planned</th>
 				<th>Options</th>
 			</tr>
-		<c:forEach var="task" items="${listaTareasInbox}" varStatus="i">
+		<c:forEach var="task" items="${listaTareasHoy}" varStatus="i">
 			<tr id="item_${i.index}">
 				<td>${task.id}</td>
 				<td>${task.title}</td>

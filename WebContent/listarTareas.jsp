@@ -10,11 +10,11 @@
 	<table border="1" align="center">
 			<tr>
 				<th>ID</th>
-				<th>Tittle</th>
+				<th>Title</th>
 				<th>Planned</th>
 				<th>Options</th>
 			</tr>
-		<c:forEach var="task" items="${listaTareasDia}" varStatus="i">
+		<c:forEach var="task" items="${listaTareas}" varStatus="i">
 			<tr id="item_${i.index}">
 				<td>${task.id}</td>
 				<td>${task.title}</td>

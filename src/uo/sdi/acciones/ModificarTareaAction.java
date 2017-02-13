@@ -41,4 +41,8 @@ public class ModificarTareaAction implements Accion{
 		return "EXITO";
 	}
 
+	@Override
+	public String toString() {
+		return getClass().getName();
+	}
 }

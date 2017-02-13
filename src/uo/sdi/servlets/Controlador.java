@@ -101,7 +101,7 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 	}
 	
 	
-	// Obtiene la p�gina JSP a la que habr� que entregar el
+	// Obtiene la página JSP a la que habr� que entregar el
 	// control el funci�n de la opci�n enviada desde el navegador
 	// y el resultado de la ejecuci�n de la acci�n asociada
 	private String buscarJSPEnMapaNavegacionSegun(String rol, String opcion, String resultado) {
@@ -147,6 +147,7 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		mapaRegistrado.put("editarCategoria", new EditarCategoriaAction());
 		mapaRegistrado.put("eliminarCategoria", new EliminarCategoriaAction());
 		mapaRegistrado.put("duplicarCategoria", new DuplicarCategoriaAction());
+		mapaRegistrado.put("listarCategorias", new ListarCategoriasAction());
 
 		mapaDeAcciones.put("USUARIO", mapaRegistrado);
 		
@@ -213,6 +214,11 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		opcionResultadoYJSP.put("editarCategoria", resultadoYJSP);
 		
 		//Listar Tareas y Categorias
+		resultadoYJSP=new HashMap<String, String>();
+		resultadoYJSP.put("EXITO","/listarCategorias.jsp");
+		resultadoYJSP.put("FRACASO","/listarCategorias.jsp");
+		opcionResultadoYJSP.put("listarCategorias", resultadoYJSP);
+			
 		resultadoYJSP=new HashMap<String, String>();
 		resultadoYJSP.put("EXITO","/listarTareasDia.jsp");
 		resultadoYJSP.put("FRACASO","/listarTareasDia.jsp");

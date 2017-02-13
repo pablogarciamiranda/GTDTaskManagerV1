@@ -11,6 +11,15 @@
 			<tr>
 				<th>ID</th>
 				<th>Nombre</th>
+			</tr>	
+			<tr id="inbox">
+				<td>Inbox</td>
+			</tr>
+			<tr id="hoy">
+				<td>Hoy</td>
+			</tr>
+			<tr id="semana">
+				<td>Esta semana</td>
 			</tr>
 		<c:forEach var="entry" items="${listaCategorias}" varStatus="i">
 			<tr id="item_${i.index}">

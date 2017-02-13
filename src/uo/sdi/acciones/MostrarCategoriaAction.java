@@ -10,30 +10,27 @@ import uo.sdi.dto.Category;
 import uo.sdi.dto.Task;
 import alb.util.log.Log;
 
-public class MostrarTareaAction implements Accion {
+public class MostrarCategoriaAction implements Accion {
 
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) {
-		
+
 		String resultado = "EXITO";
 		
-		//Datos de la tarea
-		Long taskid = Long.parseLong(request.getParameter("taskId"));
+		//Datos de la categoria
+		Long categoryid = Long.parseLong(request.getParameter("categoryId"));
 		
 		try {
 			TaskService taskService = Services.getTaskService();
 			
-			Task task = taskService.findTaskById(taskid);
-			
-			Category category = taskService.findCategoryById(task.getCategoryId());
-			
-			request.setAttribute("task", task);
+			Category category = taskService.findCategoryById(categoryid);
+
 			request.setAttribute("category", category);
 		}
 		catch (BusinessException b) {
 			request.setAttribute("error", b.getMessage());
-			Log.debug("Algo ha ocurrido buscando la tarea: %s",
+			Log.debug("Algo ha ocurrido buscando la categoria: %s",
 					b.getMessage());
 			resultado="FRACASO";
 		}

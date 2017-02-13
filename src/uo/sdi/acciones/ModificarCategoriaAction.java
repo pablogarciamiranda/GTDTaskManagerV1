@@ -14,27 +14,22 @@ import uo.sdi.dto.Category;
 import uo.sdi.dto.Task;
 import uo.sdi.dto.User;
 
-public class ModificarTareaAction implements Accion{
+public class ModificarCategoriaAction implements Accion{
 
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) {
 		
-		Long taskid = Long.parseLong(request.getParameter("taskId"));
-		TaskService taskService = Services.getTaskService();
-		HttpSession session = request.getSession();
-		
+		Long categoryid = Long.parseLong(request.getParameter("categoryId"));
+		TaskService taskService = Services.getTaskService();		
 		try {
 			
-			User user = ((User) session.getAttribute("user"));
-			List<Category> categories = taskService.findCategoriesByUserId(user.getId());
-			request.setAttribute("categories", categories);
+			Category category = taskService.findCategoryById(categoryid);
+			request.setAttribute("category", category);
 			
-			Task task = taskService.findTaskById(taskid);
-			request.setAttribute("task", task);
 		} catch (BusinessException b) {
 			request.setAttribute("error", b.getMessage());
-			Log.debug("Algo ha ocurrido editando la tarea: %s", b.getMessage());
+			Log.debug("Algo ha ocurrido editando la categoria: %s", b.getMessage());
 		
 			return "FRACASO";
 		}

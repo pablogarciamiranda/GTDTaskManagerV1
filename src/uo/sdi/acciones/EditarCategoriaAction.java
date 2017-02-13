@@ -26,7 +26,7 @@ public class EditarCategoriaAction implements Accion {
 		//Datos de la category
 		String categoryId = request.getParameter("categoryId");
 		
-		String newName = request.getParameter("name");
+		String newName = request.getParameter("newName");
 		
 		//Find category
 		TaskService taskService = Services.getTaskService();

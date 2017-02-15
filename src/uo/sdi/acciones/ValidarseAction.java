@@ -8,8 +8,10 @@ import javax.servlet.http.HttpSession;
 
 import uo.sdi.business.AdminService;
 import uo.sdi.business.Services;
+import uo.sdi.business.TaskService;
 import uo.sdi.business.UserService;
 import uo.sdi.business.exception.BusinessException;
+import uo.sdi.dto.Category;
 import uo.sdi.dto.User;
 import alb.util.log.Log;
 
@@ -61,6 +63,20 @@ public class ValidarseAction implements Accion {
 							e.printStackTrace();
 						}
 						request.setAttribute("listOfUsers", listOfUsers);
+					}
+					//Añadimos las categorias
+					else{
+						TaskService taskService = Services.getTaskService();
+						List<Category> listaCategorias = null;
+						try {
+							Services.getTaskService();
+							listaCategorias = taskService.findCategoriesByUserId(userByLogin.getId());
+						} catch (BusinessException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+						request.setAttribute("listaCategorias", listaCategorias);
 					}
 				}
 				//Si la contraseña es incorrecta

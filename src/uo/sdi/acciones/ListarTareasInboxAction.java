@@ -29,7 +29,7 @@ public class ListarTareasInboxAction implements Accion {
 			TaskService taskService = Services.getTaskService();
 			listaTareasInbox=taskService.findInboxTasksByUserId(Long.valueOf(user.getId()));
 			
-			request.setAttribute("listaTareasInbox", listaTareasInbox);
+			request.setAttribute("listaTareas", listaTareasInbox);
 			Log.debug("Obtenida lista de tareas del día conteniendo [%d] tareas", 
 					listaTareasInbox.size());
 		}

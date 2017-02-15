@@ -222,18 +222,18 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		opcionResultadoYJSP.put("listarCategorias", resultadoYJSP);
 			
 		resultadoYJSP=new HashMap<String, String>();
-		resultadoYJSP.put("EXITO","/listarTareasHoy.jsp");
-		resultadoYJSP.put("FRACASO","/listarTareasHoy.jsp");
+		resultadoYJSP.put("EXITO","/listarTareas.jsp");
+		resultadoYJSP.put("FRACASO","/listarTareasjsp");
 		opcionResultadoYJSP.put("listarTareasHoy", resultadoYJSP);
 		
 		resultadoYJSP=new HashMap<String, String>();
-		resultadoYJSP.put("EXITO","/listarTareasInbox.jsp");
-		resultadoYJSP.put("FRACASO","/listarTareasInbox.jsp");
+		resultadoYJSP.put("EXITO","/listarTareas.jsp");
+		resultadoYJSP.put("FRACASO","/listarTareas.jsp");
 		opcionResultadoYJSP.put("listarTareasInbox", resultadoYJSP);
 		
 		resultadoYJSP=new HashMap<String, String>();
-		resultadoYJSP.put("EXITO","/listarTareasSemana.jsp");
-		resultadoYJSP.put("FRACASO","/listarTareasSemana.jsp");
+		resultadoYJSP.put("EXITO","/listarTareas.jsp");
+		resultadoYJSP.put("FRACASO","/listarTareas.jsp");
 		opcionResultadoYJSP.put("listarTareasSemana", resultadoYJSP);
 		
 		resultadoYJSP=new HashMap<String, String>();

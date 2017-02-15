@@ -29,7 +29,7 @@ public class ListarTareasHoyAction implements Accion {
 			TaskService taskService = Services.getTaskService();
 			listaTareasHoy=taskService.findTodayTasksByUserId(Long.valueOf(user.getId()));
 			
-			request.setAttribute("listaTareasHoy", listaTareasHoy);
+			request.setAttribute("listaTareas", listaTareasHoy);
 			Log.debug("Obtenida lista de tareas del día conteniendo [%d] tareas", 
 					listaTareasHoy.size());
 		}

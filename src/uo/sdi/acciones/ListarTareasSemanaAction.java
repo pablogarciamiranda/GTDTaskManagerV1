@@ -29,7 +29,7 @@ public class ListarTareasSemanaAction implements Accion {
 			TaskService taskService = Services.getTaskService();
 			listaTareasSemana=taskService.findWeekTasksByUserId(Long.valueOf(user.getId()));
 			
-			request.setAttribute("listaTareasSemana", listaTareasSemana);
+			request.setAttribute("listaTareas", listaTareasSemana);
 			Log.debug("Obtenida lista de tareas de la semana conteniendo [%d] tareas", 
 					listaTareasSemana.size());
 		}

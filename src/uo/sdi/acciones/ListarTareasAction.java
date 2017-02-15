@@ -26,7 +26,7 @@ public class ListarTareasAction implements Accion {
 			TaskService taskService = Services.getTaskService();
 			listaTareas=taskService.findTasksByCategoryId(categoryID);
 			
-			request.setAttribute("listaTareasDia", listaTareas);
+			request.setAttribute("listaTareas", listaTareas);
 			Log.debug("Obtenida lista de tareas del día conteniendo [%d] tareas", 
 					listaTareas.size());
 		}

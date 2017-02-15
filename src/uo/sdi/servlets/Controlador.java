@@ -127,7 +127,7 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		//// USUARIO REGISTRADO \\\\
 		Map<String,Accion> mapaRegistrado=new HashMap<String,Accion>();
 		//Panel de Usuario
-		mapaRegistrado.put("modificarDatos", new ModificarDatosAction());
+		mapaRegistrado.put("editarDatos", new EditarDatosAction());
 		mapaRegistrado.put("cerrarSesion", new CerrarSesionAction());
 		
 		
@@ -159,6 +159,8 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		mapaAdministrador.put("activarUsuario", new ActivarUsuarioAction());
 		mapaAdministrador.put("bloquearUsuario", new BloquearUsuarioAction());
 		mapaAdministrador.put("eliminarUsuario", new EliminarUsuarioAction());
+		mapaAdministrador.put("editarUsuario", new EditarUsuarioAction());
+		mapaAdministrador.put("modificarUsuario", new ModificarUsuarioAction());
 		
 		mapaDeAcciones.put("ADMIN", mapaAdministrador);
 	}
@@ -199,14 +201,14 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		resultadoYJSP=new HashMap<String, String>();
 		resultadoYJSP.put("EXITO","/editarUsuario.jsp");
 		resultadoYJSP.put("FRACASO","/editarUsuario.jsp");
-		opcionResultadoYJSP.put("modificarDatos", resultadoYJSP);
+		opcionResultadoYJSP.put("editarDatos", resultadoYJSP);
 		
 		resultadoYJSP=new HashMap<String, String>();
 		resultadoYJSP.put("EXITO","/mostrarTarea.jsp");
 		resultadoYJSP.put("FRACASO","/editarTarea.jsp");
 		opcionResultadoYJSP.put("editarTarea", resultadoYJSP);
 		
-		resultadoYJSP.put("EXITO","/mostrarTarea.jsp");
+		resultadoYJSP.put("EXITO","/editarTarea.jsp");
 		resultadoYJSP.put("FRACASO","/modificarTarea.jsp");
 		opcionResultadoYJSP.put("modificarTarea", resultadoYJSP);
 		
@@ -260,23 +262,28 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		//Gestionar Usuarios
 		resultadoYJSP=new HashMap<String, String>();
 		resultadoYJSP.put("EXITO","/panelAdmin.jsp");
-		resultadoYJSP.put("FRACASO","/editarUsuario.jsp");
+		resultadoYJSP.put("FRACASO","/editarUsuarioAdmin.jsp");
 		opcionResultadoYJSP.put("eliminarUsuario", resultadoYJSP);
 		
 		resultadoYJSP=new HashMap<String, String>();
 		resultadoYJSP.put("EXITO","/panelAdmin.jsp");
-		resultadoYJSP.put("FRACASO","/editarUsuario.jsp");
+		resultadoYJSP.put("FRACASO","/editarUsuarioAdmin.jsp");
 		opcionResultadoYJSP.put("activarUsuario", resultadoYJSP);
 		
 		resultadoYJSP=new HashMap<String, String>();
 		resultadoYJSP.put("EXITO","/panelAdmin.jsp");
-		resultadoYJSP.put("FRACASO","/editarUsuario.jsp");
+		resultadoYJSP.put("FRACASO","/editarUsuarioAdmin.jsp");
 		opcionResultadoYJSP.put("bloquearUsuario", resultadoYJSP);
 		
 		resultadoYJSP=new HashMap<String, String>();
+		resultadoYJSP.put("EXITO","/editarUsuarioAdmin.jsp");
+		resultadoYJSP.put("FRACASO","/panelAdmin.jsp");
+		opcionResultadoYJSP.put("modificarUsuario", resultadoYJSP);	
+		
+		resultadoYJSP=new HashMap<String, String>();
 		resultadoYJSP.put("EXITO","/panelAdmin.jsp");
-		resultadoYJSP.put("FRACASO","/editarUsuario.jsp");
-		opcionResultadoYJSP.put("modificarDatos", resultadoYJSP);	
+		resultadoYJSP.put("FRACASO","/panelAdmin.jsp");
+		opcionResultadoYJSP.put("editarUsuario", resultadoYJSP);
 		
 		mapaDeNavegacion.put("ADMIN",opcionResultadoYJSP);
 	}

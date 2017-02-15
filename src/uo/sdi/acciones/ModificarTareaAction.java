@@ -32,6 +32,8 @@ public class ModificarTareaAction implements Accion{
 			
 			Task task = taskService.findTaskById(taskid);
 			request.setAttribute("task", task);
+			
+			request.setAttribute("categorySelectedId", task.getCategoryId());
 		} catch (BusinessException b) {
 			request.setAttribute("error", b.getMessage());
 			Log.debug("Algo ha ocurrido editando la tarea: %s", b.getMessage());
@@ -41,4 +43,8 @@ public class ModificarTareaAction implements Accion{
 		return "EXITO";
 	}
 
+	@Override
+	public String toString() {
+		return getClass().getName();
+	}
 }

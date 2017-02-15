@@ -37,8 +37,8 @@
 				<td>Category:</td>
 				<td id="category">
 						<select name="newCategoryId">
-							<c:forEach items="${categories}" var="id">
-							    <option value="${id.id}">${id.name}</option>
+							<c:forEach items="${categories}" var="category">
+							    <option value="${category.id} ${category.id == categorySelectedId ? 'selected' : ''}">${category.name}</option>
 							</c:forEach>
 						</select>
 				</td>

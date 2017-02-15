@@ -15,7 +15,7 @@ import uo.sdi.business.impl.util.FieldsCheck;
 import uo.sdi.dto.User;
 import uo.sdi.dto.util.Cloner;
 
-public class ModificarDatosAction implements Accion {
+public class EditarUsuarioAction implements Accion {
 
 	@Override
 	public String execute(HttpServletRequest request,
@@ -24,18 +24,28 @@ public class ModificarDatosAction implements Accion {
 		String resultado = "EXITO";
 		List<String> errors = new ArrayList<String>();
 
-		String newEmail = request.getParameter("email");
+		String newEmail = request.getParameter("newEmail");
 		String newPassword = request.getParameter("newPassword");
 		String newPassword2 = request.getParameter("newPassword2");
-		HttpSession session = request.getSession();
-		User user = ((User) session.getAttribute("user"));
+		String newLogin = request.getParameter("newLogin");
+		String login = request.getParameter("login");
+		
+		UserService userService = Services.getUserService();
+		User user = null;
+		try {
+			user = userService.findLoggableUser(login);
+		} catch (BusinessException b) {
+			b.printStackTrace();
+			return "FRACASO";
+		}
+		
 		User userClone = Cloner.clone(user);
 
 		// If new fields are empty
-		if (FieldsCheck.invalidFieldCheck(newEmail, newPassword, newPassword2)) {
+		if (FieldsCheck.invalidFieldCheck(newEmail, newPassword, newPassword2, newLogin)) {
 			errors.add("Existen campos vacios, por favor, rellenalos todos.");
 			Log.debug(
-					"El usuario [%s] no ha rellando los 3 campos al actualizar datos",
+					"El usuario [%s] no ha rellando los campos al actualizar datos",
 					user.getLogin());
 		} else {
 			// Logica relacionada con la Vista
@@ -47,7 +57,6 @@ public class ModificarDatosAction implements Accion {
 			if (user.getEmail().equals(newEmail)) {
 				errors.add("El email no se ha modificado porque coincide con el anterior.");
 				Log.debug("El email no se ha modificado porque coincide con el anterior.");
-
 			}
 			if (!user.getPassword().equals(newPassword)
 					&& newPassword.equals(newPassword2)) {
@@ -64,11 +73,20 @@ public class ModificarDatosAction implements Accion {
 				errors.add("La nueva password debe de ser distinta a la anterior.");
 				Log.debug("La password introducida coincide con el anterior");
 			}
+			if (user.getLogin().equals(newLogin)){
+				errors.add("El login debe de ser distinto al anterior.");
+				Log.debug("El login debe de ser distinto al anterior.");
+			}
+			if (!user.getLogin().equals(newLogin)){
+				userClone.setLogin(newLogin);
+				Log.debug("Modificado el login de [%s] con el valor [%s]",
+						login, newLogin);
+			}
 			try {
-				UserService userService = Services.getUserService();
+				userService = Services.getUserService();
 				userService.updateUserDetails(userClone);
 
-				session.setAttribute("user", userClone);
+				request.setAttribute("user", userClone);
 			} catch (BusinessException b) {
 				errors.add("Algo ha ocurrido actualizando los datos del usuario. "
 						+ b.getMessage());

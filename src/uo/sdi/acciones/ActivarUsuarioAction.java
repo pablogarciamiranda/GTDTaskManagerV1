@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import uo.sdi.business.AdminService;
 import uo.sdi.business.Services;
+import uo.sdi.business.UserService;
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.dto.User;
 import uo.sdi.dto.types.UserStatus;
@@ -19,27 +20,19 @@ public class ActivarUsuarioAction implements Accion {
 			HttpServletResponse response) {
 		
 		String resultado = "EXITO";
-		
-		HttpSession session = request.getSession();
-		User user = ((User) session.getAttribute("user"));
-		
-		//Lo hago en memoria
-		User userClone = Cloner.clone(user);
-		user.setStatus(UserStatus.ENABLED);
-		
-		try {
-			//Y aqui en la base de datos
-			AdminService userService = Services.getAdminService();
-			userService.enableUser(user.getId());
 
-			//Aqui se cambia el usuario clonado con el cambio hecho en memoria
-			//por el de la sesion actual
-			session.setAttribute("user", userClone);
-		} catch (BusinessException b) { 
+		String login = request.getParameter("login");
+		
+		AdminService adminService = Services.getAdminService();
+		UserService userService = Services.getUserService();
+		
+		User user;
+		try {
+			user = userService.findLoggableUser(login);
+			adminService.enableUser(user.getId());
+		} catch (BusinessException b) {
 			request.setAttribute("error", b.getMessage());
-			Log.debug(
-					"Algo ha ocurrido intentanto activar el usuario [%s]: %s",
-					user.getLogin(),b.getMessage());
+			Log.debug("Algo ha ocurrido intentanto activar el usuario seleccionado");
 			resultado = "FRACASO";
 		}
 		return resultado;

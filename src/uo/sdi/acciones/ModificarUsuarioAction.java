@@ -5,26 +5,29 @@ import javax.servlet.http.HttpServletResponse;
 
 import uo.sdi.business.Services;
 import uo.sdi.business.TaskService;
+import uo.sdi.business.UserService;
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.dto.Category;
+import uo.sdi.dto.User;
 import alb.util.log.Log;
 
-public class ModificarCategoriaAction implements Accion{
+public class ModificarUsuarioAction implements Accion{
 
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) {
 		
-		Long categoryid = Long.parseLong(request.getParameter("categoryId"));
-		TaskService taskService = Services.getTaskService();		
+		String login = request.getParameter("login");
+		UserService userService = Services.getUserService();
+		User user;
 		try {
 			
-			Category category = taskService.findCategoryById(categoryid);
-			request.setAttribute("category", category);
+			user = userService.findLoggableUser(login);
+			request.setAttribute("user", user);
 			
 		} catch (BusinessException b) {
 			request.setAttribute("error", b.getMessage());
-			Log.debug("Algo ha ocurrido editando la categoria: %s", b.getMessage());
+			Log.debug("Algo ha ocurrido editando el usuario: %s", b.getMessage());
 		
 			return "FRACASO";
 		}

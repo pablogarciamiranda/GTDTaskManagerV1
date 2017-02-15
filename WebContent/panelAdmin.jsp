@@ -4,18 +4,29 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-<title>TaskManager - Página de administracion</title>
+<title>TaskManager - Panel de administracion</title>
 </head>
 <body>
-<form action="modificarUsuario" method="POST">
-	<table>
+	<table border="1" align="center">
 			<tr>
-				<td>Nombre de usuario:</td>
-				<td id="login">
-						<input type="text" name="login" size="15"> 
-				</td>
-			</tr>
+				<th>Id</th>
+				<th>Login</th>
+				<th>Email</th>
+				<th>isAdmin</th>
+				<th>Status</th>
+				<th>Editar</th>
+			</tr>	
+			<c:forEach var="user" items="${listOfUsers}" varStatus="i">
+				<tr id="item_${i.index}">
+					<td>${user.id}</td>
+					<td>${user.login}</td>
+					<td>${user.email}</td>
+					<td>${user.isAdmin}</td>
+					<td>${user.status}</td>
+					<td><a href="modificarUsuario?login=${user.login}">Editar</a>
+					</td>
+				</tr>
+			</c:forEach>
 	</table>
-	<input type="submit" value="Modificar">
 </form>
 </body>

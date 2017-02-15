@@ -9,6 +9,7 @@ import uo.sdi.business.impl.admin.command.DisableUserCommand;
 import uo.sdi.business.impl.admin.command.EnableUserCommand;
 import uo.sdi.business.impl.command.Command;
 import uo.sdi.business.impl.command.CommandExecutor;
+import uo.sdi.dto.Category;
 import uo.sdi.dto.User;
 import uo.sdi.persistence.Persistence;
 
@@ -30,9 +31,13 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<User> findAllUsers() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<User> findAllUsers() throws BusinessException {
+		return new CommandExecutor<List<User>>().execute( new Command<List<User>>() {
+			@Override public List<User> execute() throws BusinessException {
+				
+				return Persistence.getUserDao().findAll();
+			}
+		});
 	}
 
 	@Override

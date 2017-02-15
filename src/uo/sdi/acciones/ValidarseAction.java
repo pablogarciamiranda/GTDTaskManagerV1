@@ -1,9 +1,12 @@
 package uo.sdi.acciones;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import uo.sdi.business.AdminService;
 import uo.sdi.business.Services;
 import uo.sdi.business.UserService;
 import uo.sdi.business.exception.BusinessException;
@@ -47,6 +50,18 @@ public class ValidarseAction implements Accion {
 							String.valueOf(contador+1));
 					session.setAttribute("fechaInicioSesion", new java.util.Date());
 					Log.info("El usuario [%s] ha iniciado sesión",nombreUsuario);
+					//Si el user es admin añadimos la lista de usuarios para gestionar desde el admin panel
+					if (userByLogin.getIsAdmin()){
+						AdminService adminService = Services.getAdminService();
+						List<User> listOfUsers = null;
+						try {
+							listOfUsers = adminService.findAllUsers();
+						} catch (BusinessException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						request.setAttribute("listOfUsers", listOfUsers);
+					}
 				}
 				//Si la contraseña es incorrecta
 				else{

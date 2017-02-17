@@ -14,7 +14,7 @@
 		<link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
 		<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
 
-		<title>Registro</title>
+		<title>GTDTaskManager - Registro</title>
 	</head>
 	<body>
 		<div class="container">
@@ -83,5 +83,6 @@
 		</div>
 		
 		<script type="text/javascript" src="assets/js/bootstrap.js"></script>
+		<jsp:include page="pieDePagina.jsp"/>
 	</body>
 </html>

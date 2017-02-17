@@ -141,7 +141,6 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		mapaRegistrado.put("mostrarTarea", new MostrarTareaAction());
 		mapaRegistrado.put("añadirTarea", new AñadirTareaAction());
 		mapaRegistrado.put("editarTarea", new EditarTareaAction());
-		mapaRegistrado.put("modificarTarea", new ModificarTareaAction());
 		mapaRegistrado.put("finalizarTarea", new FinalizarTareaAction());
 		
 		//Gestionar Categoría
@@ -204,13 +203,9 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		opcionResultadoYJSP.put("editarDatos", resultadoYJSP);
 		
 		resultadoYJSP=new HashMap<String, String>();
-		resultadoYJSP.put("EXITO","/mostrarTarea.jsp");
+		resultadoYJSP.put("EXITO","/listarTareas.jsp");
 		resultadoYJSP.put("FRACASO","/editarTarea.jsp");
 		opcionResultadoYJSP.put("editarTarea", resultadoYJSP);
-		
-		resultadoYJSP.put("EXITO","/editarTarea.jsp");
-		resultadoYJSP.put("FRACASO","/modificarTarea.jsp");
-		opcionResultadoYJSP.put("modificarTarea", resultadoYJSP);
 		
 		resultadoYJSP=new HashMap<String, String>();
 		resultadoYJSP.put("EXITO","/editarCategoria.jsp");
@@ -246,7 +241,7 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		//Mostrar Tarea
 		resultadoYJSP=new HashMap<String, String>();
 		resultadoYJSP.put("EXITO","/mostrarTarea.jsp");
-		resultadoYJSP.put("FRACASO","/mostrarTarea.jsp");
+		resultadoYJSP.put("FRACASO","/listarTareas.jsp");
 		opcionResultadoYJSP.put("mostrarTarea", resultadoYJSP);
 				
 		mapaDeNavegacion.put("USUARIO",opcionResultadoYJSP);

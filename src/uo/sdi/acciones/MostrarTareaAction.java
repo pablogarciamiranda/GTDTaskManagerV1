@@ -1,13 +1,17 @@
 package uo.sdi.acciones;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import uo.sdi.business.Services;
 import uo.sdi.business.TaskService;
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.dto.Category;
 import uo.sdi.dto.Task;
+import uo.sdi.dto.User;
 import alb.util.log.Log;
 
 public class MostrarTareaAction implements Accion {
@@ -18,18 +22,27 @@ public class MostrarTareaAction implements Accion {
 		
 		String resultado = "EXITO";
 		
+		HttpSession session = request.getSession();
+		
 		//Datos de la tarea
 		Long taskid = Long.parseLong(request.getParameter("taskId"));
 		
 		try {
 			TaskService taskService = Services.getTaskService();
 			
+			//Tarea a mostrar
 			Task task = taskService.findTaskById(taskid);
-			
-			Category category = taskService.findCategoryById(task.getCategoryId());
-			
 			request.setAttribute("task", task);
-			request.setAttribute("category", category);
+			
+			//Categoría de la tarea
+			request.setAttribute("selectedCategory", task.getCategoryId());
+			
+			//Categorias disponibles del usuario
+			User user = ((User) session.getAttribute("user"));
+			List<Category> categories = taskService.findCategoriesByUserId(user.getId());
+			request.setAttribute("categories", categories);
+						
+			
 		}
 		catch (BusinessException b) {
 			request.setAttribute("error", b.getMessage());

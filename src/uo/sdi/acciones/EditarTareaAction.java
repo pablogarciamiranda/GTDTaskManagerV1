@@ -54,7 +54,7 @@ public class EditarTareaAction implements Accion {
 		
 		// If new fields are empty
 
-		if (FieldsCheck.invalidFieldCheck(newTitle, newPlannedDate, newComment)) {
+		if (FieldsCheck.invalidFieldCheck(newTitle, newComment)) {
 			errors.add("Existen campos vacios, por favor, rellenalos todos.");
 			Log.debug(
 					"El usuario no ha rellado los campos al actualizar datos");
@@ -63,17 +63,17 @@ public class EditarTareaAction implements Accion {
 		//Set new fields
 		cloneTask.setTitle(newTitle);
 		cloneTask.setComments(newComment);
-		cloneTask.setCategoryId(Long.valueOf(newCategoryId));
+		cloneTask.setCategoryId(Long.parseLong(newCategoryId));
 		
 		DateFormat formatter = new SimpleDateFormat("d-MMM-yyyy,HH:mm:ss aaa");
 
 		Date date = new Date();
-		try {
-			date = formatter.parse(newPlannedDate);
-		} catch (ParseException e) {
-			e.printStackTrace();
-			
-		}
+//		try {
+//			//date = formatter.parse(newPlannedDate);
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//			
+//		}
 		cloneTask.setPlanned(date); // Hay que mirar como hacemos con las fechas
 		
 		//Update task

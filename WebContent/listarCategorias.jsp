@@ -5,22 +5,36 @@
 <html>
 <head>
 <title>TaskManager - Listado de categorías</title>
-<link rel="stylesheet" href="https://bootswatch.com/flatly/bootstrap.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<!-- Website CSS style -->
+<link rel="stylesheet" type="text/css"
+	href="https://bootswatch.com/flatly/bootstrap.min.css">
+
+<!-- Website Font style -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+
+<!-- Google Fonts -->
+<link href='https://fonts.googleapis.com/css?family=Passion+One'
+	rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Oxygen'
+	rel='stylesheet' type='text/css'>
+<link rel="stylesheet"
+	href="https://bootswatch.com/flatly/bootstrap.min.css">
 </head>
+
 <body>
-	<table border="1" align="center">
-			<tr>
-				<th>Lista</th>
-				<th>Acciones</th>
-			</tr>	
+<div class="container">
+	<h2>Lists</h2>
+	<table class="table table-striped table-hover">
+	<tbody>
 			<tr id="inbox">
-				<td><a href="listarTareasInbox">Inbox</a></td>
+				<td colspan=2><a href="listarTareasInbox">Inbox</a></td>
 			</tr>
 			<tr id="hoy">
-				<td><a href="listarTareasHoy">Hoy</a></td>
+				<td colspan=2><a href="listarTareasHoy">Hoy</a></td>
 			</tr>
 			<tr id="semana">
-				<td><a href="listarTareasSemana">Esta semana</a></td>
+				<td colspan=2><a href="listarTareasSemana">Esta semana</a></td>
 			</tr>
 		<c:forEach var="entry" items="${listaCategorias}" varStatus="i">
 			<tr id="item_${i.index}">	
@@ -28,7 +42,9 @@
 				<td><a href="mostrarCategoria?id=${entry.id}">Editar</a></td>
 			</tr>
 		</c:forEach>
+		</tbody>
 	</table>
+	</div>
 	<%@ include file="pieDePagina.jsp" %>
 </body>
 </html>

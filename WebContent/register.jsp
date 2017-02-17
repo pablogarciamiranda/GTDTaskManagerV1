@@ -1,6 +1,10 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
+<!-- Bootstrap theme -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html><head> <title>TaskManager - Registrarse</title>
+<html><head>
+<title>TaskManager - Registrarse</title>
+<link rel="stylesheet" href="https://bootswatch.com/flatly/bootstrap.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
 <body>
   <form action="registrarse" method="post" name="registrarse_form_name">
 

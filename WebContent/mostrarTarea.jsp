@@ -8,6 +8,8 @@
 <html>
 <head>
 <title>TaskManager - Mostrar tarea</title>
+<link rel="stylesheet" href="https://bootswatch.com/flatly/bootstrap.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
 <style>
 	.late{
 		color:rgb(255,0,0);

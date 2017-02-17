@@ -33,7 +33,7 @@
 	<table class="table table-striped table-hover">
 	<tbody>
 		<tr>	
-		<td colspan=2> <input class="form-control input-sm" type="text" id="inputSmall"></td>
+		<td> <input class="form-control input-sm" type="text" id="inputSmall"></td>
 		<td><button type="submit" class="btn btn-primary">Add</button></td>	
 		</tr>
 		</tbody>
@@ -45,25 +45,22 @@
 			<c:choose>
 				<c:when test="${empty task.planned}">
 					<tr id="item_${i.index}">
-						<td>${task.title}</td>
+						<td><a align="center" href="mostrarTarea?taskId=${task.id}">${task.title}</a></td></td>
 						<td><c:out value="No hay fecha planeada"></c:out></td>
-						<td><a href="mostrarTarea?taskId=${task.id}">Ver</a></td>
 					</tr>
 				</c:when>
 				<c:when test="${not empty task.planned}">
 					<c:choose>
 						<c:when test="${task.planned lt now}">
 							<tr id="item_${i.index}">
-								<td>${task.title}</td>
+								<td><a align="center" href="mostrarTarea?taskId=${task.id}">${task.title}</a></td></td>
 								<td class="danger"><c:out value="${task.planned}"></c:out></td>
-								<td><a href="mostrarTarea?taskId=${task.id}">Ver</a></td>
 							</tr>
 						</c:when>
 						<c:when test="${task.planned ge now}">
 							<tr id="item_${i.index}">
-								<td>${task.title}</td>
+								<td><a align="center" href="mostrarTarea?taskId=${task.id}">${task.title}</a></td></td>
 								<td><c:out value="${task.planned}"></c:out></td>
-								<td><a href="mostrarTarea?taskId=${task.id}">Ver</a></td>
 							</tr>
 						</c:when>
 					</c:choose>

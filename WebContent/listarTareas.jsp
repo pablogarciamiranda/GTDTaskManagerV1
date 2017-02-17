@@ -18,7 +18,10 @@
 <link rel="stylesheet" href="https://bootswatch.com/flatly/bootstrap.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 </head>
 <body>
-	<c:out value="${dateValue }"></c:out>
+	<form action="añadirTarea">
+	Nueva Tarea: <input type="text" name="fname"><br>
+	<input type="submit" value="Añadir">
+	</form>
 	<table border="1" align="center">
 			<tr>
 				<th>ID</th>

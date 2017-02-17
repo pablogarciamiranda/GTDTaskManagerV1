@@ -17,7 +17,10 @@
 </style>
 </head>
 <body>
-	<c:out value="${dateValue }"></c:out>
+	<form action="añadirTarea">
+	Nueva Tarea: <input type="text" name="fname"><br>
+	<input type="submit" value="Añadir">
+	</form>
 	<table border="1" align="center">
 			<tr>
 				<th>ID</th>

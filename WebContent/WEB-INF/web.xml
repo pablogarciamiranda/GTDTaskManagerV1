@@ -4,6 +4,22 @@
   <description>
 		Mi primer JSP+servlet.
 	</description>
+<context-param>
+    <param-name>autor1</param-name>
+    <param-value>Pablo García Miranda</param-value>
+</context-param>
+<context-param>
+    <param-name>email1</param-name>
+    <param-value>algo@uniovi.es</param-value>
+</context-param>
+<context-param>
+    <param-name>autor2</param-name>
+    <param-value>Fernando Freije Fuente</param-value>
+</context-param>
+<context-param>
+     <param-name>email2</param-name>
+    <param-value>UO244767@uniovi.es</param-value>
+</context-param>
   <context-param>
     <param-name>logLevel</param-name>
     <param-value>DEBUG</param-value>

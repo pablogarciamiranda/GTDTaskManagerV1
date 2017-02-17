@@ -3,7 +3,7 @@
 
 		<div class="alert alert-dismissible alert-danger">
 		<c:forEach var="error" items="${errors}">
-			<c:out value="${error}" />
+			<strong><c:out value="${error}" /></strong>
 		</c:forEach>
 		</div>
 </c:if>

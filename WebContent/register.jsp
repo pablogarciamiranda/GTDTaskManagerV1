@@ -25,6 +25,8 @@
 	               		<hr />
 	               	</div>
 	            </div> 
+	            <jsp:include page="messages.jsp"></jsp:include>
+	            
 				<div class="main-login main-center">
 					<form class="form-horizontal" action="registrarse" method="post" >
 						
@@ -79,7 +81,7 @@
 				</div>
 			</div>
 		</div>
-
+		
 		<script type="text/javascript" src="assets/js/bootstrap.js"></script>
 	</body>
 </html>

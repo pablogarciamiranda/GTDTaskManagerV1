@@ -11,7 +11,7 @@ import uo.sdi.dto.Category;
 import uo.sdi.dto.User;
 import alb.util.log.Log;
 
-public class ModificarUsuarioAction implements Accion{
+public class MostrarUsuarioAction implements Accion{
 
 	@Override
 	public String execute(HttpServletRequest request,
@@ -27,7 +27,7 @@ public class ModificarUsuarioAction implements Accion{
 			
 		} catch (BusinessException b) {
 			request.setAttribute("error", b.getMessage());
-			Log.debug("Algo ha ocurrido editando el usuario: %s", b.getMessage());
+			Log.debug("Algo ha ocurrido intentando editar el usuario: %s", b.getMessage());
 		
 			return "FRACASO";
 		}

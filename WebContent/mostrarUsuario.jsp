@@ -1,6 +1,8 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="uo.sdi.dto.types.UserStatus" %>
 <%@ include file="comprobarNavegacion.jsp" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
@@ -12,12 +14,15 @@
 								value="${sessionScope.fechaInicioSesion}"/>
 								(usuario número ${contador})</i>
 	<br/><br/>
-	<jsp:useBean id="user" class="uo.sdi.dto.User" scope="session" />
-	<form action="modificarDatos" method="POST">
+	<jsp:useBean id="user" class="uo.sdi.dto.User" scope="request" />
+	<jsp:include page="messages.jsp"></jsp:include>
+	<form action="editarUsuario" method="POST">
 		<table>
-			<tr>
-				<td>Id:</td><td id="id"><jsp:getProperty property="id" name="user" /></td>
-			</tr>
+			<c:if test="${sessionScope.user.isAdmin}">
+				<tr>
+					<td>Id:</td><td id="id"><jsp:getProperty property="id" name="user" /></td>
+				</tr>
+			</c:if>
 			<tr>
 				<td>Email:</td>
 				<td id="email">
@@ -47,13 +52,26 @@
 				<td>Es administrador:</td><td id="isAdmin"><jsp:getProperty property="isAdmin" name="user" /></td>
 			</tr>
 			<tr>
-				<td>Login:</td><td id="login"><jsp:getProperty property="login" name="user" /></td>
+				<td>Login:</td><td id="login"><input type="text" name="newLogin" size="15"
+							value="<jsp:getProperty property="login" name="user" />"> </td>
 			</tr>
-			<tr>
-				<td>Estado:</td><td id="status"><jsp:getProperty property="status" name="user" /></td>
-			</tr>
+			<c:if test="${sessionScope.user.isAdmin}">
+				<tr>
+					<td>Estado:</td>
+					<td id="status">	
+						 <c:if test="${user.status eq UserStatus.ENABLED}">
+	                    	 <input id="checkbox" type="checkbox" name="newStatus" value="admin" checked="checked">
+	                     </c:if>
+	                     <c:if test="${user.status eq UserStatus.DISABLED}">
+	                    	 <input id="checkbox" type="checkbox" name="newStatus" value="admin" checked="">
+	                     </c:if>
+	                     <label for="checkbox8">Admin</label>
+                    </td>
+				</tr>
+			</c:if>
 		</table>
 		<input type="submit" value="Modificar">
+		<input type="hidden" name="login" value="<jsp:getProperty property="login" name="user" />">
 	</form>
 	<br/>	
 	<a id="cerrarSesion" href="cerrarSesion">Cerrar sesión</a>

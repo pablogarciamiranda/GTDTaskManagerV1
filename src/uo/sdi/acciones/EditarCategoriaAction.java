@@ -20,8 +20,6 @@ public class EditarCategoriaAction implements Accion {
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) {
 			
-		String resultado = "EXITO";
-		List<String> errors = new ArrayList<String>();
 		
 		//Datos de la category
 		String categoryId = request.getParameter("categoryId");
@@ -44,7 +42,7 @@ public class EditarCategoriaAction implements Accion {
 		
 		// If new fields are empty
 		if (FieldsCheck.invalidFieldCheck(newName)) {
-			errors.add("Existen campos vacios, por favor, rellenalos todos.");
+			request.setAttribute("error", "Existen campos vacios, por favor, rellenalos todos.");
 			Log.debug(
 					"El usuario no ha rellado los campos al actualizar datos");
 			return "FRACASO";
@@ -62,10 +60,10 @@ public class EditarCategoriaAction implements Accion {
 			request.setAttribute("error", b.getMessage());
 			Log.debug("Algo ha ocurrido editando la categoria: %s",
 					b.getMessage());
-			resultado="FRACASO";
+			return "FRACASO";
 		}
-		
-		return resultado;
+		request.setAttribute("message", "Los datos han sido actualizados correctamente.");
+		return "EXITO";
 	}
 	
 	@Override

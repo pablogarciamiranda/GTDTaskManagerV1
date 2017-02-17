@@ -21,6 +21,7 @@
 </head>
 
 <body>
+	<jsp:include page="messages.jsp"></jsp:include>
 	<form action="editarTarea" method="POST">
 		<table border="1" align="center">
 

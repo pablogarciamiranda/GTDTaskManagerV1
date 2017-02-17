@@ -24,7 +24,7 @@
 					<td>${user.email}</td>
 					<td>${user.isAdmin}</td>
 					<td>${user.status}</td>
-					<td><a href="modificarUsuario?login=${user.login}">Editar</a>
+					<td><a href="mostrarUsuario?login=${user.login}">Editar</a>
 					</td>
 				</tr>
 			</c:forEach>

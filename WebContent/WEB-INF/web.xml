@@ -6,11 +6,11 @@
 	</description>
 <context-param>
     <param-name>autor1</param-name>
-    <param-value>Pablo García Miranda</param-value>
+    <param-value>Pablo GarcÃ­a Miranda</param-value>
 </context-param>
 <context-param>
     <param-name>email1</param-name>
-    <param-value>algo@uniovi.es</param-value>
+    <param-value>uo245530@uniovi.es</param-value>
 </context-param>
 <context-param>
     <param-name>autor2</param-name>

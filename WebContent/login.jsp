@@ -59,7 +59,7 @@
 		</div>
 		
 		<script type="text/javascript" src="assets/js/bootstrap.js"></script>
-		<jsp:include page="pieDePagina.jsp"/>
+		<%@ include file="pieDePagina.jsp" %>
 	</body>
 </html>
 			

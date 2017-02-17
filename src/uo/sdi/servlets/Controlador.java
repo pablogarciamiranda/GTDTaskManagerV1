@@ -194,7 +194,7 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		resultadoYJSP=new HashMap<String, String>();
 		
 		//// Mapa de navegación de usuarios REGISTRADOS \\\\
-		resultadoYJSP.put("EXITO","/index.jsp");
+		resultadoYJSP.put("EXITO","/listarTareas.jsp");
 		opcionResultadoYJSP.put("validarse", resultadoYJSP);	
 		
 		// Editar Usuarios, Tareas y Categorias

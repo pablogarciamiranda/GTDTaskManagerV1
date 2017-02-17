@@ -24,11 +24,11 @@ public class AñadirTareaAction implements Accion {
 		HttpSession session = request.getSession();
 		User user = ((User) session.getAttribute("user"));
 		String taskName = request.getParameter("taskName");
-		Category category = (Category) request.getAttribute("category");
+		String categoryId = request.getParameter("categoryId");
 		
 		Task task = new Task();
 		task.setTitle(taskName);
-		task.setCategoryId(category.getId());
+		task.setCategoryId(Long.parseLong("categoryId"));
 		task.setUserId(user.getId());
 		
 		try {

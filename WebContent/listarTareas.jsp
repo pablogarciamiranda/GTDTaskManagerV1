@@ -33,7 +33,8 @@
 	<table class="table table-striped table-hover">
 	<tbody>
 		<tr>	
-		<td> <input class="form-control input-sm" type="text" id="inputSmall"></td>
+		<td> <input type="hidden" name="categoryId" value="${param.id}"></td>
+		<td> <input class="form-control input-sm" type="text" id="inputSmall" name="taskName"></td>
 		<td><button type="submit" class="btn btn-primary">Add</button></td>	
 		</tr>
 		</tbody>

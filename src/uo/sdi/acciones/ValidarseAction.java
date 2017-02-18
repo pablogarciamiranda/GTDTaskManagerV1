@@ -69,7 +69,7 @@ public class ValidarseAction implements Accion {
 								request.setAttribute("error", "Algo ha ocurrido intentando iniciar sesión como administrador: " + b.getMessage());
 								return "FRACASO";
 							}
-							request.setAttribute("listOfUsers", listOfUsers);
+							session.setAttribute("listOfUsers", listOfUsers);
 						}
 						//Si no, es usuario registrado. Añadimos las categorias
 						else{

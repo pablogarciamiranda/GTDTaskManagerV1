@@ -65,7 +65,7 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 			
 		} catch(Exception e) {
 			
-			request.getSession().invalidate();
+			//request.getSession().invalidate();
 			
 			Log.error("Se ha producido alguna excepción no manejada [%s]",
 					e.getMessage());
@@ -156,8 +156,7 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		///// ADMIN \\\\
 		Map<String,Accion> mapaAdministrador=new HashMap<String,Accion>();
 		mapaAdministrador.put("cerrarSesion", new CerrarSesionAction());
-		mapaAdministrador.put("activarUsuario", new ActivarUsuarioAction());
-		mapaAdministrador.put("bloquearUsuario", new BloquearUsuarioAction());
+		mapaAdministrador.put("cambiarEstado", new CambiarEstadoAction());
 		mapaAdministrador.put("eliminarUsuario", new EliminarUsuarioAction());
 		mapaAdministrador.put("mostrarUsuario", new MostrarUsuarioAction());
 		mapaAdministrador.put("editarUsuario", new EditarUsuarioAction());
@@ -261,19 +260,14 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		
 		//Gestionar Usuarios
 		resultadoYJSP=new HashMap<String, String>();
-		resultadoYJSP.put("EXITO","/mostrarUsuario.jsp");
+		resultadoYJSP.put("EXITO","/panelAdmin.jsp");
 		resultadoYJSP.put("FRACASO","/mostrarUsuario.jsp");
 		opcionResultadoYJSP.put("eliminarUsuario", resultadoYJSP);
 		
 		resultadoYJSP=new HashMap<String, String>();
-		resultadoYJSP.put("EXITO","/mostrarUsuario.jsp");
+		resultadoYJSP.put("EXITO","/panelAdmin.jsp");
 		resultadoYJSP.put("FRACASO","/mostrarUsuario.jsp");
-		opcionResultadoYJSP.put("activarUsuario", resultadoYJSP);
-		
-		resultadoYJSP=new HashMap<String, String>();
-		resultadoYJSP.put("EXITO","/mostrarUsuario.jsp");
-		resultadoYJSP.put("FRACASO","/mostrarUsuario.jsp");
-		opcionResultadoYJSP.put("bloquearUsuario", resultadoYJSP);
+		opcionResultadoYJSP.put("cambiarEstado", resultadoYJSP);
 		
 		resultadoYJSP=new HashMap<String, String>();
 		resultadoYJSP.put("EXITO","/mostrarUsuario.jsp");

@@ -14,20 +14,21 @@
 								value="${sessionScope.fechaInicioSesion}"/>
 								(usuario número ${contador})</i>
 	<br/><br/>
-	<jsp:useBean id="user" class="uo.sdi.dto.User" scope="request" />
+	<jsp:useBean id="userToEdit" class="uo.sdi.dto.User" scope="session" />
 	<jsp:include page="messages.jsp"></jsp:include>
-	<form action="editarUsuario" method="POST">
+	<form id = "editarUsuario" action="editarUsuario" method="POST">
+	<div>
 		<table>
 			<c:if test="${sessionScope.user.isAdmin}">
 				<tr>
-					<td>Id:</td><td id="id"><jsp:getProperty property="id" name="user" /></td>
+					<td>Id:</td><td id="id"><jsp:getProperty property="id" name="userToEdit" /></td>
 				</tr>
 			</c:if>
 			<tr>
 				<td>Email:</td>
 				<td id="email">
 						<input type="text" name="newEmail" size="15"
-							value="<jsp:getProperty property="email" name="user"/>"> 
+							value="<jsp:getProperty property="email" name="userToEdit"/>"> 
 				</td>
 			</tr>
 			<tr>
@@ -49,30 +50,41 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Es administrador:</td><td id="isAdmin"><jsp:getProperty property="isAdmin" name="user" /></td>
+				<td>Es administrador:</td><td id="isAdmin"><jsp:getProperty property="isAdmin" name="userToEdit" /></td>
 			</tr>
 			<tr>
 				<td>Login:</td><td id="login"><input type="text" name="newLogin" size="15"
-							value="<jsp:getProperty property="login" name="user" />"> </td>
+							value="<jsp:getProperty property="login" name="userToEdit" />"> </td>
 			</tr>
 			<c:if test="${sessionScope.user.isAdmin}">
 				<tr>
 					<td>Estado:</td>
 					<td id="status">	
-						 <c:if test="${user.status eq UserStatus.ENABLED}">
-	                    	 <input id="checkbox" type="checkbox" name="newStatus" value="admin" checked="checked">
+						 <c:if test="${userToEdit.status eq UserStatus.ENABLED}">
+	                    	<jsp:getProperty property="status" name="userToEdit" />
 	                     </c:if>
-	                     <c:if test="${user.status eq UserStatus.DISABLED}">
-	                    	 <input id="checkbox" type="checkbox" name="newStatus" value="admin" checked="">
+	                     <c:if test="${userToEdit.status eq UserStatus.DISABLED}">
+	                    	<jsp:getProperty property="status" name="userToEdit" />
 	                     </c:if>
-	                     <label for="checkbox8">Admin</label>
                     </td>
 				</tr>
 			</c:if>
 		</table>
-		<input type="submit" value="Modificar">
-		<input type="hidden" name="login" value="<jsp:getProperty property="login" name="user" />">
-	</form>
+		<input type="hidden" name="login" value="<jsp:getProperty property="login" name="userToEdit" />">
+		<input type="submit" name="editarUsuario" value="Editar" form="editarUsuario">
+	</div>
+	</form>	
+	
+	<c:if test="${sessionScope.user.isAdmin}">
+		<form id = "eliminarUsuario" action="eliminarUsuario" method="POST">
+			<input type="hidden" name="id" value="<jsp:getProperty property="id" name="userToEdit" />">
+			<input type="submit" value="Eliminar" >
+		</form>
+		<form id = "cambiarEstado" action="cambiarEstado" method="POST">
+			<input type="hidden" name="id" value="<jsp:getProperty property="id" name="userToEdit" />">
+			<input type="submit" value="Cambiar Estado" >
+		</form>
+	</c:if>
 	<br/>	
 	<a id="cerrarSesion" href="cerrarSesion">Cerrar sesión</a>
 	

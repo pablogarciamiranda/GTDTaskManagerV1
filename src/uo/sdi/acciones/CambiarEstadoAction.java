@@ -11,33 +11,45 @@ import uo.sdi.business.Services;
 import uo.sdi.business.UserService;
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.dto.User;
+import uo.sdi.dto.types.UserStatus;
+import uo.sdi.dto.util.Cloner;
 import alb.util.log.Log;
 
-public class EliminarUsuarioAction implements Accion {
+public class CambiarEstadoAction implements Accion {
 
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) {
 		
-		HttpSession session = request.getSession();
+		String resultado = "EXITO";
 		
+		HttpSession session = request.getSession();
+
 		String id = request.getParameter("id");
 		Long idUser = Long.parseLong(id);
 		
 		AdminService adminService = Services.getAdminService();		
 		List<User> listOfUsers = null;
 		try {
-			adminService.deepDeleteUser(idUser);
+			//Si el usuario está activado, desactivalo
+			if (adminService.findUserById(idUser).getStatus().equals(UserStatus.ENABLED)){
+				adminService.disableUser(idUser);
+				request.setAttribute("message", "El usuario se ha desactivado correctamente.");
+			}
+			////Si el usuario está desactivado, activalo
+			else{
+				adminService.enableUser(idUser);
+				request.setAttribute("message", "El usuario se ha activado correctamente.");
+			}
 			listOfUsers = adminService.findAllUsers();
 		} catch (BusinessException b) {
 			request.setAttribute("error", b.getMessage());
-			Log.debug("Algo ha ocurrido al eliminar al usuario");
-			return "FRACASO";
+			Log.debug("Algo ha ocurrido intentanto editar el estado del usuario seleccionado");
+			resultado = "FRACASO";
 		}
-		request.setAttribute("message", "El usuario se ha eliminado correctamente.");
-		session.setAttribute("listOfUsers", listOfUsers);
 		
-		return "EXITO";
+		session.setAttribute("listOfUsers", listOfUsers);
+		return resultado;
 	}
 	
 	@Override

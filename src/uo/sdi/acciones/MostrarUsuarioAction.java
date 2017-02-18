@@ -2,13 +2,16 @@ package uo.sdi.acciones;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import uo.sdi.business.AdminService;
 import uo.sdi.business.Services;
 import uo.sdi.business.TaskService;
 import uo.sdi.business.UserService;
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.dto.Category;
 import uo.sdi.dto.User;
+import uo.sdi.dto.types.UserStatus;
 import alb.util.log.Log;
 
 public class MostrarUsuarioAction implements Accion{
@@ -18,12 +21,28 @@ public class MostrarUsuarioAction implements Accion{
 			HttpServletResponse response) {
 		
 		String login = request.getParameter("login");
+		
+		
 		UserService userService = Services.getUserService();
-		User user;
+		AdminService adminService = Services.getAdminService();
+		
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		User userToEdit;
 		try {
+			//Si el usuario es admin, podrá encontrar incluso un usuario desactivado
+			if (user.getIsAdmin()){
+				String id = request.getParameter("id");
+				Long userId = Long.parseLong(id);
+				
+				userToEdit = adminService.findUserById(userId);
+				request.setAttribute("userToEdit", userToEdit);
+			}
+			else{
+				userToEdit = userService.findLoggableUser(login);
+				request.setAttribute("userToEdit", userToEdit);
+			}
 			
-			user = userService.findLoggableUser(login);
-			request.setAttribute("user", user);
 			
 		} catch (BusinessException b) {
 			request.setAttribute("error", b.getMessage());

@@ -50,7 +50,6 @@ public class EditarTareaAction implements Accion {
 		} catch (BusinessException b) {
 			request.setAttribute("error", "Algo ha ocurrido editando la tarea: " +  b.getMessage());
 			Log.debug("Algo ha ocurrido editando la tarea: %s", b.getMessage());
-			setEditingTask(task, categories, request);
 			return "FRACASO";
 		}
 		
@@ -58,7 +57,6 @@ public class EditarTareaAction implements Accion {
 		if (FieldsCheck.invalidFieldCheck(newTitle, newComment)) {
 			request.setAttribute("error", "Existen campos vacios, por favor, rellenalos todos.");
 			Log.debug("El usuario no ha rellado los campos al actualizar datos");
-			setEditingTask(task, categories, request);
 			return "FRACASO";
 		}
 		
@@ -83,33 +81,21 @@ public class EditarTareaAction implements Accion {
 		//Update task
 		try {
 			taskService.updateTask(cloneTask);
-			setEditingTask(cloneTask, categories, request);
+			//Añadimos la tarea y la categoria para mostrarlas de nuevo a la sesion
+			session.setAttribute("task", cloneTask);
+			session.setAttribute("selectedCategory", cloneTask.getCategoryId());
+			
+			//Añadimos categorias disponibles del usuario a la sesion
+			session.setAttribute("categories", categories);
 			
 		} catch (BusinessException b) {
 			request.setAttribute("error", "Algo ha ocurrido editando la tarea: " +  b.getMessage());
 			Log.debug("Algo ha ocurrido editando la tarea: %s", b.getMessage());
-			setEditingTask(task, categories, request);
 			return "FRACASO";
 		}
 		
 		request.setAttribute("message", "Los datos han sido actualizados correctamente.");
 		return resultado;
-	}
-	
-	/**
-	 * Method used to set to request the task, it´s category and the list of 
-	 * categories of the user in order to not loose any data when navigating.
-	 * @param task
-	 * @param categories
-	 * @param request
-	 */
-	public void setEditingTask(Task task, List<Category> categories, HttpServletRequest request){
-		//Añadimos la tarea y la categoria para mostrarlas de nuevo
-		request.setAttribute("task", task);
-		request.setAttribute("selectedCategory", task.getCategoryId());
-		
-		//Añadimos categorias disponibles del usuario
-		request.setAttribute("categories", categories);
 	}
 
 	@Override

@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="https://bootswatch.com/flatly/bootstrap.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 </head>
 <body>
+	<jsp:include page="messages.jsp"></jsp:include>
 	<table border="1" align="center">
 			<tr>
 				<th>Id</th>
@@ -24,7 +25,7 @@
 					<td>${user.email}</td>
 					<td>${user.isAdmin}</td>
 					<td>${user.status}</td>
-					<td><a href="mostrarUsuario?login=${user.login}">Editar</a>
+					<td><a href="mostrarUsuario?id=${user.id}">Editar</a>
 					</td>
 				</tr>
 			</c:forEach>

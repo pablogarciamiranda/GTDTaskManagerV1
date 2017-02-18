@@ -32,16 +32,15 @@ public class MostrarTareaAction implements Accion {
 			
 			//Tarea a mostrar
 			Task task = taskService.findTaskById(taskid);
-			request.setAttribute("task", task);
+			session.setAttribute("task", task);
 			
 			//Categoría de la tarea
-			request.setAttribute("selectedCategory", task.getCategoryId());
+			session.setAttribute("selectedCategory", task.getCategoryId());
 			
 			//Categorias disponibles del usuario
 			User user = ((User) session.getAttribute("user"));
 			List<Category> categories = taskService.findCategoriesByUserId(user.getId());
-			request.setAttribute("categories", categories);
-						
+			session.setAttribute("categories", categories);					
 			
 		}
 		catch (BusinessException b) {

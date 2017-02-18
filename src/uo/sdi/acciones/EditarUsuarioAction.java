@@ -43,40 +43,39 @@ public class EditarUsuarioAction implements Accion {
 			UserService userService = Services.getUserService();
 			try {
 				userToEdit = userService.findLoggableUser(login);
+				session.setAttribute("userToEdit", userToEdit);
 				//Checkbox activado
-				if (newStatus!=null){
-					userToEdit.setStatus(UserStatus.ENABLED);
-					Log.debug("El usuario se ha activado");
-				}
-				else{
-					userToEdit.setStatus(UserStatus.DISABLED);
-					Log.debug("El usuario se ha desactivado");
-				}
+//				if (newStatus!=null){
+//					userToEdit.setStatus(UserStatus.ENABLED);
+//					Log.debug("El usuario se ha activado");
+//				}
+//				else{
+//					userToEdit.setStatus(UserStatus.DISABLED);
+//					Log.debug("El usuario se ha desactivado");
+//				}
 			} catch (BusinessException b) {
 				request.setAttribute("error", "Algo ha ocurrido actualizando los datos del usuario: "
 						+ b.getMessage());
 				Log.debug(
 						"Algo ha ocurrido actualizando los datos del usuario [%s]",
 						user.getLogin());
-				request.setAttribute("user", userToEdit);
 				return "FRACASO";
 			}
 		}
 		//Si no es admin, se editará a si mismo
 		else{
 			userToEdit = user;
+			session.setAttribute("userToEdit", userToEdit);
 		}
 		
 		User userClone = Cloner.clone(userToEdit);
 		
-
 		// If new fields are empty
 		if (FieldsCheck.invalidFieldCheck(newEmail, newPassword, newPassword2)) {
 			request.setAttribute("error", "Existen campos vacios, por favor, rellenalos todos.");
 			Log.debug(
 					"El usuario [%s] no ha rellado todos los campos al actualizar datos",
 					user.getLogin());
-			request.setAttribute("user", userClone);
 			return "FRACASO";
 		} else {
 			// Logica relacionada con la Vista
@@ -95,21 +94,18 @@ public class EditarUsuarioAction implements Accion {
 			if (!userToEdit.getPassword().equals(password)){
 				request.setAttribute("error", "La contraseña vieja no coincide con la almacenada en la base de datos, inténtelo de nuevo");
 				Log.debug("La contraseña vieja no coincide con la almacenada en la base de datos, inténtelo de nuevo");
-				request.setAttribute("user", userClone);
 				return "FRACASO";
 			}
 			//La repetición de la password no coincide
 			if (!newPassword.equals(newPassword2)) {
 				request.setAttribute("error", "Las nuevas passwords no coinciden, inténtelo de nuevo");
 				Log.debug("Las nuevas passwords no coinciden");
-				request.setAttribute("user", userClone);
 				return "FRACASO";
 			}
 			//La nueva password es igual a la anterior
 			if (userToEdit.getPassword().equals(newPassword)) {
 				request.setAttribute("error", "La nueva password debe de ser distinta a la anterior, inténtelo de nuevo");
 				Log.debug("La password introducida coincide con el anterior");
-				request.setAttribute("user", userClone);
 				return "FRACASO";
 			}
 			if (!userToEdit.getLogin().equals(newLogin)){
@@ -121,17 +117,20 @@ public class EditarUsuarioAction implements Accion {
 				userService.updateUserDetails(userClone);
 				
 				//If everything was ok and the operation was not performed from admin Panel
-				if (!user.getIsAdmin())
+				if (!user.getIsAdmin()){
 					session.setAttribute("user", userClone);
+					session.setAttribute("userToEdit", userClone);
+				}
 				//If everything was ok and the operation was  performed from admin Panel
-				request.setAttribute("user", userClone);
+				else{
+					request.setAttribute("userToEdit", userClone);
+				}	
 			} catch (BusinessException b) {
 				request.setAttribute("error", "Algo ha ocurrido actualizando los datos del usuario: "
 						+ b.getMessage());
 				Log.debug(
 						"Algo ha ocurrido actualizando los datos del usuario [%s]",
 						user.getLogin());
-				request.setAttribute("user", userClone);
 				return "FRACASO";
 			}
 		}

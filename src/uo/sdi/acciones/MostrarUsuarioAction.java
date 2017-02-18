@@ -22,7 +22,6 @@ public class MostrarUsuarioAction implements Accion{
 		
 		String login = request.getParameter("login");
 		
-		
 		UserService userService = Services.getUserService();
 		AdminService adminService = Services.getAdminService();
 		

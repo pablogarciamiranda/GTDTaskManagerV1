@@ -37,7 +37,12 @@ public class AñadirTareaAction implements Accion {
 		try {
 			TaskService taskService = Services.getTaskService();
 			taskService.createTask(task);
-			request.getRequestDispatcher("listarTareas?id=" + task.getCategoryId()).forward(request, response);
+			if (categoryId!=null){
+				request.getRequestDispatcher("listarTareas?id=" + task.getCategoryId()).forward(request, response);
+			}
+			else{
+				request.getRequestDispatcher("listarTareasInbox" + task.getCategoryId()).forward(request, response);
+			}
 
 		}
 		catch (BusinessException | ServletException | IOException b) {

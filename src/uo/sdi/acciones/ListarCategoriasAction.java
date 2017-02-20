@@ -28,7 +28,7 @@ public class ListarCategoriasAction implements Accion {
 		try {
 			TaskService taskService = Services.getTaskService();
 			listaCategorias=taskService.findCategoriesByUserId(user.getId());
-			request.setAttribute("listaCategorias", listaCategorias);
+			session.setAttribute("listaCategorias", listaCategorias);
 			Log.debug("Obtenida lista de categorías conteniendo [%d] categorías", 
 					listaCategorias.size());
 		}

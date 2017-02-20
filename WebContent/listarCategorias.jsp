@@ -40,6 +40,24 @@
 				<td><a href="listarTareas?categoryId=${entry.id}">${entry.name}</a></td>
 			</tr>
 		</c:forEach>
+			<tr id= "añadirCategoria">
+				<td>			
+				<form action="añadirCategoria">
+				<table class="table table-striped table-hover">
+					<tbody>
+						<tr>
+							<td><input class="form-control input-sm" type="text"
+								id="inputSmall" name="name"
+								placeholder="Name of the category"></td>
+							<td><button type="submit" class="btn btn-primary">Add</button></td>
+						</tr>
+						<tr>
+					</tbody>
+				</table>
+				</form>
+				</td>
+			</tr>
+			
 		</tbody>
 	</table>
 </body>

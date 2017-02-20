@@ -1,5 +1,7 @@
 package uo.sdi.acciones;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -27,9 +29,15 @@ public class AñadirCategoriaAction implements Accion {
 		category.setUserId(user.getId());
 		category.setName(name);
 		
+		List<Category> listaCategorias;
+		
 		try {
 			TaskService taskService = Services.getTaskService();
 			taskService.createCategory(category);
+			
+			listaCategorias=taskService.findCategoriesByUserId(user.getId());
+			session.setAttribute("listaCategorias", listaCategorias);
+			Log.debug("Añadida nueva categoria");
 		}
 		catch (BusinessException b) {
 			request.setAttribute("error", b.getMessage());

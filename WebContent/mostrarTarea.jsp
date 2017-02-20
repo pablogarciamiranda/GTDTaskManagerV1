@@ -4,39 +4,53 @@
 <%@ include file="comprobarNavegacion.jsp"%>
 <jsp:useBean id="now" class="java.util.Date" />
 <fmt:formatDate value="${today}" pattern="MM.dd.yyyy" />
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <title>TaskManager - Mostrar tarea</title>
-<link rel="stylesheet"
-	href="https://bootswatch.com/flatly/bootstrap.min.css"
-	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-	crossorigin="anonymous">
 </head>
-<style>
-.late {
-	color: rgb(255, 0, 0);
-}
-</style>
-</head>
-
 <body>
-	<jsp:include page="messages.jsp"></jsp:include>
-	<form action="editarTarea" method="POST">
-		<table border="1" align="center">
+<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="mostrarTareas">Task Manager</a>
+			</div>
 
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<jsp:useBean id="user" class="uo.sdi.dto.User" scope="session" />
+					<li class="active"><a
+						href="mostrarUsuario?login=${sessionScope.user.login}">${sessionScope.user.login}<span
+							class="sr-only">(current)</span></a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="cerrarSesion">Logout</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+<div class="container">
+	<jsp:include page="messages.jsp"></jsp:include>
+	<form action="editarTarea" method="POST" class="form-horizontal">
+		<table border="1" class="table table-striped table-hover ">
 			<tr>
 				<th>Nombre</th>
 				<td id="title">
 						<input type="text" name="newTitle" size="15"
-							value="${task.title}"> 
+							value="${task.title}" class="form-control"> 
 				</td>
 			</tr>
 
 			<tr>
 				<th>Comentarios</th>
 			<td id="comment">
-						<textarea rows="4" cols="50" name="newComment">${task.comments}</textarea>
 				</td>
 			</tr>
 
@@ -54,7 +68,7 @@
 					<c:when test="${not empty task.planned}">
 						<c:choose>
 							<c:when test="${task.planned lt now}">
-								<td class="late"><c:out value="${task.planned}"></c:out></td>
+								<td class="text-danger"><c:out value="${task.planned}"></c:out></td>
 							</c:when>
 							<c:when test="${task.planned ge now}">
 								<td><c:out value="${task.planned}"></c:out></td>
@@ -79,7 +93,7 @@
 			<tr>
 				<th>Categoría</th>
 				<td id="category">
-						<select name="newCategoryId">
+						<select name="newCategoryId" class="form-control">
 							<option value=-1>Sin categoría</option>
 							<c:forEach items="${categories}" var="category">
 							    <option value="${category.id}" ${category.id == selectedCategory ? 'selected="selected"' : ''}">${category.name}</option>
@@ -90,7 +104,8 @@
 		</table>
 		
 		<input type="hidden" value="${task.id}" name="taskId" />
-		<input type="submit" class="button" value="Editar tarea" />
+		<input type="submit" class="btn btn-primary" value="Editar tarea" />
 	</form>
+</div>
 	<%@ include file="pieDePagina.jsp"%>
 </body>

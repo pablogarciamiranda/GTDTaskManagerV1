@@ -8,36 +8,18 @@
 <html>
 <head>
 <title>TaskManager - Mostrar tarea</title>
+<link rel="stylesheet" type="text/css"
+	href="https://bootswatch.com/flatly/bootstrap.css">
+<!-- Google Fonts -->
+<link href='https://fonts.googleapis.com/css?family=Passion+One'
+	rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Oxygen'
+	rel='stylesheet' type='text/css'>
 </head>
 <body>
-<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="mostrarTareas">Task Manager</a>
-			</div>
-
-			<div class="collapse navbar-collapse"
-				id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
-					<jsp:useBean id="user" class="uo.sdi.dto.User" scope="session" />
-					<li class="active"><a
-						href="mostrarUsuario?login=${sessionScope.user.login}">${sessionScope.user.login}<span
-							class="sr-only">(current)</span></a></li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="cerrarSesion">Logout</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+<jsp:include page="navbar.jsp"/>
 <div class="container">
-	<jsp:include page="messages.jsp"></jsp:include>
+	<jsp:include page="messages.jsp"/>
 	<form action="editarTarea" method="POST" class="form-horizontal">
 		<table border="1" class="table table-striped table-hover ">
 			<tr>

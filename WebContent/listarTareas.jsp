@@ -77,13 +77,17 @@
 				<div class="col-md-8">
 					<c:if test="${category != null}">
 						<div class="form-group">
-							<div class="input-group">
-								<span class="input-group-addon">Category</span> <input
-									type="text" class="form-control" placeholder="${category.name}"><span
-									class="input-group-btn">
-									<button class="btn btn-default" type="button">Editar</button>
-								</span>
-							</div>
+							<form action="editarCategoria">
+								<div class="input-group">
+									<span class="input-group-addon">Category</span> <input
+										type="text" class="form-control" name="newName" 
+										placeholder="${category.name}"> <input type ="hidden"
+										name = "categoryId" value = "${category.id}">
+										<span class="input-group-btn">
+										<button class="btn btn-default" type="submit">Editar</button>
+									</span>
+								</div>
+							</form>
 						</div>
 
 					</c:if>		

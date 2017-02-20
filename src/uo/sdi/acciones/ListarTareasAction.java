@@ -21,12 +21,17 @@ public class ListarTareasAction implements Accion {
 		long categoryID = Long.parseLong(request.getParameter("id"));
 		
 		List<Task> listaTareas;
+		List<Task> listaTareasTerminadas;
 		
 		try {
 			TaskService taskService = Services.getTaskService();
 			listaTareas=taskService.findTasksByCategoryId(categoryID);
+			listaTareasTerminadas=taskService.findFinishedTasksByCategoryId(categoryID);
 			
 			request.setAttribute("listaTareas", listaTareas);
+			request.setAttribute("listaTareasTerminadas", listaTareasTerminadas);
+			
+			
 			Log.debug("Obtenida lista de tareas del día conteniendo [%d] tareas", 
 					listaTareas.size());
 		}

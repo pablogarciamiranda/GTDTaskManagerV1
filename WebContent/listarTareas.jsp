@@ -25,10 +25,29 @@
 	rel='stylesheet' type='text/css'>
 <link rel="stylesheet"
 	href="https://bootswatch.com/flatly/bootstrap.min.css">
+<script>
+
+	function setCheckBoxFalse(checkbox){
+		checbox.checked = false;
+	}
+
+	function toggleFinishedTasks(checkbox) {
+		var terminadasDiv = document.getElementById('terminadasDiv');
+		if (checkbox.checked == true) {
+			terminadasDiv.style.display = 'block';
+		} else {
+			terminadasDiv.style.display = 'none';
+		}
+	}
+</script>
 </head>
 
 <body>
 	<div class="container">
+		<form >
+			<input type="checkbox" id="checkbox" onchange="toggleFinishedTasks(this)">
+			Mostrar tareas terminadas
+		</form>
 		<form action="añadirTarea">
 			<table class="table table-striped table-hover">
 				<tbody>
@@ -95,6 +114,22 @@
 				</c:forEach>
 			</tbody>
 		</table>
+
+		<div class="container" id="terminadasDiv" style="display: none;">
+			<h3>Tareas terminadas</h3>
+			<table>
+				<tbody>
+					<c:forEach var="task" items="${listaTareasTerminadas}"
+						varStatus="i">
+						<tr>
+						<td><a href="mostrarTarea?taskId=${task.id}">${task.title}</a></td>
+						<td><c:out value="${task.planned}"></c:out></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+
 	</div>
 	<%@ include file="pieDePagina.jsp"%>
 </body>

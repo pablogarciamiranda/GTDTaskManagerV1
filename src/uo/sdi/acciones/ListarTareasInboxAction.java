@@ -24,12 +24,17 @@ public class ListarTareasInboxAction implements Accion {
 		
 		//All not finished tasks in the user's inbox (without category)
 		List<Task> listaTareasInbox;
+		List<Task> listaTareasTerminadasInbox;
+		
 		
 		try {
 			TaskService taskService = Services.getTaskService();
 			listaTareasInbox=taskService.findInboxTasksByUserId(Long.valueOf(user.getId()));
+			listaTareasTerminadasInbox=taskService.
+					findFinishedInboxTasksByUserId(Long.valueOf(user.getId()));
 			
 			request.setAttribute("listaTareas", listaTareasInbox);
+			request.setAttribute("listaTareasTerminadas", listaTareasTerminadasInbox);
 			Log.debug("Obtenida lista de tareas del día conteniendo [%d] tareas", 
 					listaTareasInbox.size());
 		}

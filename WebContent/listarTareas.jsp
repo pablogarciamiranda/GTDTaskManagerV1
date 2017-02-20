@@ -44,25 +44,54 @@
 
 <body>
 	<div class="container">
-		<form >
-			<input type="checkbox" id="checkbox" onchange="toggleFinishedTasks(this)">
-			Mostrar tareas terminadas
+	<table>
+		<tr>
+		<td><h2>${category.name}</h2></td>
+		<c:if test="${category != null}">
+		<td>
+		<form action="editarCategoria">
+			<input type="hidden" name="categoryId" value="${category.id}">
+			<button type="submit" class="btn btn-primary">Editar</button>	
 		</form>
+		</td>
+		<td>
+		<form action="eliminarCategoria">	
+			<input type="hidden" name="categoryId" value="${category.id}">
+			<button type="submit" class="btn btn-primary">Eliminar</button>
+		</form>
+		</td>
+		<td>
+		<form action="duplicarCategoria">
+			<input type="hidden" name="categoryId" value="${category.id}">
+			<button type="submit" class="btn btn-primary">Duplicar</button>
+		</form>
+		</td>
+		</c:if>
+		</tr>
+	</table>
 		<form action="añadirTarea">
 			<table class="table table-striped table-hover">
 				<tbody>
 					<tr>
 						<td><input type="hidden" name="categoryId"
-							value="${param.id}"></td>
+							value="${category.id}"></td>
 						<td><input class="form-control input-sm" type="text"
 							id="inputSmall" name="taskName"></td>
 						<td><button type="submit" class="btn btn-primary">Add</button></td>
 					</tr>
+					<tr>
 				</tbody>
 			</table>
 		</form>
 		<table class="table table-striped table-hover">
 			<tbody>
+				<tr>
+				<form>
+					<input type="checkbox" id="checkbox" onchange="toggleFinishedTasks(this)">
+					Mostrar tareas terminadas
+				</form>
+				<h3>Tareas sin terminar</h3>
+				</tr>
 				<c:forEach var="task" items="${listaTareas}" varStatus="i">
 					<c:choose>
 						<c:when test="${empty task.planned}">

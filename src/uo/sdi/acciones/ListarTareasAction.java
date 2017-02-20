@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import uo.sdi.business.Services;
 import uo.sdi.business.TaskService;
 import uo.sdi.business.exception.BusinessException;
+import uo.sdi.dto.Category;
 import uo.sdi.dto.Task;
 import alb.util.log.Log;
 
@@ -18,19 +19,21 @@ public class ListarTareasAction implements Accion {
 			HttpServletResponse response) {
 		
 		String resultado="EXITO";
-		long categoryID = Long.parseLong(request.getParameter("id"));
+		long categoryID = Long.parseLong(request.getParameter("categoryId"));
 		
 		List<Task> listaTareas;
 		List<Task> listaTareasTerminadas;
 		
 		try {
 			TaskService taskService = Services.getTaskService();
+			
 			listaTareas=taskService.findTasksByCategoryId(categoryID);
 			listaTareasTerminadas=taskService.findFinishedTasksByCategoryId(categoryID);
+			Category category = taskService.findCategoryById(categoryID);
 			
 			request.setAttribute("listaTareas", listaTareas);
 			request.setAttribute("listaTareasTerminadas", listaTareasTerminadas);
-			
+			request.setAttribute("category", category);
 			
 			Log.debug("Obtenida lista de tareas del día conteniendo [%d] tareas", 
 					listaTareas.size());

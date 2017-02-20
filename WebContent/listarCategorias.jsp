@@ -38,8 +38,8 @@
 			</tr>
 		<c:forEach var="entry" items="${listaCategorias}" varStatus="i">
 			<tr id="item_${i.index}">	
-				<td><a href="listarTareas?id=${entry.id}">${entry.name}</a></td>
-				<td><a href="mostrarCategoria?id=${entry.id}">Editar</a></td>
+				<td><a href="listarTareas?categoryId=${entry.id}">${entry.name}</a></td>
+				<td><a href="mostrarCategoria?categoryId=${entry.id}">Editar</a></td>
 			</tr>
 		</c:forEach>
 		</tbody>

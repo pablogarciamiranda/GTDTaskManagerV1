@@ -17,7 +17,7 @@ public class DuplicarCategoriaAction implements Accion {
 		String resultado = "EXITO";
 		
 		//Datos de la categoria
-		long categoryid = Long.parseLong(request.getParameter("categoryID"));
+		long categoryid = Long.parseLong(request.getParameter("categoryId"));
 		
 		try {
 			TaskService taskService = Services.getTaskService();

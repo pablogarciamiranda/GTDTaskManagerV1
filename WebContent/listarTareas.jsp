@@ -142,10 +142,16 @@
 									<td><c:out value="No hay fecha planeada"></c:out></td>
 									<td>
 										<form action="terminarTarea">
-											<c:if test="${category.id != null}">
-												<input type="hidden" name="categoryId"
-													value="${category.id}">
-											</c:if>
+											<c:choose>
+												<c:when test="${category.id != null}">
+													<input type="hidden" name="categoryId"
+														value="${category.id}">
+												</c:when>
+												<c:otherwise>
+													<input type="hidden" name="pseudolistaNombre"
+														value="${pseudolistaNombre}">
+												</c:otherwise>
+											</c:choose>
 											<input type="hidden" name="taskId" value="${task.id}">
 											<button type="submit" class="btn btn-primary">Finished</button>
 										</form>
@@ -160,10 +166,16 @@
 											<td class="danger"><c:out value="${task.planned}"></c:out></td>
 											<td>
 												<form action="terminarTarea">
-													<c:if test="${category.id != null}">
-														<input type="hidden" name="categoryId"
-															value="${category.id}">
-													</c:if>
+													<c:choose>
+														<c:when test="${category.id != null}">
+															<input type="hidden" name="categoryId"
+																value="${category.id}">
+														</c:when>
+														<c:otherwise>
+															<input type="hidden" name="pseudolistaNombre"
+																value="${pseudolistaNombre}">
+														</c:otherwise>
+													</c:choose>
 													<input type="hidden" name="taskId" value="${task.id}">
 													<button type="submit" class="btn btn-primary">Finished</button>
 												</form>
@@ -176,10 +188,16 @@
 											<td><c:out value="${task.planned}"></c:out></td>
 											<td>
 												<form action="terminarTarea">
-													<c:if test="${category.id != null}">
-														<input type="hidden" name="categoryId"
-															value="${category.id}">
-													</c:if>
+													<c:choose>
+														<c:when test="${category.id != null}">
+															<input type="hidden" name="categoryId"
+																value="${category.id}">
+														</c:when>
+														<c:otherwise>
+															<input type="hidden" name="pseudolistaNombre"
+																value="${pseudolistaNombre}">
+														</c:otherwise>
+													</c:choose>
 													<input type="hidden" name="taskId" value="${task.id}">
 													<button type="submit" class="btn btn-primary">Finished</button>
 												</form>

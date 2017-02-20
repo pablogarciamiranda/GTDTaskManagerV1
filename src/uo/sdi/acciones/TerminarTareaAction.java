@@ -20,7 +20,8 @@ public class TerminarTareaAction implements Accion {
 		
 		Long taskid = Long.parseLong(request.getParameter("taskId"));
 		String categoryId = request.getParameter("categoryId");
-		TaskService taskService = Services.getTaskService();		
+		TaskService taskService = Services.getTaskService();	
+		String pseudolistaNombre = request.getParameter("pseudolistaNombre");
 		try {
 			
 			taskService.markTaskAsFinished(taskid);
@@ -30,7 +31,14 @@ public class TerminarTareaAction implements Accion {
 				request.getRequestDispatcher("listarTareas?id=" + task.getCategoryId()).forward(request, response);
 			}
 			else{
-				request.getRequestDispatcher("listarTareasInbox").forward(request, response);
+				if (pseudolistaNombre.equals("Semana"))
+					request.getRequestDispatcher("listarTareasSemana").forward(request, response);
+				else if (pseudolistaNombre.equals("Inbox")){
+					request.getRequestDispatcher("listarTareasInbox").forward(request, response);
+				}
+				else if (pseudolistaNombre.equals("Hoy")){
+					request.getRequestDispatcher("listarTareasHoy").forward(request, response);
+				}
 			}
 			
 		} catch (BusinessException | ServletException | IOException b) {

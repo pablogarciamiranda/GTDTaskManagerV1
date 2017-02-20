@@ -36,7 +36,8 @@ public class EditarTareaAction implements Accion {
 		String newTitle = request.getParameter("newTitle");
 		String newPlannedDate = request.getParameter("newPlannedDate");
 		String newComment = request.getParameter("newComment");
-		String newCategoryId = request.getParameter("newCategoryId");
+		long newCategoryId = Long.parseLong(request.getParameter("newCategoryId"));
+		
 		
 		//Find task and categories
 		TaskService taskService = Services.getTaskService();
@@ -64,7 +65,9 @@ public class EditarTareaAction implements Accion {
 		//Set new fields
 		cloneTask.setTitle(newTitle);
 		cloneTask.setComments(newComment);
-		cloneTask.setCategoryId(Long.parseLong(newCategoryId));
+		if (newCategoryId != -1){
+			cloneTask.setCategoryId(newCategoryId);
+		}
 		
 		DateFormat formatter = new SimpleDateFormat("d-MMM-yyyy,HH:mm:ss aaa");
 		Date date = new Date();

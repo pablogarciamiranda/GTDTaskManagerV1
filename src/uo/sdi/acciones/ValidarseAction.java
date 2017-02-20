@@ -85,7 +85,7 @@ public class ValidarseAction implements Accion {
 								return "FRACASO";
 							}
 							
-							request.setAttribute("listaCategorias", listaCategorias);
+							session.setAttribute("listaCategorias", listaCategorias);
 						}
 					}
 					//Si la contraseña es incorrecta

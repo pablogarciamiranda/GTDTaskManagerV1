@@ -80,6 +80,7 @@
 				<th>Categoría</th>
 				<td id="category">
 						<select name="newCategoryId">
+							<option value=-1>Sin categoría</option>
 							<c:forEach items="${categories}" var="category">
 							    <option value="${category.id}" ${category.id == selectedCategory ? 'selected="selected"' : ''}">${category.name}</option>
 							</c:forEach>

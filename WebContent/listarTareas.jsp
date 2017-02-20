@@ -57,9 +57,9 @@
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="mostrarUsuario">User<span
+				<jsp:useBean id="user" class="uo.sdi.dto.User" scope="session" />
+				<li class="active"><a href="mostrarUsuario?login=${sessionScope.user.login}">${sessionScope.user.login}<span
 						class="sr-only">(current)</span></a></li>
-				<li><a href="#">Que ponemos aqui? Nada?</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="cerrarSesion">Logout</a></li>
@@ -132,7 +132,9 @@
 								<td><c:out value="No hay fecha planeada"></c:out></td>
 								<td>
 									<form action="terminarTarea">
-										<input type="hidden" name="categoryId" value="${param.id}">
+										<c:if test="${category.id != null}">
+											<input type="hidden" name="categoryId" value="${category.id}">
+										</c:if>
 										<input type="hidden" name="taskId" value="${task.id}">
 										<button type="submit" class="btn btn-primary">Finished</button>
 									</form>
@@ -147,7 +149,9 @@
 										<td class="danger"><c:out value="${task.planned}"></c:out></td>
 										<td>
 											<form action="terminarTarea">
-												<input type="hidden" name="categoryId" value="${param.id}">
+												<c:if test="${category.id != null}">
+													<input type="hidden" name="categoryId" value="${category.id}">
+												</c:if>
 												<input type="hidden" name="taskId" value="${task.id}">
 												<button type="submit" class="btn btn-primary">Finished</button>
 											</form>
@@ -160,7 +164,9 @@
 										<td><c:out value="${task.planned}"></c:out></td>
 										<td>
 											<form action="terminarTarea">
-												<input type="hidden" name="categoryId" value="${param.id}">
+												<c:if test="${category.id != null}">
+													<input type="hidden" name="categoryId" value="${category.id}">
+												</c:if>
 												<input type="hidden" name="taskId" value="${task.id}">
 												<button type="submit" class="btn btn-primary">Finished</button>
 											</form>

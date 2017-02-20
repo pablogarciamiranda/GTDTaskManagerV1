@@ -32,11 +32,11 @@ public class MostrarUsuarioAction implements Accion{
 				Long userId = Long.parseLong(id);
 				
 				userToEdit = adminService.findUserById(userId);
-				request.setAttribute("userToEdit", userToEdit);
+				session.setAttribute("userToEdit", userToEdit);
 			}
 			else{
 				userToEdit = userService.findLoggableUser(login);
-				request.setAttribute("userToEdit", userToEdit);
+				session.setAttribute("userToEdit", userToEdit);
 			}
 			
 			

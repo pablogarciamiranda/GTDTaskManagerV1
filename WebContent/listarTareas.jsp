@@ -101,7 +101,9 @@
 							<td></td>
 							<c:if test="${category != null}">
 								<td>
-									<form action="eliminarCategoria">
+									<form action="eliminarCategoria" onsubmit="return confirm('Do you really want' +
+											'to delete the category?\n If you accept every task from this category'
+													+ ' will be removed');">
 										<input type="hidden" name="categoryId" value="${category.id}">
 										<button type="submit" class="btn btn-primary">Eliminar</button>
 									</form>

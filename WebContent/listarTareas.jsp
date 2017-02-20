@@ -12,7 +12,7 @@
 <title>TaskManager - Listado de tareas del día</title>
 <!-- Website CSS style -->
 <link rel="stylesheet" type="text/css"
-	href="https://bootswatch.com/flatly/bootstrap.min.css">
+	href="https://bootswatch.com/flatly/bootstrap.css">
 
 <!-- Website Font style -->
 <link rel="stylesheet"
@@ -199,8 +199,9 @@
 					terminadas
 				</form>
 			</c:if>
+			
 			<div id="terminadasDiv" style="display: none;">
-				<table>
+				<table class="table table-striped table-hover ">
 					<caption>Tareas terminadas</caption>
 					<tbody>
 						<c:forEach var="task" items="${listaTareasTerminadas}"

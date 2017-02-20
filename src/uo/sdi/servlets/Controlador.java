@@ -223,13 +223,13 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		opcionResultadoYJSP.put("editarCategoria", resultadoYJSP);
 		
 		resultadoYJSP=new HashMap<String, String>();
-		resultadoYJSP.put("EXITO","/listarCategorias.jsp");
-		resultadoYJSP.put("FRACASO","/listarCategorias.jsp");
+		resultadoYJSP.put("EXITO","/listarTareas.jsp");
+		resultadoYJSP.put("FRACASO","/listarTareas.jsp");
 		opcionResultadoYJSP.put("eliminarCategoria", resultadoYJSP);
 		
 		resultadoYJSP=new HashMap<String, String>();
-		resultadoYJSP.put("EXITO","/listarCategorias.jsp");
-		resultadoYJSP.put("FRACASO","/listarCategorias.jsp");
+		resultadoYJSP.put("EXITO","/listarTareas.jsp");
+		resultadoYJSP.put("FRACASO","/listarTareas.jsp");
 		opcionResultadoYJSP.put("duplicarCategoria", resultadoYJSP);
 		
 		//Listar Tareas y Categorias

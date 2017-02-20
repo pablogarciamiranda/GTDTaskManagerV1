@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import uo.sdi.business.Services;
 import uo.sdi.business.TaskService;
 import uo.sdi.business.exception.BusinessException;
+import uo.sdi.business.impl.util.FieldsCheck;
 import uo.sdi.dto.Task;
 import uo.sdi.dto.User;
 import alb.util.log.Log;
@@ -28,11 +29,17 @@ public class AñadirTareaAction implements Accion {
 		String taskName = request.getParameter("taskName");
 		String categoryId = request.getParameter("categoryId");
 		
+		if (FieldsCheck.invalidFieldCheck(taskName)) {
+			request.setAttribute("error", "No puedes crear una tarea sin nombre");
+			Log.debug("El usuario no ha introducido un nombre para la tarea");
+			return "FRACASO";
+		}
 		Task task = new Task();
 		task.setTitle(taskName);
 		if (categoryId != null)
 			task.setCategoryId(Long.parseLong(categoryId));
 		task.setUserId(user.getId());
+		
 		
 		try {
 			TaskService taskService = Services.getTaskService();

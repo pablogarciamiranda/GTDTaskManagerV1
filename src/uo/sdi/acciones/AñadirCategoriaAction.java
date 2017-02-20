@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import uo.sdi.business.Services;
 import uo.sdi.business.TaskService;
 import uo.sdi.business.exception.BusinessException;
+import uo.sdi.business.impl.util.FieldsCheck;
 import uo.sdi.dto.Category;
 import uo.sdi.dto.User;
 import alb.util.log.Log;
@@ -24,6 +25,12 @@ public class AñadirCategoriaAction implements Accion {
 		HttpSession session = request.getSession();
 		User user = ((User) session.getAttribute("user"));
 		String name = request.getParameter("name");
+		
+		if (FieldsCheck.invalidFieldCheck(name)) {
+			request.setAttribute("error", "No puedes crear una categoría sin nombre");
+			Log.debug("El usuario no ha introducido un nombre para la categoría");
+			return "FRACASO";
+		}
 		
 		Category category = new Category();
 		category.setUserId(user.getId());

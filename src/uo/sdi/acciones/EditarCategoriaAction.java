@@ -28,6 +28,12 @@ public class EditarCategoriaAction implements Accion {
 		
 		String newName = request.getParameter("newName");
 		
+		if (FieldsCheck.invalidFieldCheck(newName)) {
+			request.setAttribute("error", "No puedes dejar el nombre de la categoría vacío");
+			Log.debug("El usuario no ha introducido un nombre para la categoría");
+			return "FRACASO";
+		}
+		
 		//Find category
 		TaskService taskService = Services.getTaskService();
 		Category category;

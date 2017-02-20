@@ -30,7 +30,8 @@ public class AñadirTareaAction implements Accion {
 		
 		Task task = new Task();
 		task.setTitle(taskName);
-		task.setCategoryId(Long.parseLong(categoryId));
+		if (categoryId != null)
+			task.setCategoryId(Long.parseLong(categoryId));
 		task.setUserId(user.getId());
 		
 		try {

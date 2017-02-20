@@ -73,8 +73,10 @@
 			<table class="table table-striped table-hover">
 				<tbody>
 					<tr>
+					<c:if test="${category.id }">
 						<td><input type="hidden" name="categoryId"
 							value="${category.id}"></td>
+					</c:if>
 						<td><input class="form-control input-sm" type="text"
 							id="inputSmall" name="taskName"></td>
 						<td><button type="submit" class="btn btn-primary">Add</button></td>

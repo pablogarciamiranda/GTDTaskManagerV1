@@ -53,7 +53,7 @@ public class EditarTareaAction implements Accion {
 		}
 		
 		// If new fields are empty
-		if (FieldsCheck.invalidFieldCheck(newTitle, newComment)) {
+		if (FieldsCheck.invalidFieldCheck(newTitle)) {
 			request.setAttribute("error", "Existen campos vacios, por favor, rellenalos todos.");
 			Log.debug("El usuario no ha rellado los campos al actualizar datos");
 			return "FRACASO";
@@ -67,6 +67,9 @@ public class EditarTareaAction implements Accion {
 		cloneTask.setComments(newComment);
 		if (newCategoryId != -1){
 			cloneTask.setCategoryId(newCategoryId);
+		}
+		else{
+			cloneTask.setCategoryId(null);
 		}
 		
 		DateFormat formatter = new SimpleDateFormat("d-MMM-yyyy,HH:mm:ss aaa");

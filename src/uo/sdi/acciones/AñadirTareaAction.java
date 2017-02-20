@@ -40,7 +40,7 @@ public class AñadirTareaAction implements Accion {
 				request.getRequestDispatcher("listarTareas?id=" + task.getCategoryId()).forward(request, response);
 			}
 			else{
-				request.getRequestDispatcher("listarTareasInbox" + task.getCategoryId()).forward(request, response);
+				request.getRequestDispatcher("listarTareasInbox").forward(request, response);
 			}
 
 		}

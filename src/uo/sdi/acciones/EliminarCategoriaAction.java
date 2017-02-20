@@ -29,7 +29,7 @@ public class EliminarCategoriaAction implements Accion {
 			TaskService taskService = Services.getTaskService();
 			taskService.deleteCategory(categoryid);
 			List<Category> listaCategorias = taskService.findCategoriesByUserId(user.getId());
-			request.setAttribute("listaCategorias", listaCategorias);
+			session.setAttribute("listaCategorias", listaCategorias);
 		}
 		catch (BusinessException b) {
 			request.setAttribute("error", b.getMessage());

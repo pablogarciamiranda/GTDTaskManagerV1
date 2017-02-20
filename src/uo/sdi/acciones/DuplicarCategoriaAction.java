@@ -31,7 +31,7 @@ public class DuplicarCategoriaAction implements Accion {
 			taskService.duplicateCategory(categoryid);
 			
 			List<Category> listaCategorias = taskService.findCategoriesByUserId(user.getId());
-			request.setAttribute("listaCategorias", listaCategorias);
+			session.setAttribute("listaCategorias", listaCategorias);
 		}
 		catch (BusinessException b) {
 			request.setAttribute("error", b.getMessage());

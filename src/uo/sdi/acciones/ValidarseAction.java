@@ -85,6 +85,7 @@ public class ValidarseAction implements Accion {
 								return "FRACASO";
 							}
 							
+							request.setAttribute("pseudolistaNombre","Inbox");
 							session.setAttribute("listaCategorias", listaCategorias);
 						}
 					}

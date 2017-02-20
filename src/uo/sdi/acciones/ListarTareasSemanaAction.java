@@ -30,6 +30,10 @@ public class ListarTareasSemanaAction implements Accion {
 			listaTareasSemana=taskService.findWeekTasksByUserId(Long.valueOf(user.getId()));
 			
 			request.setAttribute("listaTareas", listaTareasSemana);
+			
+			
+			request.setAttribute("pseudolistaNombre","Semana");
+			request.setAttribute("sePuedeMostrarTerminadas",false);
 			Log.debug("Obtenida lista de tareas de la semana conteniendo [%d] tareas", 
 					listaTareasSemana.size());
 		}

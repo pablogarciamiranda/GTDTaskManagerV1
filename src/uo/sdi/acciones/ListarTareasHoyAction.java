@@ -30,6 +30,10 @@ public class ListarTareasHoyAction implements Accion {
 			listaTareasHoy=taskService.findTodayTasksByUserId(Long.valueOf(user.getId()));
 			
 			request.setAttribute("listaTareas", listaTareasHoy);
+			
+			request.setAttribute("pseudolistaNombre","Hoy");
+			request.setAttribute("sePuedeMostrarTerminadas",false);
+			
 			Log.debug("Obtenida lista de tareas del día conteniendo [%d] tareas", 
 					listaTareasHoy.size());
 		}

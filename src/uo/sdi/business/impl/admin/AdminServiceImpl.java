@@ -9,7 +9,6 @@ import uo.sdi.business.impl.admin.command.DisableUserCommand;
 import uo.sdi.business.impl.admin.command.EnableUserCommand;
 import uo.sdi.business.impl.command.Command;
 import uo.sdi.business.impl.command.CommandExecutor;
-import uo.sdi.dto.Category;
 import uo.sdi.dto.User;
 import uo.sdi.persistence.Persistence;
 

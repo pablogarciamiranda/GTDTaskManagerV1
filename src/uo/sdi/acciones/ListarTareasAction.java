@@ -33,6 +33,7 @@ public class ListarTareasAction implements Accion {
 			
 			request.setAttribute("listaTareas", listaTareas);
 			request.setAttribute("listaTareasTerminadas", listaTareasTerminadas);
+			request.setAttribute("sePuedeMostrarTerminadas",true);
 			request.setAttribute("category", category);
 			
 			Log.debug("Obtenida lista de tareas del día conteniendo [%d] tareas", 

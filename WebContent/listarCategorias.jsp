@@ -23,7 +23,6 @@
 </head>
 
 <body>
-<div class="container">
 	<h2>Lists</h2>
 	<table class="table table-striped table-hover">
 	<tbody>
@@ -44,7 +43,5 @@
 		</c:forEach>
 		</tbody>
 	</table>
-	</div>
-	<%@ include file="pieDePagina.jsp" %>
 </body>
 </html>

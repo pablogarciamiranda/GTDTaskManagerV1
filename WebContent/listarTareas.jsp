@@ -87,13 +87,15 @@
 						</tbody>
 					</table>
 				</div>
-				<form action="añadirTarea?listaMostrada=${listaMostrada}">
+				<form action="añadirTarea">
+				<input type="hidden" name="listaMostrada" value="${listaMostrada}">
 					<table class="table table-striped table-hover">
 						<tbody>
 							<tr>
 								<c:if test="${category.id != null}">
 									<td><input type="hidden" name="categoryId"
 										value="${category.id}"></td>
+										
 								</c:if>
 								<td><input class="form-control input-sm" type="text"
 									id="inputSmall" name="taskName"
@@ -121,8 +123,8 @@
 															value="${category.id}">
 													</c:when>
 													<c:otherwise>
-														<input type="hidden" name="pseudolistaNombre"
-															value="${pseudolistaNombre}">
+														<input type="hidden" name="listaMostrada"
+															value="${listaMostrada}">
 													</c:otherwise>
 												</c:choose>
 												<input type="hidden" name="taskId" value="${task.id}">
@@ -145,8 +147,8 @@
 																	value="${category.id}">
 															</c:when>
 															<c:otherwise>
-																<input type="hidden" name="pseudolistaNombre"
-																	value="${pseudolistaNombre}">
+																<input type="hidden" name="listaMostrada"
+																	value="${listaMostrada}">
 															</c:otherwise>
 														</c:choose>
 														<input type="hidden" name="taskId" value="${task.id}">
@@ -167,8 +169,8 @@
 																	value="${category.id}">
 															</c:when>
 															<c:otherwise>
-																<input type="hidden" name="pseudolistaNombre"
-																	value="${pseudolistaNombre}">
+																<input type="hidden" name="listaMostrada"
+																	value="${listaMostrada}">
 															</c:otherwise>
 														</c:choose>
 														<input type="hidden" name="taskId" value="${task.id}">

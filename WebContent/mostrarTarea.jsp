@@ -31,6 +31,7 @@
 				<tr>
 					<th>Comentarios</th>
 					<td id="comment"></td>
+					
 				</tr>
 
 				<tr>

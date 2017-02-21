@@ -69,12 +69,16 @@
 				<c:if test="${sessionScope.user.isAdmin}">
 					<tr>
 						<td>Estado:</td>
-						<td id="status"><c:if
-								test="${userToEdit.status eq UserStatus.ENABLED}">
-								<jsp:getProperty property="status" name="userToEdit" />
-							</c:if> <c:if test="${userToEdit.status eq UserStatus.DISABLED}">
-								<jsp:getProperty property="status" name="userToEdit" />
-							</c:if></td>
+						<td id="status">
+							<c:choose>
+								<c:when test="${userToEdit.status == 'ENABLED'}">
+ 									<span class="glyphicon glyphicon-ok-circle"></span>
+								</c:when>
+								<c:otherwise>
+									<span class="glyphicon glyphicon-remove-circle"></span>
+								</c:otherwise>
+							</c:choose>
+						</td>
 					</tr>
 				</c:if>
 			</table>
@@ -84,7 +88,6 @@
 				value="Editar" form="editarUsuario">
 		</form>
 		<br/>
-		<br /> <a id="cerrarSesion" href="cerrarSesion">Cerrar sesión</a>
 	</div>
 	<%@ include file="pieDePagina.jsp"%>
 </body>

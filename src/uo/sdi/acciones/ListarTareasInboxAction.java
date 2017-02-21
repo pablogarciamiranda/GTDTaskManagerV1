@@ -42,7 +42,7 @@ public class ListarTareasInboxAction implements Accion {
 			request.setAttribute("listaTareas", listaTareasInbox);
 			request.setAttribute("listaTareasTerminadas", listaTareasTerminadasInbox);
 			
-			session.setAttribute("listaMostrada", "Inbox");
+			request.setAttribute("listaMostrada", "Inbox");
 			request.setAttribute("sePuedeMostrarTerminadas",true);
 			
 			Log.debug("Obtenida lista de tareas del día conteniendo [%d] tareas", 

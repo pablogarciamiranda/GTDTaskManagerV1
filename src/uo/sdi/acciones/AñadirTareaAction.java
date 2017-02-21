@@ -43,7 +43,7 @@ public class AñadirTareaAction implements Accion {
 			
 			//Si la lista que se esta mostrando es la pseudolista Hoy se le pone
 			// de planeada un minuto antes de que acabe el día de hoy
-			String listaMostrada = (String) session.getAttribute("listaMostrada"); 
+			String listaMostrada = request.getParameter("listaMostrada"); 
 			if (listaMostrada!=null && listaMostrada.equalsIgnoreCase("hoy"))
 				task.setPlanned(DateUtil.today());
 			

@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import uo.sdi.business.Services;
 import uo.sdi.business.TaskService;
@@ -19,9 +20,10 @@ public class TerminarTareaAction implements Accion {
 			HttpServletResponse response) {
 		
 		Long taskid = Long.parseLong(request.getParameter("taskId"));
+		HttpSession session = request.getSession();
 		String categoryId = request.getParameter("categoryId");
 		TaskService taskService = Services.getTaskService();	
-		String pseudolistaNombre = request.getParameter("pseudolistaNombre");
+		String pseudolistaNombre = request.getParameter("listaMostrada");
 		try {
 			
 			taskService.markTaskAsFinished(taskid);

@@ -87,7 +87,7 @@
 						</tbody>
 					</table>
 				</div>
-				<form action="añadirTarea?pseudolistaNombre=${pseudolistaNombre}">
+				<form action="añadirTarea?listaMostrada=${listaMostrada}">
 					<table class="table table-striped table-hover">
 						<tbody>
 							<tr>

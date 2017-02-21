@@ -88,9 +88,7 @@ public class ValidarseAction implements Accion {
 								listaTareasTerminadas=taskService.
 										findFinishedInboxTasksByUserId(userByLogin.getId());
 								
-								FreijeyPabloUtil.orderAscending(listaTareas);
-							
-								
+								FreijeyPabloUtil.orderAscending(listaTareas);	
 								FreijeyPabloUtil.orderDescending(listaTareasTerminadas);
 								
 							} catch (BusinessException b) {

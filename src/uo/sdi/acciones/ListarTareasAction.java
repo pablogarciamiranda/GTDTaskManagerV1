@@ -21,7 +21,6 @@ public class ListarTareasAction implements Accion {
 			HttpServletResponse response) {
 		
 		String resultado="EXITO";
-		HttpSession session = request.getSession();
 		long categoryID = Long.parseLong(request.getParameter("categoryId"));
 		
 		List<Task> listaTareas;
@@ -43,7 +42,7 @@ public class ListarTareasAction implements Accion {
 			
 			request.setAttribute("sePuedeMostrarTerminadas",true);
 			
-			session.setAttribute("listaMostrada", "custom");
+			request.setAttribute("listaMostrada", "custom");
 			request.setAttribute("category", category);
 			
 			Log.debug("Obtenida lista de tareas del día conteniendo [%d] tareas", 

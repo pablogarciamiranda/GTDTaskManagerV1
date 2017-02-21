@@ -1,15 +1,17 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ include file="comprobarNavegacion.jsp" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <title>TaskManager - Panel de administracion</title>
-<link rel="stylesheet" href="https://bootswatch.com/flatly/bootstrap.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<link rel="stylesheet" href="https://bootswatch.com/flatly/bootstrap.min.css" />
 </head>
 <body>
+<jsp:include page="navbar.jsp"/>
+<div class="container">
 	<jsp:include page="messages.jsp"></jsp:include>
-	<table border="1" align="center">
+	<table border="1" class="table table-striped table-hover">
 			<tr>
 				<th>Id</th>
 				<th>Login</th>
@@ -30,5 +32,5 @@
 				</tr>
 			</c:forEach>
 	</table>
-</form>
+</div>
 </body>

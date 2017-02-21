@@ -16,17 +16,17 @@
 	rel='stylesheet' type='text/css'>
 </head>
 <body>
-	<jsp:include page="navbar.jsp"/>
+	<jsp:include page="navbar.jsp" />
 	<div class="container">
 		<i>Iniciaste sesión el <fmt:formatDate
 				pattern="dd-MM-yyyy' a las 'HH:mm"
 				value="${sessionScope.fechaInicioSesion}" /> (usuario número
 			${contador})
-		</i> <br/>
-		<br/>
+		</i> <br /> <br />
 		<jsp:useBean id="userToEdit" class="uo.sdi.dto.User" scope="session" />
 		<jsp:include page="messages.jsp"></jsp:include>
-		<form class="form-horizontal" id="editarUsuario" action="editarUsuario" method="POST">
+		<form class="form-horizontal" id="editarUsuario"
+			action="editarUsuario" method="POST">
 			<table class="table table-striped table-hover">
 				<c:if test="${sessionScope.user.isAdmin}">
 					<tr>
@@ -80,21 +80,22 @@
 			</table>
 			<input type="hidden" name="login"
 				value="<jsp:getProperty property="login" name="userToEdit" />">
-			<input type="submit" name="editarUsuario" value="Editar"
-				form="editarUsuario">
+			<input type="submit" class="btn btn-primary" name="editarUsuario"
+				value="Editar" form="editarUsuario">
 		</form>
-
+		<br/>
 		<c:if test="${sessionScope.user.isAdmin}">
-			<form id="eliminarUsuario" action="eliminarUsuario" method="POST">
-				<input type="hidden" name="id"
-					value="<jsp:getProperty property="id" name="userToEdit" />">
-				<input type="submit" value="Eliminar">
-			</form>
-			<form id="cambiarEstado" action="cambiarEstado" method="POST">
-				<input type="hidden" name="id"
-					value="<jsp:getProperty property="id" name="userToEdit" />">
-				<input type="submit" value="Cambiar Estado">
-			</form>
+				<form id="eliminarUsuario" action="eliminarUsuario" method="POST">
+					<input type="hidden" name="id"
+						value="<jsp:getProperty property="id" name="userToEdit" />">
+					<input type="submit" class="btn btn-primary" value="Eliminar">
+				</form>
+				<br/>
+				<form id="cambiarEstado" action="cambiarEstado" method="POST">
+					<input type="hidden" name="id"
+						value="<jsp:getProperty property="id" name="userToEdit" />">
+					<input type="submit" class="btn btn-primary" value="Cambiar Estado">
+				</form>
 		</c:if>
 		<br /> <a id="cerrarSesion" href="cerrarSesion">Cerrar sesión</a>
 	</div>

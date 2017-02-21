@@ -49,6 +49,7 @@ public class TerminarTareaAction implements Accion {
 		
 			return "FRACASO";
 		}
+		request.setAttribute("message", "La tarea ha sido marcado como finalizada. ");
 		return "EXITO";
 	}
 

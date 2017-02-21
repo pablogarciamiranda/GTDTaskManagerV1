@@ -25,8 +25,7 @@ public class EditarUsuarioAction implements Accion {
 			,newEmail = request.getParameter("newEmail")
 			,password = request.getParameter("password")
 			,newPassword = request.getParameter("newPassword")
-			,newPassword2 = request.getParameter("newPassword2")
-			,newStatus = request.getParameter("newStatus");
+			,newPassword2 = request.getParameter("newPassword2");
 		
 		HttpSession session = request.getSession();
 		User user = ((User) session.getAttribute("user"));
@@ -38,15 +37,7 @@ public class EditarUsuarioAction implements Accion {
 			try {
 				userToEdit = userService.findLoggableUser(login);
 				session.setAttribute("userToEdit", userToEdit);
-				//Checkbox activado
-//				if (newStatus!=null){
-//					userToEdit.setStatus(UserStatus.ENABLED);
-//					Log.debug("El usuario se ha activado");
-//				}
-//				else{
-//					userToEdit.setStatus(UserStatus.DISABLED);
-//					Log.debug("El usuario se ha desactivado");
-//				}
+				
 			} catch (BusinessException b) {
 				request.setAttribute("error", "Algo ha ocurrido actualizando los datos del usuario: "
 						+ b.getMessage());

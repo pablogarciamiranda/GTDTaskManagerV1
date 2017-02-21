@@ -30,7 +30,9 @@
 
 				<tr>
 					<th>Comentarios</th>
-					<td id="comment"></td>
+					<td id="comment">		
+ 						<textarea rows="4" cols="50" name="newComment">${task.comments}</textarea>		
+ 					</td>
 					
 				</tr>
 

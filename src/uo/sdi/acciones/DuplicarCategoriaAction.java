@@ -1,7 +1,9 @@
 package uo.sdi.acciones;
 
+import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -28,12 +30,14 @@ public class DuplicarCategoriaAction implements Accion {
 		
 		try {
 			TaskService taskService = Services.getTaskService();
-			taskService.duplicateCategory(categoryid);
+			long categoryId = taskService.duplicateCategory(categoryid);
 			
 			List<Category> listaCategorias = taskService.findCategoriesByUserId(user.getId());
 			session.setAttribute("listaCategorias", listaCategorias);
+			
+			request.getRequestDispatcher("listarTareas?categoryId=" + Long.toString(categoryId)).forward(request, response);
 		}
-		catch (BusinessException b) {
+		catch (BusinessException | ServletException | IOException b) {
 			request.setAttribute("error", b.getMessage());
 			Log.debug("Algo ha ocurrido duplicando la categoria: %s",
 					b.getMessage());

@@ -30,7 +30,7 @@ public class TerminarTareaAction implements Accion {
 			Task task = taskService.findTaskById(taskid);
 			
 			if (categoryId!=null){
-				request.getRequestDispatcher("listarTareas?id=" + task.getCategoryId()).forward(request, response);
+				request.getRequestDispatcher("listarTareas?categoryId=" + task.getCategoryId()).forward(request, response);
 			}
 			else{
 				if (pseudolistaNombre.equals("Semana"))

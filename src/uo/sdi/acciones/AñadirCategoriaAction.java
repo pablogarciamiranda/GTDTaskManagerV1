@@ -48,7 +48,7 @@ public class AñadirCategoriaAction implements Accion {
 			session.setAttribute("listaCategorias", listaCategorias);
 			Log.debug("Añadida nueva categoria");
 			
-			
+			request.setAttribute("message", "Se ha añadido la categoría '" + category.getName()  + "'");
 			request.getRequestDispatcher("listarTareas?categoryId=" + Long.toString(categoryId)).forward(request, response);
 		}
 		catch (BusinessException | ServletException | IOException b) {

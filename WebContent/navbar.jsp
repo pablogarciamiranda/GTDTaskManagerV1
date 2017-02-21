@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -7,7 +8,14 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="listarTareasInbox">Task Manager</a>
+				<c:choose>
+					<c:when test="${sessionScope.user.isAdmin}">
+ 						<a class="navbar-brand" href="">Task Manager</a>
+					</c:when>
+					<c:otherwise>
+						<a class="navbar-brand" href="listarTareasInbox">Task Manager</a>
+					</c:otherwise>
+				</c:choose>
 			</div>
 
 			<div class="collapse navbar-collapse"

@@ -65,7 +65,8 @@ public class AñadirTareaAction implements Accion {
 			Log.debug("Algo ha ocurrido creando la tarea: %s", b.getMessage());
 			resultado = "FRACASO";
 		}
-
+		
+		request.setAttribute("message", "Se ha añadido la tarea '" + task.getTitle() + "'");
 		return resultado;
 	}
 

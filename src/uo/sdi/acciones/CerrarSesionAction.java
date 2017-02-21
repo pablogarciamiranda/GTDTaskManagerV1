@@ -18,7 +18,7 @@ public class CerrarSesionAction implements Accion {
 		sesion.invalidate();
 
 		Log.info("Se ha cerrado la sesion");
-
+		request.setAttribute("message", "Gracias por su visita. Esperemos que vuelva pronto.");
 		return resultado;
 	}
 

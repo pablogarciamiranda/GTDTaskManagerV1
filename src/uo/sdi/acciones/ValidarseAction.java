@@ -103,6 +103,8 @@ public class ValidarseAction implements Accion {
 							request.setAttribute("listaTareasTerminadas",listaTareas);
 							session.setAttribute("listaCategorias", listaCategorias);
 						}
+						request.setAttribute("message", "Has iniciado sesión correctamente " + userByLogin.getLogin());
+
 					}
 					//Si la contraseña es incorrecta
 					else{

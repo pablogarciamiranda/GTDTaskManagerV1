@@ -31,9 +31,11 @@ public class DuplicarCategoriaAction implements Accion {
 		try {
 			TaskService taskService = Services.getTaskService();
 			long categoryId = taskService.duplicateCategory(categoryid);
+			Category category = taskService.findCategoryById(categoryId);
 			
 			List<Category> listaCategorias = taskService.findCategoriesByUserId(user.getId());
 			session.setAttribute("listaCategorias", listaCategorias);
+			request.setAttribute("message", "Se ha duplicado la categoría '" + category.getName()  + "'");
 			
 			request.getRequestDispatcher("listarTareas?categoryId=" + Long.toString(categoryId)).forward(request, response);
 		}
@@ -43,7 +45,7 @@ public class DuplicarCategoriaAction implements Accion {
 					b.getMessage());
 			resultado="FRACASO";
 		}
-		
+
 		return resultado;
 	}
 	

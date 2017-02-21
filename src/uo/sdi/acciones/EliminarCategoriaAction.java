@@ -42,6 +42,7 @@ public class EliminarCategoriaAction implements Accion {
 			resultado="FRACASO";
 		}
 		
+		request.setAttribute("message", "Se ha eliminado la categoría correctamente. ");
 		return resultado;
 	}
 	

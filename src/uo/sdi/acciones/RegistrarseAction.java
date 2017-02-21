@@ -42,6 +42,8 @@ public class RegistrarseAction implements Accion {
 
 					UserService userService = Services.getUserService();
 					userService.registerUser(user);
+					request.setAttribute("message", "Te has registrado correctamente con el nombre de usuario '" + user.getLogin() + "'");
+
 				} catch (BusinessException b) {
 					request.setAttribute("error", "Ha ocurrido algo durante el registro y no se ha completado: " + b.getMessage());
 					Log.debug("Ha ocurrido algo durante el registro y no se ha completado ");
@@ -49,7 +51,7 @@ public class RegistrarseAction implements Accion {
 				}
 			}
 		}
-
+		
 		return "EXITO";
 	}
 

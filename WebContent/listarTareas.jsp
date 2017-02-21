@@ -40,6 +40,7 @@
 				<jsp:include page="listarCategorias.jsp" /></div>
 			<div class="col-md-10">
 				<div class="row">
+					<jsp:include page="messages.jsp"/>
 					<div class="col-md-8">
 						<c:if test="${category != null}">
 							<div class="form-group">
@@ -54,6 +55,7 @@
 										</span>
 									</div>
 								</form>
+								
 							</div>
 
 						</c:if>

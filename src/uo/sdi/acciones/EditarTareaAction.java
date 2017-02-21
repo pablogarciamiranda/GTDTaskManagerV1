@@ -92,6 +92,8 @@ public class EditarTareaAction implements Accion {
 			//Añadimos categorias disponibles del usuario a la sesion
 			session.setAttribute("categories", categories);
 			
+			session.setAttribute("message", "Se ha editado la tarea correctamente.");
+			
 		} catch (BusinessException b) {
 			request.setAttribute("error", "Algo ha ocurrido editando la tarea: " +  b.getMessage());
 			Log.debug("Algo ha ocurrido editando la tarea: %s", b.getMessage());

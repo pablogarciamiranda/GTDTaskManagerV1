@@ -70,7 +70,7 @@ public class EditarCategoriaAction implements Accion {
 		//Update category
 		try {		
 			taskService.updateCategory(cloneCategory);
-			
+			request.setAttribute("message", "Se ha editado la categoría correctamente.");
 			request.setAttribute("category", cloneCategory);
 		} catch (BusinessException b) {
 			request.setAttribute("error", b.getMessage());

@@ -13,7 +13,9 @@ import uo.sdi.business.UserService;
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.business.impl.util.FieldsCheck;
 import uo.sdi.dto.Category;
+import uo.sdi.dto.Task;
 import uo.sdi.dto.User;
+import uo.sdi.dto.util.FreijeyPabloUtil;
 import alb.util.log.Log;
 
 public class ValidarseAction implements Accion {
@@ -75,9 +77,22 @@ public class ValidarseAction implements Accion {
 						else{
 							TaskService taskService = Services.getTaskService();
 							List<Category> listaCategorias = null;
+							List<Task> listaTareas = null;
+							List<Task> listaTareasTerminadas = null;
 							try {
 								Services.getTaskService();
-								listaCategorias = taskService.findCategoriesByUserId(userByLogin.getId());
+								listaCategorias = taskService.
+										findCategoriesByUserId(userByLogin.getId());
+								listaTareas=taskService
+										.findInboxTasksByUserId(userByLogin.getId());
+								listaTareasTerminadas=taskService.
+										findFinishedInboxTasksByUserId(userByLogin.getId());
+								
+								FreijeyPabloUtil.orderAscending(listaTareas);
+							
+								
+								FreijeyPabloUtil.orderDescending(listaTareasTerminadas);
+								
 							} catch (BusinessException b) {
 								Log.debug("Algo ha ocurrido intentando iniciar sesión como usuario registrado [%s]: %s", 
 										nombreUsuario, b.getMessage());
@@ -85,7 +100,9 @@ public class ValidarseAction implements Accion {
 								return "FRACASO";
 							}
 							
-							request.setAttribute("pseudolistaNombre","Inbox");
+							request.setAttribute("listaMostrada","Inbox");
+							request.setAttribute("listaTareas",listaTareas);
+							request.setAttribute("listaTareasTerminadas",listaTareas);
 							session.setAttribute("listaCategorias", listaCategorias);
 						}
 					}

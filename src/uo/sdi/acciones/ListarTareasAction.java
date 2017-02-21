@@ -4,12 +4,14 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import uo.sdi.business.Services;
 import uo.sdi.business.TaskService;
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.dto.Category;
 import uo.sdi.dto.Task;
+import uo.sdi.dto.util.FreijeyPabloUtil;
 import alb.util.log.Log;
 
 public class ListarTareasAction implements Accion {
@@ -19,6 +21,7 @@ public class ListarTareasAction implements Accion {
 			HttpServletResponse response) {
 		
 		String resultado="EXITO";
+		HttpSession session = request.getSession();
 		long categoryID = Long.parseLong(request.getParameter("categoryId"));
 		
 		List<Task> listaTareas;
@@ -29,12 +32,18 @@ public class ListarTareasAction implements Accion {
 			
 			listaTareas=taskService.findTasksByCategoryId(categoryID);
 			listaTareasTerminadas=taskService.findFinishedTasksByCategoryId(categoryID);
+			
+			FreijeyPabloUtil.orderAscending(listaTareas);
+			FreijeyPabloUtil.orderDescending(listaTareasTerminadas);
+			
 			Category category = taskService.findCategoryById(categoryID);
 			
 			request.setAttribute("listaTareas", listaTareas);
 			request.setAttribute("listaTareasTerminadas", listaTareasTerminadas);
 			
 			request.setAttribute("sePuedeMostrarTerminadas",true);
+			
+			session.setAttribute("listaMostrada", "custom");
 			request.setAttribute("category", category);
 			
 			Log.debug("Obtenida lista de tareas del día conteniendo [%d] tareas", 

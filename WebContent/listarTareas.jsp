@@ -58,7 +58,7 @@
 
 						</c:if>
 						<c:if test="${category == null}">
-							<h3>${pseudolistaNombre}</h3>
+							<h3>${listaMostrada}</h3>
 						</c:if>
 					</div>
 					<table>
@@ -87,7 +87,7 @@
 						</tbody>
 					</table>
 				</div>
-				<form action="añadirTarea">
+				<form action="añadirTarea?pseudolistaNombre=${pseudolistaNombre}">
 					<table class="table table-striped table-hover">
 						<tbody>
 							<tr>

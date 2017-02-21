@@ -11,6 +11,7 @@ import uo.sdi.business.TaskService;
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.dto.Task;
 import uo.sdi.dto.User;
+import uo.sdi.dto.util.FreijeyPabloUtil;
 import alb.util.log.Log;
 
 public class ListarTareasInboxAction implements Accion {
@@ -33,10 +34,15 @@ public class ListarTareasInboxAction implements Accion {
 			listaTareasTerminadasInbox=taskService.
 					findFinishedInboxTasksByUserId(Long.valueOf(user.getId()));
 			
+			FreijeyPabloUtil.orderAscending(listaTareasInbox);
+		
+			
+			FreijeyPabloUtil.orderDescending(listaTareasTerminadasInbox);
+			
 			request.setAttribute("listaTareas", listaTareasInbox);
 			request.setAttribute("listaTareasTerminadas", listaTareasTerminadasInbox);
 			
-			request.setAttribute("pseudolistaNombre","Inbox");
+			session.setAttribute("listaMostrada", "Inbox");
 			request.setAttribute("sePuedeMostrarTerminadas",true);
 			
 			Log.debug("Obtenida lista de tareas del día conteniendo [%d] tareas", 

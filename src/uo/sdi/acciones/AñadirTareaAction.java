@@ -13,6 +13,7 @@ import uo.sdi.business.exception.BusinessException;
 import uo.sdi.business.impl.util.FieldsCheck;
 import uo.sdi.dto.Task;
 import uo.sdi.dto.User;
+import alb.util.date.DateUtil;
 import alb.util.log.Log;
 
 public class AñadirTareaAction implements Accion {
@@ -38,9 +39,14 @@ public class AñadirTareaAction implements Accion {
 		task.setTitle(taskName);
 		if (categoryId != null)
 			task.setCategoryId(Long.parseLong(categoryId));
-		task.setUserId(user.getId());
-		
-		
+			task.setUserId(user.getId());	
+			
+			//Si la lista que se esta mostrando es la pseudolista Hoy se le pone
+			// de planeada un minuto antes de que acabe el día de hoy
+			String listaMostrada = (String) session.getAttribute("listaMostrada"); 
+			if (listaMostrada!=null && listaMostrada.equalsIgnoreCase("hoy"))
+				task.setPlanned(DateUtil.today());
+			
 		try {
 			TaskService taskService = Services.getTaskService();
 			taskService.createTask(task);

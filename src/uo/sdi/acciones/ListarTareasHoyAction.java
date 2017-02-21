@@ -31,7 +31,7 @@ public class ListarTareasHoyAction implements Accion {
 			
 			request.setAttribute("listaTareas", listaTareasHoy);
 			
-			request.setAttribute("pseudolistaNombre","Hoy");
+			session.setAttribute("listaMostrada", "Hoy");
 			request.setAttribute("sePuedeMostrarTerminadas",false);
 			
 			Log.debug("Obtenida lista de tareas del día conteniendo [%d] tareas", 

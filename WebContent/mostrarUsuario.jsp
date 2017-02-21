@@ -84,19 +84,6 @@
 				value="Editar" form="editarUsuario">
 		</form>
 		<br/>
-		<c:if test="${sessionScope.user.isAdmin}">
-				<form id="eliminarUsuario" action="eliminarUsuario" method="POST">
-					<input type="hidden" name="id"
-						value="<jsp:getProperty property="id" name="userToEdit" />">
-					<input type="submit" class="btn btn-primary" value="Eliminar">
-				</form>
-				<br/>
-				<form id="cambiarEstado" action="cambiarEstado" method="POST">
-					<input type="hidden" name="id"
-						value="<jsp:getProperty property="id" name="userToEdit" />">
-					<input type="submit" class="btn btn-primary" value="Cambiar Estado">
-				</form>
-		</c:if>
 		<br /> <a id="cerrarSesion" href="cerrarSesion">Cerrar sesión</a>
 	</div>
 	<%@ include file="pieDePagina.jsp"%>

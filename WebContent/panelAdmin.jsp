@@ -19,6 +19,8 @@
 				<th>isAdmin</th>
 				<th>Status</th>
 				<th>Editar</th>
+				<th>Cambiar status</th>
+				<th>Eliminar</th>
 			</tr>	
 			<c:forEach var="user" items="${listOfUsers}" varStatus="i">
 				<tr id="item_${i.index}">
@@ -27,8 +29,24 @@
 					<td>${user.email}</td>
 					<td>${user.isAdmin}</td>
 					<td>${user.status}</td>
-					<td><a href="mostrarUsuario?id=${user.id}">Editar</a>
-					</td>
+					<td><form id="mostrarUsuario" action="mostrarUsuario" method="POST">
+							<input type="hidden" name="id"
+								value="${user.id}">
+							<input type="submit" class="btn btn-primary" value="Editar">
+						</form></td>
+					<c:if test="${!user.isAdmin}">
+						<td><form id="cambiarEstado" action="cambiarEstado" method="POST">
+							<input type="hidden" name="id"
+								value="${user.id}">
+							<input type="submit" class="btn btn-primary" value="Cambiar">
+						</form></td>					
+						<td><form id="eliminarUsuario" action="eliminarUsuario" method="POST">
+							<input type="hidden" name="id"
+								value="${user.id}">
+							<input type="submit" class="btn btn-primary" value="Eliminar">
+						</form></td>
+
+					</c:if>
 				</tr>
 			</c:forEach>
 	</table>

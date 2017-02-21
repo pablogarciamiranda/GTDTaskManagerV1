@@ -40,7 +40,10 @@
 								value="${user.id}">
 							<input type="submit" class="btn btn-primary" value="Cambiar">
 						</form></td>					
-						<td><form id="eliminarUsuario" action="eliminarUsuario" method="POST">
+						<td><form id="eliminarUsuario" action="eliminarUsuario" method="POST"
+								onsubmit="return confirm('Do you really want' +
+								' to delete the user?\n If you accept every task from this user'
+													+ ' will be removed');">
 							<input type="hidden" name="id"
 								value="${user.id}">
 							<input type="submit" class="btn btn-primary" value="Eliminar">

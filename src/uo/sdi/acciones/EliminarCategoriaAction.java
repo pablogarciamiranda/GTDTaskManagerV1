@@ -33,6 +33,7 @@ public class EliminarCategoriaAction implements Accion {
 			List<Category> listaCategorias = taskService.findCategoriesByUserId(user.getId());
 			session.setAttribute("listaCategorias", listaCategorias);
 			
+			request.setAttribute("message", "Se ha eliminado la categoría correctamente. ");
 			request.getRequestDispatcher("listarTareasInbox").forward(request, response);
 		}
 		catch (BusinessException | ServletException | IOException b) {
@@ -42,7 +43,6 @@ public class EliminarCategoriaAction implements Accion {
 			resultado="FRACASO";
 		}
 		
-		request.setAttribute("message", "Se ha eliminado la categoría correctamente. ");
 		return resultado;
 	}
 	

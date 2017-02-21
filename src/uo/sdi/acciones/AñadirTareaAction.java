@@ -51,6 +51,7 @@ public class AñadirTareaAction implements Accion {
 		try {
 			TaskService taskService = Services.getTaskService();
 			taskService.createTask(task);
+			request.setAttribute("message", "Se ha añadido la tarea '" + task.getTitle() + "'");
 			if (categoryId != null) {
 				request.getRequestDispatcher(
 						"listarTareas?id=" + task.getCategoryId()).forward(
@@ -66,7 +67,6 @@ public class AñadirTareaAction implements Accion {
 			resultado = "FRACASO";
 		}
 		
-		request.setAttribute("message", "Se ha añadido la tarea '" + task.getTitle() + "'");
 		return resultado;
 	}
 

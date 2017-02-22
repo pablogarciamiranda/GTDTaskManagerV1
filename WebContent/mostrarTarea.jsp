@@ -30,10 +30,9 @@
 
 				<tr>
 					<th>Comentarios</th>
-					<td id="comment">		
- 						<textarea rows="4" cols="50" name="newComment">${task.comments}</textarea>		
- 					</td>
-					
+					<td id="comment"><textarea rows="4" cols="50"
+							name="newComment">${task.comments}</textarea></td>
+
 				</tr>
 
 				<tr>
@@ -46,15 +45,25 @@
 						<th>Planeada</th>
 						<c:choose>
 							<c:when test="${empty task.planned}">
-								<td><c:out value="No hay fecha planeada"></c:out></td>
+								<td><strong>Now</strong>: No planned date <br />
+								 <strong>Modify</strong>: <input type="date"
+									name="newPlannedDate"></td>
 							</c:when>
 							<c:when test="${not empty task.planned}">
 								<c:choose>
 									<c:when test="${task.planned lt now}">
-										<td class="text-danger"><c:out value="${task.planned}"></c:out></td>
+										<td class="text-danger"><strong>Now:</strong><c:out
+												value="${task.planned}"></c:out><br />
+												<Strong>Modify:</Strong> <input
+											type="date" name="newPlannedDate">
+										</td>
 									</c:when>
 									<c:when test="${task.planned ge now}">
-										<td><c:out value="${task.planned}"></c:out></td>
+										<td><strong>Now:</strong>
+										<c:out value="${task.planned}"></c:out><br />
+											<strong>Modify:</strong> 
+											<input type="date" name="newPlannedDate">
+										</td>
 									</c:when>
 								</c:choose>
 							</c:when>

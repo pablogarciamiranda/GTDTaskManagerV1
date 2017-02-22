@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import uo.sdi.business.AdminService;
 import uo.sdi.business.Services;
 import uo.sdi.business.TaskService;
 import uo.sdi.business.UserService;
@@ -66,27 +65,24 @@ public class ValidarseAction implements Accion {
 						// Si el user es admin añadimos la lista de usuarios
 						// para gestionar desde el admin panel
 						if (userByLogin.getIsAdmin()) {
-							AdminService adminService = Services
-									.getAdminService();
-							List<User> listOfUsers = null;
 							try {
-								listOfUsers = adminService.findAllUsers();
-							} catch (BusinessException b) {
+								request.getRequestDispatcher("listarUsuarios")
+										.forward(request, response);
+							} catch (ServletException | IOException e) {
 								Log.debug(
 										"Algo ha ocurrido intentando iniciar sesión como administrador: [%s]: %s",
-										nombreUsuario, b.getMessage());
+										nombreUsuario, e.getMessage());
 								request.setAttribute("error",
 										"Algo ha ocurrido intentando iniciar sesión como administrador: "
-												+ b.getMessage());
+												+ e.getMessage());
 								return "FRACASO";
 							}
-							session.setAttribute("listOfUsers", listOfUsers);
 						}
 						// Si no, es usuario registrado. Añadimos las categorias
 						else {
 							try {
-								 TaskService taskService =
-								 Services.getTaskService();
+								TaskService taskService = Services
+										.getTaskService();
 								List<Category> listaCategorias = null;
 								listaCategorias = taskService
 										.findCategoriesByUserId(userByLogin
@@ -99,7 +95,8 @@ public class ValidarseAction implements Accion {
 								request.getRequestDispatcher(
 										"listarTareasInbox").forward(request,
 										response);
-							} catch (ServletException | IOException | BusinessException e) {
+							} catch (ServletException | IOException
+									| BusinessException e) {
 								Log.debug(
 										"Algo ha ocurrido intentando iniciar sesiófn como usuario registrado [%s]: %s",
 										nombreUsuario, e.getMessage());
@@ -108,7 +105,6 @@ public class ValidarseAction implements Accion {
 												+ e.getMessage());
 								return "FRACASO";
 							}
-							
 
 						}
 

@@ -74,7 +74,7 @@
 											'to delete the category?\n If you accept every task from this category'
 													+ ' will be removed');">
 										<input type="hidden" name="categoryId" value="${category.id}">
-										<button type="submit" class="btn btn-primary">Eliminar</button>
+										<button type="submit" id="eliminar_categoria" class="btn btn-primary">Eliminar</button>
 									</form>
 								</td>
 
@@ -90,7 +90,7 @@
 					</tbody>
 				</table>
 			</div>
-			<form action="añadirTarea">
+			<form action="añadirTarea" id="add_task_form">
 				<input type="hidden" name="listaMostrada" value="${listaMostrada}">
 				<table class="table table-striped table-hover">
 					<tbody>
@@ -101,9 +101,9 @@
 
 							</c:if>
 							<td><input class="form-control input-sm" type="text"
-								id="inputSmall" name="taskName"
+								id="input_Task" name="taskName"
 								placeholder="Insert your task here"></td>
-							<td><button type="submit" class="btn btn-primary">Add</button></td>
+							<td><button type="submit" id="add_task" class="btn btn-primary">Add</button></td>
 						</tr>
 						<tr>
 					</tbody>

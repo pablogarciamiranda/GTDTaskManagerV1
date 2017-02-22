@@ -25,7 +25,6 @@ public class EditarCategoriaAction implements Accion {
 		
 		//Datos de la category
 		String categoryId = request.getParameter("categoryId");
-		
 		String newName = request.getParameter("newName");
 		
 		if (FieldsCheck.invalidFieldCheck(newName)) {
@@ -41,12 +40,7 @@ public class EditarCategoriaAction implements Accion {
 		
 		try {
 			category = taskService.findCategoryById(Long.parseLong(categoryId));
-			category.setName(newName);
-			taskService.updateCategory(category);
 			
-			listaCategorias=taskService.findCategoriesByUserId(user.getId());
-			session.setAttribute("listaCategorias", listaCategorias);
-			Log.debug("Añadida nueva categoria");
 		} catch (BusinessException b) {
 			request.setAttribute("error", b.getMessage());
 			Log.debug("Algo ha ocurrido editando la categoria: %s", b.getMessage());
@@ -56,22 +50,18 @@ public class EditarCategoriaAction implements Accion {
 		//Clone Category
 		Category cloneCategory = Cloner.clone(category);
 		
-		// If new fields are empty
-		if (FieldsCheck.invalidFieldCheck(newName)) {
-			request.setAttribute("error", "Existen campos vacios, por favor, rellenalos todos.");
-			Log.debug(
-					"El usuario no ha rellado los campos al actualizar datos");
-			return "FRACASO";
-		}
-		
 		//Set new fields
 		cloneCategory.setName(newName);
+		cloneCategory.setId(category.getId());
 		
 		//Update category
 		try {		
 			taskService.updateCategory(cloneCategory);
 			request.setAttribute("message", "Se ha editado la categoría correctamente.");
 			request.setAttribute("category", cloneCategory);
+			listaCategorias=taskService.findCategoriesByUserId(user.getId());
+			session.setAttribute("listaCategorias", listaCategorias);
+			Log.debug("Añadida nueva categoria");
 		} catch (BusinessException b) {
 			request.setAttribute("error", b.getMessage());
 			Log.debug("Algo ha ocurrido editando la categoria: %s",

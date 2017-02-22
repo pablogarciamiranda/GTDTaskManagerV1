@@ -102,6 +102,7 @@ public class ValidarseAction implements Accion {
 							request.setAttribute("listaTareas",listaTareas);
 							request.setAttribute("listaTareasTerminadas",listaTareas);
 							session.setAttribute("listaCategorias", listaCategorias);
+							request.setAttribute("sePuedeMostrarTerminadas",true);
 						}
 						request.setAttribute("message", "Has iniciado sesión correctamente " + userByLogin.getLogin());
 

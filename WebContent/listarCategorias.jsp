@@ -1,6 +1,6 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ include file="comprobarNavegacion.jsp" %>
+<%@ include file="comprobarNavegacion.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
@@ -24,8 +24,8 @@
 
 <body>
 	<h2>Lists</h2>
-	<table class="table table-striped table-hover">
-	<tbody>
+	<table class="table table-striped table-hover" id="listaDeCategorias">
+		<tbody>
 			<tr id="inbox">
 				<td colspan=2><a href="listarTareasInbox">Inbox</a></td>
 			</tr>
@@ -35,29 +35,30 @@
 			<tr id="semana">
 				<td colspan=2><a href="listarTareasSemana">Esta semana</a></td>
 			</tr>
-		<c:forEach var="entry" items="${listaCategorias}" varStatus="i">
-			<tr id="item_${i.index}">	
-				<td><a href="listarTareas?categoryId=${entry.id}">${entry.name}</a></td>
-			</tr>
-		</c:forEach>
-			<tr id= "añadirCategoria">
-				<td>			
-				<form action="añadirCategoria">
-				<table class="table table-striped table-hover">
-					<tbody>
-						<tr>
-							<td><input class="form-control input-sm" type="text"
-								id="inputSmall" name="name"
-								placeholder="Name of the category"></td>
-							<td><button type="submit" class="btn btn-primary">Add</button></td>
-						</tr>
-						<tr>
-					</tbody>
-				</table>
-				</form>
+			<c:forEach var="entry" items="${listaCategorias}" varStatus="i">
+				<tr id="item_${i.index}">
+					<td><a href="listarTareas?categoryId=${entry.id}">${entry.name}</a></td>
+				</tr>
+			</c:forEach>
+			<tr id="añadirCategoria">
+				<td>
+					<form action="añadirCategoria">
+						<table class="table table-striped table-hover">
+							<tbody>
+								<tr>
+									<td><input class="form-control input-sm" type="text"
+										id="category_textfield" name="name"
+										placeholder="Name of the category"></td>
+									<td><button type="submit" id="add_category"
+											class="btn btn-primary">Add</button></td>
+								</tr>
+								<tr>
+							</tbody>
+						</table>
+					</form>
 				</td>
 			</tr>
-			
+
 		</tbody>
 	</table>
 </body>

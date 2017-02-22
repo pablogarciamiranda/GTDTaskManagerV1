@@ -28,7 +28,7 @@
 	            <jsp:include page="messages.jsp"></jsp:include>
 	            
 	            <div class="main-login main-center">
-					<form class="form-horizontal" action="validarse" method="post" >
+					<form class="form-horizontal" id="login_form" action="validarse" method="post" >
 						
 						<div class="form-group">
 							<label for="username" class="cols-sm-2 control-label">Username:</label>

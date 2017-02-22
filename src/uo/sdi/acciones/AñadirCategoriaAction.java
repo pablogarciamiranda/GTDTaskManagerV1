@@ -26,7 +26,7 @@ public class AñadirCategoriaAction implements Accion {
 		//Datos de la categoria
 		HttpSession session = request.getSession();
 		User user = ((User) session.getAttribute("user"));
-		String name = request.getParameter("name");
+		String name = request.getParameter("categoryName");
 		
 		if (FieldsCheck.invalidFieldCheck(name)) {
 			request.setAttribute("error", "No puedes crear una categoría sin nombre");

@@ -17,7 +17,7 @@
 </c:if>
 
 <c:if test="${not empty message}">
-  		  <div class="alert alert-success alert-dismissable">
+  		  <div class="alert alert-success alert-dismissable" id="message">
 		    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
 		    <strong>Enhorabuena: </strong>${message}
   		  </div>

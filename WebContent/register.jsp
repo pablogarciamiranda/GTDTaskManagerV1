@@ -28,7 +28,7 @@
 	            <jsp:include page="messages.jsp"></jsp:include>
 	            
 				<div class="main-login main-center">
-					<form class="form-horizontal" action="registrarse" method="post" >
+					<form class="form-horizontal" id="register_form" action="registrarse" method="post" >
 						
 
 						<div class="form-group">
@@ -72,7 +72,7 @@
 						</div>
 
 						<div class="form-group ">
-							<button value="Send" class="btn btn-primary btn-lg btn-block login-button" type="submit">Register</button>
+							<button value="Send" id="submit" class="btn btn-primary btn-lg btn-block login-button" type="submit">Register</button>
 						</div>
 						<div class="login-register" align="center">
 				            <a href="login.jsp">Login</a>

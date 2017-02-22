@@ -34,186 +34,187 @@
 </script>
 </head>
 <body onload="setCheckBoxFalse()">
-	<jsp:include page="navbar.jsp"/>
-		<div class="container-fluid">
-			<div class="col-md-2">
-				<jsp:include page="listarCategorias.jsp" /></div>
-			<div class="col-md-10">
-				<div class="row">
-					<jsp:include page="messages.jsp"/>
-					<div class="col-md-8">
-						<c:if test="${category != null}">
-							<div class="form-group">
-								<form action="editarCategoria">
-									<div class="input-group">
-										<span class="input-group-addon">Category</span> <input
-											type="text" class="form-control" name="newName"
-											placeholder="${category.name}"> <input type="hidden"
-											name="categoryId" value="${category.id}"> <span
-											class="input-group-btn">
-											<button class="btn btn-default" type="submit">Editar</button>
-										</span>
-									</div>
-								</form>
-								
-							</div>
+	<jsp:include page="navbar.jsp" />
+	<div class="container-fluid">
+		<div class="col-md-2">
+			<jsp:include page="listarCategorias.jsp" /></div>
+		<div class="col-md-10">
+			<div class="row">
+				<jsp:include page="messages.jsp" />
+				<div class="col-md-8">
+					<c:if test="${category != null}">
+						<div class="form-group">
+							<form action="editarCategoria">
+								<div class="input-group">
+									<span class="input-group-addon">Category</span> <input
+										type="text" class="form-control" name="newName"
+										placeholder="${category.name}"> <input type="hidden"
+										name="categoryId" value="${category.id}"> <span
+										class="input-group-btn">
+										<button class="btn btn-default" type="submit">Editar</button>
+									</span>
+								</div>
+							</form>
 
-						</c:if>
-						<c:if test="${category == null}">
-							<h3>${listaMostrada}</h3>
-						</c:if>
-					</div>
-					<table>
-						<tbody>
-							<tr>
-								<td></td>
-								<c:if test="${category != null}">
-									<td>
-										<form action="eliminarCategoria"
-											onsubmit="return confirm('Do you really want' +
+						</div>
+
+					</c:if>
+					<c:if test="${category == null}">
+						<h3>${listaMostrada}</h3>
+					</c:if>
+				</div>
+				<table>
+					<tbody>
+						<tr>
+							<td></td>
+							<c:if test="${category != null}">
+								<td>
+									<form action="eliminarCategoria"
+										onsubmit="return confirm('Do you really want' +
 											'to delete the category?\n If you accept every task from this category'
 													+ ' will be removed');">
-											<input type="hidden" name="categoryId" value="${category.id}">
-											<button type="submit" class="btn btn-primary">Eliminar</button>
-										</form>
-									</td>
+										<input type="hidden" name="categoryId" value="${category.id}">
+										<button type="submit" class="btn btn-primary">Eliminar</button>
+									</form>
+								</td>
 
+								<td>
+									<form action="duplicarCategoria">
+										<input type="hidden" name="categoryId" value="${category.id}">
+										<button type="submit" id="duplicar_categoria"
+											class="btn btn-primary">Duplicar</button>
+									</form>
+								</td>
+							</c:if>
+						<tr>
+					</tbody>
+				</table>
+			</div>
+			<form action="añadirTarea">
+				<input type="hidden" name="listaMostrada" value="${listaMostrada}">
+				<table class="table table-striped table-hover">
+					<tbody>
+						<tr>
+							<c:if test="${category.id != null}">
+								<td><input type="hidden" name="categoryId"
+									value="${category.id}"></td>
+
+							</c:if>
+							<td><input class="form-control input-sm" type="text"
+								id="inputSmall" name="taskName"
+								placeholder="Insert your task here"></td>
+							<td><button type="submit" class="btn btn-primary">Add</button></td>
+						</tr>
+						<tr>
+					</tbody>
+				</table>
+			</form>
+			<table class="table table-striped table-hover">
+				<caption>Tareas sin terminar</caption>
+				<tbody>
+					<c:forEach var="task" items="${listaTareas}" varStatus="i">
+						<fmt:formatDate value="${task.planned}" var="plannedDate"
+							pattern="EEEEEEEEEE dd/MM/yyyy" />
+						<c:choose>
+							<c:when test="${empty task.planned}">
+								<tr id="item_${i.index}">
+									<td><a href="mostrarTarea?taskId=${task.id}">${task.title}</a></td>
+									<td><c:out value="No hay fecha planeada"></c:out></td>
 									<td>
-										<form action="duplicarCategoria">
-											<input type="hidden" name="categoryId" value="${category.id}">
-											<button type="submit" class="btn btn-primary">Duplicar</button>
+										<form action="terminarTarea">
+											<c:choose>
+												<c:when test="${category.id != null}">
+													<input type="hidden" name="categoryId"
+														value="${category.id}">
+												</c:when>
+												<c:otherwise>
+													<input type="hidden" name="listaMostrada"
+														value="${listaMostrada}">
+												</c:otherwise>
+											</c:choose>
+											<input type="hidden" name="taskId" value="${task.id}">
+											<button type="submit" class="btn btn-primary">Finished</button>
 										</form>
 									</td>
-								</c:if>
-							<tr>
-						</tbody>
-					</table>
-				</div>
-				<form action="añadirTarea">
-				<input type="hidden" name="listaMostrada" value="${listaMostrada}">
-					<table class="table table-striped table-hover">
-						<tbody>
-							<tr>
-								<c:if test="${category.id != null}">
-									<td><input type="hidden" name="categoryId"
-										value="${category.id}"></td>
-										
-								</c:if>
-								<td><input class="form-control input-sm" type="text"
-									id="inputSmall" name="taskName"
-									placeholder="Insert your task here"></td>
-								<td><button type="submit" class="btn btn-primary">Add</button></td>
-							</tr>
-							<tr>
-						</tbody>
-					</table>
+								</tr>
+							</c:when>
+							<c:when test="${not empty task.planned}">
+								<c:choose>
+									<c:when test="${task.planned lt now}">
+										<tr id="item_${i.index}">
+											<td><a href="mostrarTarea?taskId=${task.id}">${task.title}</a></td>
+											<td class="danger"><c:out value="${plannedDate}"></c:out></td>
+											<td>
+												<form action="terminarTarea">
+													<c:choose>
+														<c:when test="${category.id != null}">
+															<input type="hidden" name="categoryId"
+																value="${category.id}">
+														</c:when>
+														<c:otherwise>
+															<input type="hidden" name="listaMostrada"
+																value="${listaMostrada}">
+														</c:otherwise>
+													</c:choose>
+													<input type="hidden" name="taskId" value="${task.id}">
+													<button type="submit" class="btn btn-primary">Finished</button>
+												</form>
+											</td>
+										</tr>
+									</c:when>
+									<c:when test="${task.planned ge now}">
+										<tr id="item_${i.index}">
+											<td><a href="mostrarTarea?taskId=${task.id}">${task.title}</a></td>
+											<td><c:out value="${plannedDate}"></c:out></td>
+											<td>
+												<form action="terminarTarea">
+													<c:choose>
+														<c:when test="${category.id != null}">
+															<input type="hidden" name="categoryId"
+																value="${category.id}">
+														</c:when>
+														<c:otherwise>
+															<input type="hidden" name="listaMostrada"
+																value="${listaMostrada}">
+														</c:otherwise>
+													</c:choose>
+													<input type="hidden" name="taskId" value="${task.id}">
+													<button type="submit" class="btn btn-primary">Finished</button>
+												</form>
+											</td>
+										</tr>
+									</c:when>
+								</c:choose>
+							</c:when>
+						</c:choose>
+					</c:forEach>
+				</tbody>
+			</table>
+			<c:if test="${sePuedeMostrarTerminadas == true}">
+				<form>
+					<input type="checkbox" id="checkbox"
+						onchange="toggleFinishedTasks(this)"> Mostrar tareas
+					terminadas
 				</form>
-				<table class="table table-striped table-hover">
-					<caption>Tareas sin terminar</caption>
+			</c:if>
+
+			<div id="terminadasDiv" style="display: none;">
+				<table class="table table-striped table-hover ">
+					<caption>Tareas terminadas</caption>
 					<tbody>
-						<c:forEach var="task" items="${listaTareas}" varStatus="i">
-						<fmt:formatDate value="${task.planned}" var="plannedDate"
-                                      pattern="EEEEEEEEEE dd/MM/yyyy"/>
-							<c:choose>
-								<c:when test="${empty task.planned}">
-									<tr id="item_${i.index}">
-										<td><a href="mostrarTarea?taskId=${task.id}">${task.title}</a></td>
-										<td><c:out value="No hay fecha planeada"></c:out></td>
-										<td>
-											<form action="terminarTarea">
-												<c:choose>
-													<c:when test="${category.id != null}">
-														<input type="hidden" name="categoryId"
-															value="${category.id}">
-													</c:when>
-													<c:otherwise>
-														<input type="hidden" name="listaMostrada"
-															value="${listaMostrada}">
-													</c:otherwise>
-												</c:choose>
-												<input type="hidden" name="taskId" value="${task.id}">
-												<button type="submit" class="btn btn-primary">Finished</button>
-											</form>
-										</td>
-									</tr>
-								</c:when>
-								<c:when test="${not empty task.planned}">
-									<c:choose>
-										<c:when test="${task.planned lt now}">
-											<tr id="item_${i.index}">
-												<td><a href="mostrarTarea?taskId=${task.id}">${task.title}</a></td>
-												<td class="danger"><c:out value="${plannedDate}"></c:out></td>
-												<td>
-													<form action="terminarTarea">
-														<c:choose>
-															<c:when test="${category.id != null}">
-																<input type="hidden" name="categoryId"
-																	value="${category.id}">
-															</c:when>
-															<c:otherwise>
-																<input type="hidden" name="listaMostrada"
-																	value="${listaMostrada}">
-															</c:otherwise>
-														</c:choose>
-														<input type="hidden" name="taskId" value="${task.id}">
-														<button type="submit" class="btn btn-primary">Finished</button>
-													</form>
-												</td>
-											</tr>
-										</c:when>
-										<c:when test="${task.planned ge now}">
-											<tr id="item_${i.index}">
-												<td><a href="mostrarTarea?taskId=${task.id}">${task.title}</a></td>
-												<td><c:out value="${plannedDate}"></c:out></td>
-												<td>
-													<form action="terminarTarea">
-														<c:choose>
-															<c:when test="${category.id != null}">
-																<input type="hidden" name="categoryId"
-																	value="${category.id}">
-															</c:when>
-															<c:otherwise>
-																<input type="hidden" name="listaMostrada"
-																	value="${listaMostrada}">
-															</c:otherwise>
-														</c:choose>
-														<input type="hidden" name="taskId" value="${task.id}">
-														<button type="submit" class="btn btn-primary">Finished</button>
-													</form>
-												</td>
-											</tr>
-										</c:when>
-									</c:choose>
-								</c:when>
-							</c:choose>
+						<c:forEach var="task" items="${listaTareasTerminadas}"
+							varStatus="i">
+							<fmt:formatDate value="${task.created}" var="plannedDate"
+								pattern="EEEEEEEEEE dd/MM/yyyy" />
+							<tr class="success">
+								<td><a href="mostrarTarea?taskId=${task.id}">${task.title}</a></td>
+								<td><c:out value="${plannedDate}"></c:out></td>
+							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
-				<c:if test="${sePuedeMostrarTerminadas == true}">
-					<form>
-						<input type="checkbox" id="checkbox"
-							onchange="toggleFinishedTasks(this)"> Mostrar tareas
-						terminadas
-					</form>
-				</c:if>
-
-				<div id="terminadasDiv" style="display: none;">
-					<table class="table table-striped table-hover ">
-						<caption>Tareas terminadas</caption>
-						<tbody>
-							<c:forEach var="task" items="${listaTareasTerminadas}"
-								varStatus="i">
-								<fmt:formatDate value="${task.created}" var="plannedDate"
-                                      pattern="EEEEEEEEEE dd/MM/yyyy"/>
-								<tr class="success">
-									<td><a href="mostrarTarea?taskId=${task.id}">${task.title}</a></td>
-									<td><c:out value="${plannedDate}"></c:out></td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</div>
 			</div>
 		</div>
-		<%@ include file="pieDePagina.jsp"%></body>
+	</div>
+	<%@ include file="pieDePagina.jsp"%></body>
 </html>

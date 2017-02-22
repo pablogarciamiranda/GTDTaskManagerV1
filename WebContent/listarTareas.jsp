@@ -112,6 +112,8 @@
 					<caption>Tareas sin terminar</caption>
 					<tbody>
 						<c:forEach var="task" items="${listaTareas}" varStatus="i">
+						<fmt:formatDate value="${task.planned}" var="plannedDate"
+                                      pattern="EEEEEEEEEE dd/MM/yyyy"/>
 							<c:choose>
 								<c:when test="${empty task.planned}">
 									<tr id="item_${i.index}">
@@ -140,7 +142,7 @@
 										<c:when test="${task.planned lt now}">
 											<tr id="item_${i.index}">
 												<td><a href="mostrarTarea?taskId=${task.id}">${task.title}</a></td>
-												<td class="danger"><c:out value="${task.planned}"></c:out></td>
+												<td class="danger"><c:out value="${plannedDate}"></c:out></td>
 												<td>
 													<form action="terminarTarea">
 														<c:choose>
@@ -162,7 +164,7 @@
 										<c:when test="${task.planned ge now}">
 											<tr id="item_${i.index}">
 												<td><a href="mostrarTarea?taskId=${task.id}">${task.title}</a></td>
-												<td><c:out value="${task.planned}"></c:out></td>
+												<td><c:out value="${plannedDate}"></c:out></td>
 												<td>
 													<form action="terminarTarea">
 														<c:choose>
@@ -201,9 +203,11 @@
 						<tbody>
 							<c:forEach var="task" items="${listaTareasTerminadas}"
 								varStatus="i">
+								<fmt:formatDate value="${task.created}" var="plannedDate"
+                                      pattern="EEEEEEEEEE dd/MM/yyyy"/>
 								<tr class="success">
 									<td><a href="mostrarTarea?taskId=${task.id}">${task.title}</a></td>
-									<td><c:out value="${task.planned}"></c:out></td>
+									<td><c:out value="${plannedDate}"></c:out></td>
 								</tr>
 							</c:forEach>
 						</tbody>

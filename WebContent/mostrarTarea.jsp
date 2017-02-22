@@ -17,6 +17,11 @@
 	rel='stylesheet' type='text/css'>
 </head>
 <body>
+<fmt:formatDate value="${task.planned}" var="plannedDate"
+                                      pattern="yyyy-MM-dd"/>
+<fmt:formatDate value="${task.created}" var="createdDate"
+                                      pattern="EEEEEEEEEE dd/MM/yyyy"/>
+                             
 	<jsp:include page="navbar.jsp" />
 	<div class="container">
 		<jsp:include page="messages.jsp" />
@@ -37,7 +42,7 @@
 
 				<tr>
 					<th>Creada</th>
-					<td>${task.created}</td>
+					<td>${createdDate}</td>
 				</tr>
 
 				<tr>
@@ -45,24 +50,21 @@
 						<th>Planeada</th>
 						<c:choose>
 							<c:when test="${empty task.planned}">
-								<td><strong>Now</strong>: No planned date <br />
-								 <strong>Modify</strong>: <input type="date"
+							<td>
+								<input value="${plannedDate}" type="date"
 									name="newPlannedDate"></td>
 							</c:when>
 							<c:when test="${not empty task.planned}">
 								<c:choose>
+									
 									<c:when test="${task.planned lt now}">
-										<td class="text-danger"><strong>Now:</strong><c:out
-												value="${task.planned}"></c:out><br />
-												<Strong>Modify:</Strong> <input
+										<td class="text-danger">
+											<input value="${plannedDate}"
 											type="date" name="newPlannedDate">
 										</td>
 									</c:when>
 									<c:when test="${task.planned ge now}">
-										<td><strong>Now:</strong>
-										<c:out value="${task.planned}"></c:out><br />
-											<strong>Modify:</strong> 
-											<input type="date" name="newPlannedDate">
+										<td><input value="${plannedDate}" type="date" name="newPlannedDate">
 										</td>
 									</c:when>
 								</c:choose>

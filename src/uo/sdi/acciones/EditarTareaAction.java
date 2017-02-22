@@ -79,15 +79,17 @@ public class EditarTareaAction implements Accion {
 		
 		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		String plannedDateString=request.getParameter("newPlannedDate");
+		date = null;
 		if (!plannedDateString.equals("")){
 			try {
 				date = formatter.parse(plannedDateString);
-				cloneTask.setPlanned(date);
+				
 			} catch (ParseException e) {
 				Log.debug("Ha ocurrido un problema con la fecha");
 				return "FRACASO";
 			}
 		}
+		cloneTask.setPlanned(date);
 		
 		
 		 // Hay que mirar como hacemos con las fechas

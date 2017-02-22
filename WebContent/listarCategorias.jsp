@@ -47,7 +47,7 @@
 							<tbody>
 								<tr>
 									<td><input class="form-control input-sm" type="text"
-										id="category_textfield" name="name"
+										id="categoryName" name="categoryName"
 										placeholder="Name of the category"></td>
 									<td><button type="submit" id="add_category"
 											class="btn btn-primary">Add</button></td>

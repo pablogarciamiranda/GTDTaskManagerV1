@@ -91,7 +91,7 @@
 			</table>
 
 			<input type="hidden" value="${task.id}" name="taskId" /> <input
-				type="submit" class="btn btn-primary" value="Editar tarea" />
+				type="submit" id="editar_tarea" class="btn btn-primary" value="Editar tarea" />
 		</form>
 	</div>
 	<%@ include file="pieDePagina.jsp"%>

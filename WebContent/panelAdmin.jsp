@@ -22,6 +22,7 @@
 </head>
 <body>
 	<jsp:include page="navbar.jsp" />
+	<jsp:include page="messages.jsp"/>
 	<div class = container-fluid>
 	<table id="example" class="table table-striped table-hover" cellpadding="0" cellspacing="0" width="100%">
 		<thead>

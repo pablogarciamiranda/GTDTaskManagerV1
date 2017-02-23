@@ -65,7 +65,7 @@ public class FreijeyPabloUtil {
 						return -1;
 					if (o2.getCategoryId()==null)
 						return 1;
-					return getCatName(o2).compareTo(getCatName(o1));
+					return getCatName(o1).compareTo(getCatName(o2));
 				}
 					
 				return o1.getPlanned().compareTo(o2.getPlanned());			

@@ -1,7 +1,6 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="WEB-INF/catname.tld" prefix="cat" %>
 <%@ page import="alb.util.date.DateUtil"%>
 <%@ include file="comprobarNavegacion.jsp"%>
 <c:set var="today" value="<%=DateUtil.today()%>" />
@@ -115,11 +114,22 @@
 				<caption>Tareas sin terminar</caption>
 				<tbody>
 					<c:forEach var="task" items="${listaTareas}" varStatus="i">
-						<fmt:formatDate value="${task.planned}" var="plannedDate" pattern="EEEEEEEEEE dd/MM/yyyy" />
+						<fmt:formatDate value="${task.planned}" var="plannedDate"
+							pattern="EEEEEEEEEE dd/MM/yyyy" />
 						<tr id="item_${i.index}">
 							<td><a href="mostrarTarea?taskId=${task.id}">${task.title}</a></td>
-							<c:if test="${listaMostrada eq 'Hoy' or listaMostrada eq 'Semana' }">
+							<c:if
+								test="${listaMostrada eq 'Hoy' or listaMostrada eq 'Semana' }">
 								<!-- Aqui iria el nombre de la categoria -->
+								<c:forEach var="category" items="${listaCategorias}" varStatus="i">
+									<c:if test= "${category.id == task.categoryId}">
+										<td>${category.name}</td>
+									</c:if>
+									
+									
+									
+								</c:forEach>
+								
 							</c:if>
 							<c:choose>
 								<c:when test="${empty task.planned}">

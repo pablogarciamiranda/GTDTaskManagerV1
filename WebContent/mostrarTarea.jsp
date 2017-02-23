@@ -1,9 +1,9 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="alb.util.date.DateUtil" %>
+<%@ page import="alb.util.date.DateUtil"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ include file="comprobarNavegacion.jsp"%>
-<c:set var="today" value="<%=DateUtil.today()%>"/>
+<c:set var="today" value="<%=DateUtil.today()%>" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,11 +17,11 @@
 	rel='stylesheet' type='text/css'>
 </head>
 <body>
-<fmt:formatDate value="${task.planned}" var="plannedDate"
-                                      pattern="yyyy-MM-dd"/>
-<fmt:formatDate value="${task.created}" var="createdDate"
-                                      pattern="EEEEEEEEEE dd/MM/yyyy"/>
-                             
+	<fmt:formatDate value="${task.planned}" var="plannedDate"
+		pattern="yyyy-MM-dd" />
+	<fmt:formatDate value="${task.created}" var="createdDate"
+		pattern="EEEEEEEEEE dd/MM/yyyy" />
+
 	<jsp:include page="navbar.jsp" />
 	<div class="container">
 		<jsp:include page="messages.jsp" />
@@ -50,21 +50,18 @@
 						<th>Planeada</th>
 						<c:choose>
 							<c:when test="${empty task.planned}">
-							<td>
-								<input value="${plannedDate}" type="date"
+								<td><input value="${plannedDate}" type="date"
 									name="newPlannedDate"></td>
 							</c:when>
 							<c:when test="${not empty task.planned}">
-								<c:choose>		
+								<c:choose>
 									<c:when test="${task.planned lt today}">
-										<td class="text-danger">
-											<input value="${plannedDate}"
-											type="date" name="newPlannedDate">
-										</td>
+										<td class="text-danger"><input value="${plannedDate}"
+											type="date" name="newPlannedDate"></td>
 									</c:when>
 									<c:otherwise>
-										<td><input value="${plannedDate}" type="date" name="newPlannedDate">
-										</td>
+										<td><input value="${plannedDate}" type="date"
+											name="newPlannedDate"></td>
 									</c:otherwise>
 								</c:choose>
 							</c:when>
@@ -89,9 +86,11 @@
 					</select></td>
 				</tr>
 			</table>
-
+			<c:if test="${task.finished == null}">
 			<input type="hidden" value="${task.id}" name="taskId" /> <input
-				type="submit" id="editar_tarea" class="btn btn-primary" value="Editar tarea" />
+				type="submit" id="editar_tarea" class="btn btn-primary"
+				value="Editar tarea" />
+			</c:if>
 		</form>
 	</div>
 	<%@ include file="pieDePagina.jsp"%>

@@ -35,14 +35,14 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		String rolAntes, rolDespues;
 		
 		try {
-			accionNavegadorUsuario=request.getServletPath().replace("/","");  // Obtener el string que hay a la derecha de la última /
+			accionNavegadorUsuario=request.getServletPath().replace("/","");  // Obtener el string que hay a la derecha de la última / //$NON-NLS-1$ //$NON-NLS-2$
 				
 			rolAntes=obtenerRolDeSesion(request);
 			
 			objetoAccion=buscarObjetoAccionParaAccionNavegador(rolAntes, 
 					accionNavegadorUsuario);
 			
-			request.removeAttribute("mensajeParaElUsuario");
+			request.removeAttribute("mensajeParaElUsuario"); //$NON-NLS-1$
 				
 			resultado=objetoAccion.execute(request,response);
 				
@@ -51,27 +51,27 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 			jspSiguiente=buscarJSPEnMapaNavegacionSegun(rolDespues, 
 					accionNavegadorUsuario, resultado);
 
-			request.setAttribute("jspSiguiente", jspSiguiente);
+			request.setAttribute("jspSiguiente", jspSiguiente); //$NON-NLS-1$
 
 		} catch(PersistenceException e) {
 			
 			request.getSession().invalidate();
 			
-			Log.error("Se ha producido alguna excepción relacionada con la persistencia [%s]",
+			Log.error("Se ha producido alguna excepción relacionada con la persistencia [%s]", //$NON-NLS-1$
 					e.getMessage());
-			request.setAttribute("mensajeParaElUsuario", 
-					"Error irrecuperable: contacte con el responsable de la aplicación");
-			jspSiguiente="/login.jsp";
+			request.setAttribute("mensajeParaElUsuario",  //$NON-NLS-1$
+					"Error irrecuperable: contacte con el responsable de la aplicación"); //$NON-NLS-1$
+			jspSiguiente="/login.jsp"; //$NON-NLS-1$
 			
 		} catch(Exception e) {
 			
 			//request.getSession().invalidate();
 			
-			Log.error("Se ha producido alguna excepción no manejada [%s]",
+			Log.error("Se ha producido alguna excepción no manejada [%s]", //$NON-NLS-1$
 					e.getMessage());
-			request.setAttribute("mensajeParaElUsuario", 
-					"Error irrecuperable: contacte con el responsable de la aplicación");
-			jspSiguiente="/login.jsp";
+			request.setAttribute("mensajeParaElUsuario",  //$NON-NLS-1$
+					"Error irrecuperable: contacte con el responsable de la aplicación"); //$NON-NLS-1$
+			jspSiguiente="/login.jsp"; //$NON-NLS-1$
 		}
 			
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(jspSiguiente); 
@@ -82,13 +82,13 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 	
 	private String obtenerRolDeSesion(HttpServletRequest req) {
 		HttpSession sesion=req.getSession();
-		if (sesion.getAttribute("user")==null)
-			return "ANONIMO";
+		if (sesion.getAttribute(Maps.getString("Controlador.12"))==null) //$NON-NLS-1$
+			return Maps.getString("Controlador.13"); //$NON-NLS-1$
 		else
-			if (((User)sesion.getAttribute("user")).getIsAdmin())
-				return "ADMIN";
+			if (((User)sesion.getAttribute(Maps.getString("Controlador.14"))).getIsAdmin()) //$NON-NLS-1$
+				return Maps.getString("Controlador.15"); //$NON-NLS-1$
 			else
-				return "USUARIO";
+				return Maps.getString("Controlador.16"); //$NON-NLS-1$
 	}
 
 	// Obtiene un objeto accion en funci�n de la opci�n
@@ -96,7 +96,7 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 	private Accion buscarObjetoAccionParaAccionNavegador(String rol, String opcion) {
 		
 		Accion accion=mapaDeAcciones.get(rol).get(opcion);
-		Log.debug("Elegida acción [%s] para opción [%s] y rol [%s]",accion,opcion,rol);
+		Log.debug(Maps.getString("Controlador.17"),accion,opcion,rol); //$NON-NLS-1$
 		return accion;
 	}
 	
@@ -107,7 +107,7 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 	private String buscarJSPEnMapaNavegacionSegun(String rol, String opcion, String resultado) {
 		
 		String jspSiguiente=mapaDeNavegacion.get(rol).get(opcion).get(resultado);
-		Log.debug("Elegida página siguiente [%s] para el resultado [%s] tras realizar [%s] con rol [%s]",
+		Log.debug(Maps.getString("Controlador.18"), //$NON-NLS-1$
 				jspSiguiente,resultado,opcion,rol);
 		return jspSiguiente;		
 	}
@@ -119,50 +119,50 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		
 		//// USUARIO ANÓNIMO \\\\
 		Map<String,Accion> mapaPublico=new HashMap<String,Accion>();
-		mapaPublico.put("validarse", new ValidarseAction());
-		mapaPublico.put("registrarse", new RegistrarseAction());
+		mapaPublico.put(Maps.getString("Controlador.19"), new ValidarseAction()); //$NON-NLS-1$
+		mapaPublico.put(Maps.getString("Controlador.20"), new RegistrarseAction()); //$NON-NLS-1$
 		
-		mapaDeAcciones.put("ANONIMO", mapaPublico);
+		mapaDeAcciones.put(Maps.getString("Controlador.21"), mapaPublico); //$NON-NLS-1$
 		
 		//// USUARIO REGISTRADO \\\\
 		Map<String,Accion> mapaRegistrado=new HashMap<String,Accion>();
 		//Panel de Usuario
-		mapaRegistrado.put("mostrarUsuario", new MostrarUsuarioAction());
-		mapaRegistrado.put("editarUsuario", new EditarUsuarioAction());
-		mapaRegistrado.put("cerrarSesion", new CerrarSesionAction());
+		mapaRegistrado.put(Maps.getString("Controlador.22"), new MostrarUsuarioAction()); //$NON-NLS-1$
+		mapaRegistrado.put(Maps.getString("Controlador.23"), new EditarUsuarioAction()); //$NON-NLS-1$
+		mapaRegistrado.put(Maps.getString("Controlador.24"), new CerrarSesionAction()); //$NON-NLS-1$
 		
 		
 		//Listar tareareas
-		mapaRegistrado.put("listarTareasHoy", new ListarTareasHoyAction());
-		mapaRegistrado.put("listarTareasSemana", new ListarTareasSemanaAction());
-		mapaRegistrado.put("listarTareasInbox", new ListarTareasInboxAction());
-		mapaRegistrado.put("listarTareas", new ListarTareasAction());
+		mapaRegistrado.put(Maps.getString("Controlador.25"), new ListarTareasHoyAction()); //$NON-NLS-1$
+		mapaRegistrado.put(Maps.getString("Controlador.26"), new ListarTareasSemanaAction()); //$NON-NLS-1$
+		mapaRegistrado.put(Maps.getString("Controlador.27"), new ListarTareasInboxAction()); //$NON-NLS-1$
+		mapaRegistrado.put(Maps.getString("Controlador.28"), new ListarTareasAction()); //$NON-NLS-1$
 		
 		//Gestionar Tareas
-		mapaRegistrado.put("mostrarTarea", new MostrarTareaAction());
-		mapaRegistrado.put("añadirTarea", new AñadirTareaAction());
-		mapaRegistrado.put("editarTarea", new EditarTareaAction());
-		mapaRegistrado.put("terminarTarea", new TerminarTareaAction());
+		mapaRegistrado.put(Maps.getString("Controlador.29"), new MostrarTareaAction()); //$NON-NLS-1$
+		mapaRegistrado.put(Maps.getString("Controlador.30"), new AñadirTareaAction()); //$NON-NLS-1$
+		mapaRegistrado.put(Maps.getString("Controlador.31"), new EditarTareaAction()); //$NON-NLS-1$
+		mapaRegistrado.put(Maps.getString("Controlador.32"), new TerminarTareaAction()); //$NON-NLS-1$
 		
 		//Gestionar Categoría
-		mapaRegistrado.put("añadirCategoria", new AñadirCategoriaAction());
-		mapaRegistrado.put("editarCategoria", new EditarCategoriaAction());
-		mapaRegistrado.put("eliminarCategoria", new EliminarCategoriaAction());
-		mapaRegistrado.put("duplicarCategoria", new DuplicarCategoriaAction());
-		mapaRegistrado.put("listarCategorias", new ListarCategoriasAction());
+		mapaRegistrado.put(Maps.getString("Controlador.33"), new AñadirCategoriaAction()); //$NON-NLS-1$
+		mapaRegistrado.put(Maps.getString("Controlador.34"), new EditarCategoriaAction()); //$NON-NLS-1$
+		mapaRegistrado.put(Maps.getString("Controlador.35"), new EliminarCategoriaAction()); //$NON-NLS-1$
+		mapaRegistrado.put(Maps.getString("Controlador.36"), new DuplicarCategoriaAction()); //$NON-NLS-1$
+		mapaRegistrado.put(Maps.getString("Controlador.37"), new ListarCategoriasAction()); //$NON-NLS-1$
 
-		mapaDeAcciones.put("USUARIO", mapaRegistrado);
+		mapaDeAcciones.put(Maps.getString("Controlador.38"), mapaRegistrado); //$NON-NLS-1$
 		
 		///// ADMIN \\\\
 		Map<String,Accion> mapaAdministrador=new HashMap<String,Accion>();
-		mapaAdministrador.put("cerrarSesion", new CerrarSesionAction());
-		mapaAdministrador.put("cambiarEstado", new CambiarEstadoAction());
-		mapaAdministrador.put("eliminarUsuario", new EliminarUsuarioAction());
-		mapaAdministrador.put("mostrarUsuario", new MostrarUsuarioAction());
-		mapaAdministrador.put("editarUsuario", new EditarUsuarioAction());
-		mapaAdministrador.put("listarUsuarios", new ListarUsuariosAction());
+		mapaAdministrador.put(Maps.getString("Controlador.39"), new CerrarSesionAction()); //$NON-NLS-1$
+		mapaAdministrador.put(Maps.getString("Controlador.40"), new CambiarEstadoAction()); //$NON-NLS-1$
+		mapaAdministrador.put(Maps.getString("Controlador.41"), new EliminarUsuarioAction()); //$NON-NLS-1$
+		mapaAdministrador.put(Maps.getString("Controlador.42"), new MostrarUsuarioAction()); //$NON-NLS-1$
+		mapaAdministrador.put(Maps.getString("Controlador.43"), new EditarUsuarioAction()); //$NON-NLS-1$
+		mapaAdministrador.put(Maps.getString("Controlador.44"), new ListarUsuariosAction()); //$NON-NLS-1$
 		
-		mapaDeAcciones.put("ADMIN", mapaAdministrador);
+		mapaDeAcciones.put(Maps.getString("Controlador.45"), mapaAdministrador); //$NON-NLS-1$
 	}
 	
 	
@@ -175,137 +175,137 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 		Map<String, String> resultadoYJSP=new HashMap<String, String>();
 
 		//// Mapa de navegación de ANÓNIMO \\\\
-		resultadoYJSP.put("FRACASO","/login.jsp");
-		opcionResultadoYJSP.put("validarse", resultadoYJSP);
+		resultadoYJSP.put(Maps.getString("Controlador.46"),Maps.getString("Controlador.47")); //$NON-NLS-1$ //$NON-NLS-2$
+		opcionResultadoYJSP.put(Maps.getString("Controlador.48"), resultadoYJSP); //$NON-NLS-1$
 		
 		resultadoYJSP=new HashMap<String, String>();
-		resultadoYJSP.put("EXITO","/login.jsp");
-		resultadoYJSP.put("FRACASO","/register.jsp");
-		opcionResultadoYJSP.put("registrarse", resultadoYJSP);
+		resultadoYJSP.put(Maps.getString("Controlador.49"),Maps.getString("Controlador.50")); //$NON-NLS-1$ //$NON-NLS-2$
+		resultadoYJSP.put(Maps.getString("Controlador.51"),Maps.getString("Controlador.52")); //$NON-NLS-1$ //$NON-NLS-2$
+		opcionResultadoYJSP.put(Maps.getString("Controlador.53"), resultadoYJSP); //$NON-NLS-1$
 		
 		resultadoYJSP=new HashMap<String, String>();
-		resultadoYJSP.put("EXITO","/login.jsp");
-		opcionResultadoYJSP.put("cerrarSesion", resultadoYJSP);
+		resultadoYJSP.put(Maps.getString("Controlador.54"),Maps.getString("Controlador.55")); //$NON-NLS-1$ //$NON-NLS-2$
+		opcionResultadoYJSP.put(Maps.getString("Controlador.56"), resultadoYJSP); //$NON-NLS-1$
 		
-		mapaDeNavegacion.put("ANONIMO",opcionResultadoYJSP);
+		mapaDeNavegacion.put(Maps.getString("Controlador.57"),opcionResultadoYJSP); //$NON-NLS-1$
 		
 		// Crear mapas auxiliares vacíos
 		opcionResultadoYJSP=new HashMap<String, Map<String, String>>();
 		resultadoYJSP=new HashMap<String, String>();
 		
 		//// Mapa de navegación de usuarios REGISTRADOS \\\\
-		resultadoYJSP.put("EXITO","/listarTareas.jsp");
-		opcionResultadoYJSP.put("validarse", resultadoYJSP);	
+		resultadoYJSP.put(Maps.getString("Controlador.58"),Maps.getString("Controlador.59")); //$NON-NLS-1$ //$NON-NLS-2$
+		opcionResultadoYJSP.put(Maps.getString("Controlador.60"), resultadoYJSP);	 //$NON-NLS-1$
 		
 		// Editar Usuarios, Tareas y Categorias
 		resultadoYJSP=new HashMap<String, String>();
-		resultadoYJSP.put("EXITO","/mostrarUsuario.jsp");
-		resultadoYJSP.put("FRACASO","/listarTareas.jsp");
-		opcionResultadoYJSP.put("mostrarUsuario", resultadoYJSP);
+		resultadoYJSP.put(Maps.getString("Controlador.61"),Maps.getString("Controlador.62")); //$NON-NLS-1$ //$NON-NLS-2$
+		resultadoYJSP.put(Maps.getString("Controlador.63"),Maps.getString("Controlador.64")); //$NON-NLS-1$ //$NON-NLS-2$
+		opcionResultadoYJSP.put(Maps.getString("Controlador.65"), resultadoYJSP); //$NON-NLS-1$
 		
 		resultadoYJSP=new HashMap<String, String>();
-		resultadoYJSP.put("EXITO","/mostrarUsuario.jsp");
-		resultadoYJSP.put("FRACASO","/mostrarUsuario.jsp");
-		opcionResultadoYJSP.put("editarUsuario", resultadoYJSP);
+		resultadoYJSP.put(Maps.getString("Controlador.66"),Maps.getString("Controlador.67")); //$NON-NLS-1$ //$NON-NLS-2$
+		resultadoYJSP.put(Maps.getString("Controlador.68"),Maps.getString("Controlador.69")); //$NON-NLS-1$ //$NON-NLS-2$
+		opcionResultadoYJSP.put(Maps.getString("Controlador.70"), resultadoYJSP); //$NON-NLS-1$
 		
 		resultadoYJSP=new HashMap<String, String>();
-		resultadoYJSP.put("EXITO","/mostrarTarea.jsp");
-		resultadoYJSP.put("FRACASO","/listarTareas.jsp");
-		opcionResultadoYJSP.put("mostrarTarea", resultadoYJSP);
+		resultadoYJSP.put(Maps.getString("Controlador.71"),Maps.getString("Controlador.72")); //$NON-NLS-1$ //$NON-NLS-2$
+		resultadoYJSP.put(Maps.getString("Controlador.73"),Maps.getString("Controlador.74")); //$NON-NLS-1$ //$NON-NLS-2$
+		opcionResultadoYJSP.put(Maps.getString("Controlador.75"), resultadoYJSP); //$NON-NLS-1$
 		
 		resultadoYJSP=new HashMap<String, String>();
-		resultadoYJSP.put("EXITO","/mostrarTarea.jsp");
-		resultadoYJSP.put("FRACASO","/mostrarTarea.jsp");
-		opcionResultadoYJSP.put("editarTarea", resultadoYJSP);
+		resultadoYJSP.put(Maps.getString("Controlador.76"),Maps.getString("Controlador.77")); //$NON-NLS-1$ //$NON-NLS-2$
+		resultadoYJSP.put(Maps.getString("Controlador.78"),Maps.getString("Controlador.79")); //$NON-NLS-1$ //$NON-NLS-2$
+		opcionResultadoYJSP.put(Maps.getString("Controlador.80"), resultadoYJSP); //$NON-NLS-1$
 		
 		resultadoYJSP=new HashMap<String, String>();
-		resultadoYJSP.put("EXITO","/listarTareas.jsp");
-		resultadoYJSP.put("FRACASO","/listarTareas.jsp");
-		opcionResultadoYJSP.put("editarCategoria", resultadoYJSP);
+		resultadoYJSP.put(Maps.getString("Controlador.81"),Maps.getString("Controlador.82")); //$NON-NLS-1$ //$NON-NLS-2$
+		resultadoYJSP.put(Maps.getString("Controlador.83"),Maps.getString("Controlador.84")); //$NON-NLS-1$ //$NON-NLS-2$
+		opcionResultadoYJSP.put(Maps.getString("Controlador.85"), resultadoYJSP); //$NON-NLS-1$
 		
 		resultadoYJSP=new HashMap<String, String>();
-		resultadoYJSP.put("EXITO","/listarTareas.jsp");
-		resultadoYJSP.put("FRACASO","/listarTareas.jsp");
-		opcionResultadoYJSP.put("eliminarCategoria", resultadoYJSP);
+		resultadoYJSP.put(Maps.getString("Controlador.86"),Maps.getString("Controlador.87")); //$NON-NLS-1$ //$NON-NLS-2$
+		resultadoYJSP.put(Maps.getString("Controlador.88"),Maps.getString("Controlador.89")); //$NON-NLS-1$ //$NON-NLS-2$
+		opcionResultadoYJSP.put(Maps.getString("Controlador.90"), resultadoYJSP); //$NON-NLS-1$
 		
 		resultadoYJSP=new HashMap<String, String>();
-		resultadoYJSP.put("EXITO","/listarTareas.jsp");
-		resultadoYJSP.put("FRACASO","/listarTareas.jsp");
-		opcionResultadoYJSP.put("duplicarCategoria", resultadoYJSP);
+		resultadoYJSP.put(Maps.getString("Controlador.91"),Maps.getString("Controlador.92")); //$NON-NLS-1$ //$NON-NLS-2$
+		resultadoYJSP.put(Maps.getString("Controlador.93"),Maps.getString("Controlador.94")); //$NON-NLS-1$ //$NON-NLS-2$
+		opcionResultadoYJSP.put(Maps.getString("Controlador.95"), resultadoYJSP); //$NON-NLS-1$
 		
 		resultadoYJSP=new HashMap<String, String>();
-		resultadoYJSP.put("EXITO","/listarTareas.jsp");
-		resultadoYJSP.put("FRACASO","/listarTareas.jsp");
-		opcionResultadoYJSP.put("añadirCategoria", resultadoYJSP);
+		resultadoYJSP.put(Maps.getString("Controlador.96"),Maps.getString("Controlador.97")); //$NON-NLS-1$ //$NON-NLS-2$
+		resultadoYJSP.put(Maps.getString("Controlador.98"),Maps.getString("Controlador.99")); //$NON-NLS-1$ //$NON-NLS-2$
+		opcionResultadoYJSP.put(Maps.getString("Controlador.100"), resultadoYJSP); //$NON-NLS-1$
 		
 		//Listar Tareas y Categorias
 		resultadoYJSP=new HashMap<String, String>();
-		resultadoYJSP.put("EXITO","/listarCategorias.jsp");
-		resultadoYJSP.put("FRACASO","/listarCategorias.jsp");
-		opcionResultadoYJSP.put("listarCategorias", resultadoYJSP);
+		resultadoYJSP.put(Maps.getString("Controlador.101"),Maps.getString("Controlador.102")); //$NON-NLS-1$ //$NON-NLS-2$
+		resultadoYJSP.put(Maps.getString("Controlador.103"),Maps.getString("Controlador.104")); //$NON-NLS-1$ //$NON-NLS-2$
+		opcionResultadoYJSP.put(Maps.getString("Controlador.105"), resultadoYJSP); //$NON-NLS-1$
 			
 		resultadoYJSP=new HashMap<String, String>();
-		resultadoYJSP.put("EXITO","/listarTareas.jsp");
-		resultadoYJSP.put("FRACASO","/listarTareasjsp");
-		opcionResultadoYJSP.put("listarTareasHoy", resultadoYJSP);
+		resultadoYJSP.put(Maps.getString("Controlador.106"),Maps.getString("Controlador.107")); //$NON-NLS-1$ //$NON-NLS-2$
+		resultadoYJSP.put(Maps.getString("Controlador.108"),Maps.getString("Controlador.109")); //$NON-NLS-1$ //$NON-NLS-2$
+		opcionResultadoYJSP.put(Maps.getString("Controlador.110"), resultadoYJSP); //$NON-NLS-1$
 		
 		resultadoYJSP=new HashMap<String, String>();
-		resultadoYJSP.put("EXITO","/listarTareas.jsp");
-		resultadoYJSP.put("FRACASO","/listarTareas.jsp");
-		opcionResultadoYJSP.put("listarTareasInbox", resultadoYJSP);
+		resultadoYJSP.put(Maps.getString("Controlador.111"),Maps.getString("Controlador.112")); //$NON-NLS-1$ //$NON-NLS-2$
+		resultadoYJSP.put(Maps.getString("Controlador.113"),Maps.getString("Controlador.114")); //$NON-NLS-1$ //$NON-NLS-2$
+		opcionResultadoYJSP.put(Maps.getString("Controlador.115"), resultadoYJSP); //$NON-NLS-1$
 		
 		resultadoYJSP=new HashMap<String, String>();
-		resultadoYJSP.put("EXITO","/listarTareas.jsp");
-		resultadoYJSP.put("FRACASO","/listarTareas.jsp");
-		opcionResultadoYJSP.put("listarTareasSemana", resultadoYJSP);
+		resultadoYJSP.put(Maps.getString("Controlador.116"),Maps.getString("Controlador.117")); //$NON-NLS-1$ //$NON-NLS-2$
+		resultadoYJSP.put(Maps.getString("Controlador.118"),Maps.getString("Controlador.119")); //$NON-NLS-1$ //$NON-NLS-2$
+		opcionResultadoYJSP.put(Maps.getString("Controlador.120"), resultadoYJSP); //$NON-NLS-1$
 		
 		resultadoYJSP=new HashMap<String, String>();
-		resultadoYJSP.put("EXITO","/listarTareas.jsp");
-		resultadoYJSP.put("FRACASO","/listarTareas.jsp");
-		opcionResultadoYJSP.put("listarTareas", resultadoYJSP);
+		resultadoYJSP.put(Maps.getString("Controlador.121"),Maps.getString("Controlador.122")); //$NON-NLS-1$ //$NON-NLS-2$
+		resultadoYJSP.put(Maps.getString("Controlador.123"),Maps.getString("Controlador.124")); //$NON-NLS-1$ //$NON-NLS-2$
+		opcionResultadoYJSP.put(Maps.getString("Controlador.125"), resultadoYJSP); //$NON-NLS-1$
 		
 		resultadoYJSP=new HashMap<String, String>();
-		resultadoYJSP.put("EXITO","/listarTareas.jsp");
-		resultadoYJSP.put("FRACASO","/listarTareas.jsp");
-		opcionResultadoYJSP.put("terminarTarea", resultadoYJSP);
+		resultadoYJSP.put(Maps.getString("Controlador.126"),Maps.getString("Controlador.127")); //$NON-NLS-1$ //$NON-NLS-2$
+		resultadoYJSP.put(Maps.getString("Controlador.128"),Maps.getString("Controlador.129")); //$NON-NLS-1$ //$NON-NLS-2$
+		opcionResultadoYJSP.put(Maps.getString("Controlador.130"), resultadoYJSP); //$NON-NLS-1$
 				
-		mapaDeNavegacion.put("USUARIO",opcionResultadoYJSP);
+		mapaDeNavegacion.put(Maps.getString("Controlador.131"),opcionResultadoYJSP); //$NON-NLS-1$
 		
 		// Crear mapas auxiliares vacíos
 		opcionResultadoYJSP=new HashMap<String, Map<String, String>>();
 		resultadoYJSP=new HashMap<String, String>();
 		
 		 ////Mapa de navegación del ADMIN \\\\
-		resultadoYJSP.put("EXITO","/panelAdmin.jsp");
-		opcionResultadoYJSP.put("validarse", resultadoYJSP);
+		resultadoYJSP.put(Maps.getString("Controlador.132"),Maps.getString("Controlador.133")); //$NON-NLS-1$ //$NON-NLS-2$
+		opcionResultadoYJSP.put(Maps.getString("Controlador.134"), resultadoYJSP); //$NON-NLS-1$
 		
 		//Gestionar Usuarios
 		resultadoYJSP=new HashMap<String, String>();
-		resultadoYJSP.put("EXITO","/panelAdmin.jsp");
-		resultadoYJSP.put("FRACASO","/mostrarUsuario.jsp");
-		opcionResultadoYJSP.put("eliminarUsuario", resultadoYJSP);
+		resultadoYJSP.put(Maps.getString("Controlador.135"),Maps.getString("Controlador.136")); //$NON-NLS-1$ //$NON-NLS-2$
+		resultadoYJSP.put(Maps.getString("Controlador.137"),Maps.getString("Controlador.138")); //$NON-NLS-1$ //$NON-NLS-2$
+		opcionResultadoYJSP.put(Maps.getString("Controlador.139"), resultadoYJSP); //$NON-NLS-1$
 		
 		resultadoYJSP=new HashMap<String, String>();
-		resultadoYJSP.put("EXITO","/panelAdmin.jsp");
-		resultadoYJSP.put("FRACASO","/mostrarUsuario.jsp");
-		opcionResultadoYJSP.put("cambiarEstado", resultadoYJSP);
+		resultadoYJSP.put(Maps.getString("Controlador.140"),Maps.getString("Controlador.141")); //$NON-NLS-1$ //$NON-NLS-2$
+		resultadoYJSP.put(Maps.getString("Controlador.142"),Maps.getString("Controlador.143")); //$NON-NLS-1$ //$NON-NLS-2$
+		opcionResultadoYJSP.put(Maps.getString("Controlador.144"), resultadoYJSP); //$NON-NLS-1$
 		
 		resultadoYJSP=new HashMap<String, String>();
-		resultadoYJSP.put("EXITO","/mostrarUsuario.jsp");
-		resultadoYJSP.put("FRACASO","/panelAdmin.jsp");
-		opcionResultadoYJSP.put("mostrarUsuario", resultadoYJSP);	
+		resultadoYJSP.put(Maps.getString("Controlador.145"),Maps.getString("Controlador.146")); //$NON-NLS-1$ //$NON-NLS-2$
+		resultadoYJSP.put(Maps.getString("Controlador.147"),Maps.getString("Controlador.148")); //$NON-NLS-1$ //$NON-NLS-2$
+		opcionResultadoYJSP.put(Maps.getString("Controlador.149"), resultadoYJSP);	 //$NON-NLS-1$
 		
 		resultadoYJSP=new HashMap<String, String>();
-		resultadoYJSP.put("EXITO","/mostrarUsuario.jsp");
-		resultadoYJSP.put("FRACASO","/mostrarUsuario.jsp");
-		opcionResultadoYJSP.put("editarUsuario", resultadoYJSP);
+		resultadoYJSP.put(Maps.getString("Controlador.150"),Maps.getString("Controlador.151")); //$NON-NLS-1$ //$NON-NLS-2$
+		resultadoYJSP.put(Maps.getString("Controlador.152"),Maps.getString("Controlador.153")); //$NON-NLS-1$ //$NON-NLS-2$
+		opcionResultadoYJSP.put(Maps.getString("Controlador.154"), resultadoYJSP); //$NON-NLS-1$
 		
 		resultadoYJSP=new HashMap<String, String>();
-		resultadoYJSP.put("EXITO","/panelAdmin.jsp");
-		resultadoYJSP.put("FRACASO","/panelAdmin.jsp");
-		opcionResultadoYJSP.put("listarUsuarios", resultadoYJSP);
+		resultadoYJSP.put(Maps.getString("Controlador.155"),Maps.getString("Controlador.156")); //$NON-NLS-1$ //$NON-NLS-2$
+		resultadoYJSP.put(Maps.getString("Controlador.157"),Maps.getString("Controlador.158")); //$NON-NLS-1$ //$NON-NLS-2$
+		opcionResultadoYJSP.put(Maps.getString("Controlador.159"), resultadoYJSP); //$NON-NLS-1$
 		
-		mapaDeNavegacion.put("ADMIN",opcionResultadoYJSP);
+		mapaDeNavegacion.put(Maps.getString("Controlador.160"),opcionResultadoYJSP); //$NON-NLS-1$
 	}
 			
 	public void doPost(HttpServletRequest req, HttpServletResponse res)

@@ -1,4 +1,4 @@
-package uo.sdi.dto.util;
+package uo.sdi.business.impl.util;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -30,6 +30,22 @@ public class FreijeyPabloUtil {
 				if (o2.getPlanned()==null)
 					return -1;
 				return o2.getPlanned().compareTo(o1.getPlanned());
+			}
+		});
+	}
+	
+	public static void groupByCategory (List<Task> param){
+		Collections.sort(param, new Comparator<Task>(){
+			@Override
+			public int compare(Task o1, Task o2) {
+				if (o1.getCategoryId()==null)
+					return -1;
+				if (o2.getCategoryId()==null)
+					return 1;
+				if (o1.getCategoryId()==o2.getCategoryId())
+					return o1.getPlanned().compareTo(o2.getPlanned());
+				
+				return o2.getCategoryId().compareTo(o1.getCategoryId());
 			}
 		});
 	}

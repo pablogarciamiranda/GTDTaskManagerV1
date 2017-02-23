@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import uo.sdi.business.Services;
 import uo.sdi.business.TaskService;
 import uo.sdi.business.exception.BusinessException;
+import uo.sdi.business.impl.util.FreijeyPabloUtil;
 import uo.sdi.dto.Task;
 import uo.sdi.dto.User;
 import alb.util.log.Log;
@@ -28,8 +29,10 @@ public class ListarTareasHoyAction implements Accion {
 		try {
 			TaskService taskService = Services.getTaskService();
 			listaTareasHoy=taskService.findTodayTasksByUserId(Long.valueOf(user.getId()));
+			FreijeyPabloUtil.groupByCategory(listaTareasHoy);
 			
 			request.setAttribute("listaTareas", listaTareasHoy);
+			
 			
 			request.setAttribute("listaMostrada", "Hoy");
 			request.setAttribute("sePuedeMostrarTerminadas",false);

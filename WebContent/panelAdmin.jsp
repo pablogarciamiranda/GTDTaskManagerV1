@@ -15,14 +15,20 @@
 	href="https://bootswatch.com/flatly/bootstrap.css">
 
 <script type="text/javascript">
-	$(document).ready(function() {
-		$('#example').DataTable();
-	});
+$(document).ready( function() {
+	  $('#example').dataTable( {
+	    "aoColumnDefs": [
+	      { "bSortable": false, "aTargets": [ 0 ] },
+	      { "bSortable": false, "aTargets": [ 3 ] },
+	      { "bSortable": false, "aTargets": [ 5 ] }
+	    ] } );
+	} );
 </script>
 </head>
 <body>
 	<jsp:include page="navbar.jsp" />
 	<jsp:include page="messages.jsp"/>
+	<section>
 	<div class = container-fluid>
 	<table id="example" class="table table-striped table-hover" cellpadding="0" cellspacing="0" width="100%">
 		<thead>
@@ -32,7 +38,7 @@
 				<th align="center">email</th>
 				<th align="center">Is Admin</th>
 				<th align="center" >Status</th>
-				<th align="center">Editar</th>
+				<th align="center"></th>
 
 			</tr>
 		</thead>
@@ -81,6 +87,7 @@
 		</tbody>
 	</table>
 	</div>
+	</section>
 </body>
 </html>
 

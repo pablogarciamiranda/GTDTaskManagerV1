@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import uo.sdi.business.Services;
 import uo.sdi.business.TaskService;
 import uo.sdi.business.exception.BusinessException;
+import uo.sdi.business.impl.util.FreijeyPabloUtil;
 import uo.sdi.dto.Task;
 import uo.sdi.dto.User;
 import alb.util.log.Log;
@@ -28,6 +29,7 @@ public class ListarTareasSemanaAction implements Accion {
 		try {
 			TaskService taskService = Services.getTaskService();
 			listaTareasSemana=taskService.findWeekTasksByUserId(Long.valueOf(user.getId()));
+			FreijeyPabloUtil.groupByDay(listaTareasSemana);
 			
 			request.setAttribute("listaTareas", listaTareasSemana);
 			

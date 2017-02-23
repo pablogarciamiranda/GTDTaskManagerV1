@@ -1,9 +1,9 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="alb.util.date.DateUtil" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ include file="comprobarNavegacion.jsp"%>
-<jsp:useBean id="now" class="java.util.Date" />
-<fmt:formatDate value="${today}" pattern="MM.dd.yyyy" />
+<c:set var="today" value="<%=DateUtil.today()%>"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,18 +55,17 @@
 									name="newPlannedDate"></td>
 							</c:when>
 							<c:when test="${not empty task.planned}">
-								<c:choose>
-									
-									<c:when test="${task.planned lt now}">
+								<c:choose>		
+									<c:when test="${task.planned lt today}">
 										<td class="text-danger">
 											<input value="${plannedDate}"
 											type="date" name="newPlannedDate">
 										</td>
 									</c:when>
-									<c:when test="${task.planned ge now}">
+									<c:otherwise>
 										<td><input value="${plannedDate}" type="date" name="newPlannedDate">
 										</td>
-									</c:when>
+									</c:otherwise>
 								</c:choose>
 							</c:when>
 						</c:choose>

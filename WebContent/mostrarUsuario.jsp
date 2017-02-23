@@ -84,7 +84,7 @@
 			</table>
 			<input type="hidden" name="login"
 				value="<jsp:getProperty property="login" name="userToEdit" />">
-			<input type="submit" class="btn btn-primary" name="editarUsuario"
+			<input type="submit" id="editar" class="btn btn-primary" name="editarUsuario"
 				value="Editar" form="editarUsuario">
 		</form>
 		<br/>

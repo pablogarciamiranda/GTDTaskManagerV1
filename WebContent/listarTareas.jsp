@@ -158,7 +158,7 @@
 										</c:otherwise>
 									</c:choose>
 									<input type="hidden" name="taskId" value="${task.id}">
-									<button type="submit" class="btn btn-primary">Finished</button>
+									<button id="terminar_tarea_${task.title}" type="submit" class="btn btn-primary">Finished</button>
 								</form>
 							</td>
 						</tr>
@@ -166,8 +166,8 @@
 				</tbody>
 			</table>
 			<c:if test="${sePuedeMostrarTerminadas == true}">
-				<form>
-					<input type="checkbox" id="checkbox"
+				<form id="listar_terminadas_form">
+					<input type="checkbox" name="checkbox" id="checkbox"
 						onchange="toggleFinishedTasks(this)"> Mostrar tareas
 					terminadas
 				</form>

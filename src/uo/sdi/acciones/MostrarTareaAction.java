@@ -45,7 +45,8 @@ public class MostrarTareaAction implements Accion {
 			//Categorias disponibles del usuario
 			User user = ((User) session.getAttribute("user"));
 			List<Category> categories = taskService.findCategoriesByUserId(user.getId());
-			session.setAttribute("categories", categories);					
+			session.setAttribute("categories", categories);		
+			Log.info("Mostrada la tarea correctamente");
 			
 		}
 		catch (BusinessException b) {

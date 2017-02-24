@@ -106,7 +106,7 @@ public class EditarTareaAction implements Accion {
 			
 			session.setAttribute("message", "Se ha editado la tarea correctamente.");
 			request.getRequestDispatcher("mostrarTarea?taskId="+taskId).forward(request,response);
-			
+			Log.info("Se ha editado la tarea correctamente.");
 		} catch (BusinessException b) {
 			request.setAttribute("error", "Algo ha ocurrido editando la tarea: " +  b.getMessage());
 			Log.debug("Algo ha ocurrido editando la tarea: %s", b.getMessage());

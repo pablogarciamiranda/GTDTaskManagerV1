@@ -37,7 +37,7 @@ public class ListarTareasHoyAction implements Accion {
 			request.setAttribute("listaMostrada", "Hoy");
 			request.setAttribute("sePuedeMostrarTerminadas",false);
 			
-			Log.debug("Obtenida lista de tareas del día conteniendo [%d] tareas", 
+			Log.info("Obtenida lista de tareas del día conteniendo [%d] tareas", 
 					listaTareasHoy.size());
 		}
 		catch (BusinessException b) {

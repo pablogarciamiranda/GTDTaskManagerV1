@@ -48,6 +48,7 @@ public class MostrarUsuarioAction implements Accion{
 					return "FRACASO";
 				}
 			}
+			Log.info("Se está mostrando información del usuario " + userToEdit.getLogin());
 			
 			
 		} catch (BusinessException b) {

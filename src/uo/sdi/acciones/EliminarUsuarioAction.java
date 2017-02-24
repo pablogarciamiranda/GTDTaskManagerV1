@@ -28,6 +28,7 @@ public class EliminarUsuarioAction implements Accion {
 		try {
 			adminService.deepDeleteUser(idUser);
 			listOfUsers = adminService.findAllUsers();
+			Log.info("Usuario eliminado correctamente");
 		} catch (BusinessException b) {
 			request.setAttribute("error", b.getMessage());
 			Log.debug("Algo ha ocurrido al eliminar al usuario");

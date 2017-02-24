@@ -38,6 +38,8 @@ public class DuplicarCategoriaAction implements Accion {
 			request.setAttribute("message", "Se ha duplicado la categoría '" + category.getName()  + "'");
 			
 			request.getRequestDispatcher("listarTareas?categoryId=" + Long.toString(categoryId)).forward(request, response);
+			Log.info("Se ha duplicado la categoría '" + category.getName()  + "'");
+
 		}
 		catch (BusinessException | ServletException | IOException b) {
 			request.setAttribute("error", b.getMessage());

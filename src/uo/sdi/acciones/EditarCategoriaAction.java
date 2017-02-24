@@ -61,7 +61,7 @@ public class EditarCategoriaAction implements Accion {
 			request.setAttribute("category", cloneCategory);
 			listaCategorias=taskService.findCategoriesByUserId(user.getId());
 			session.setAttribute("listaCategorias", listaCategorias);
-			Log.debug("Añadida nueva categoria");
+			Log.info("Se ha editado la categoría correctamente.");
 		} catch (BusinessException b) {
 			request.setAttribute("error", b.getMessage());
 			Log.debug("Algo ha ocurrido editando la categoria: %s",

@@ -44,6 +44,7 @@ public class RegistrarseAction implements Accion {
 					long idUser = userService.registerUser(user);
 					request.setAttribute("message", "Te has registrado correctamente con el nombre de usuario '" + user.getLogin() + "'"
 							+ " e id: '" + idUser +"'");
+					Log.info("Se ha registrado el usuario con login " + user.getLogin());
 
 				} catch (BusinessException b) {
 					request.setAttribute("error", "Ha ocurrido algo durante el registro y no se ha completado: " + b.getMessage());

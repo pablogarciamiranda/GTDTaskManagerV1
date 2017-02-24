@@ -35,6 +35,7 @@ public class EliminarCategoriaAction implements Accion {
 			
 			request.setAttribute("message", "Se ha eliminado la categoría correctamente. ");
 			request.getRequestDispatcher("listarTareasInbox").forward(request, response);
+			Log.info("Se ha eliminado la categoría correctamente. ");
 		}
 		catch (BusinessException | ServletException | IOException b) {
 			request.setAttribute("error", b.getMessage());

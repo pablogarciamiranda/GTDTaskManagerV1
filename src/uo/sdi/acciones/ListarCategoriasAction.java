@@ -29,7 +29,7 @@ public class ListarCategoriasAction implements Accion {
 			TaskService taskService = Services.getTaskService();
 			listaCategorias=taskService.findCategoriesByUserId(user.getId());
 			session.setAttribute("listaCategorias", listaCategorias);
-			Log.debug("Obtenida lista de categorías conteniendo [%d] categorías", 
+			Log.info("Obtenida lista de categorías conteniendo [%d] categorías", 
 					listaCategorias.size());
 		}
 		catch (BusinessException b) {

@@ -36,7 +36,7 @@ public class ListarTareasSemanaAction implements Accion {
 			
 			session.setAttribute("listaMostrada", "Semana");
 			request.setAttribute("sePuedeMostrarTerminadas",false);
-			Log.debug("Obtenida lista de tareas de la semana conteniendo [%d] tareas", 
+			Log.info("Obtenida lista de tareas de la semana conteniendo [%d] tareas", 
 					listaTareasSemana.size());
 		}
 		catch (BusinessException b) {

@@ -44,7 +44,7 @@ public class ListarTareasAction implements Accion {
 			request.setAttribute("listaMostrada", "custom");
 			request.setAttribute("category", category);
 			
-			Log.debug("Obtenida lista de tareas del día conteniendo [%d] tareas", 
+			Log.info("Obtenida lista de tareas del día conteniendo [%d] tareas", 
 					listaTareas.size());
 		}
 		catch (BusinessException b) {

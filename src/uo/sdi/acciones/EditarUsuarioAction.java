@@ -66,13 +66,13 @@ public class EditarUsuarioAction implements Accion {
 			// Logica relacionada con la Vista
 			if (!userToEdit.getEmail().equals(newEmail)) {
 				userClone.setEmail(newEmail);
-				Log.debug("Modificado el email de [%s] con el valor [%s]",
+				Log.info("Modificado el email de [%s] con el valor [%s]",
 						userClone.getLogin(), newEmail);
 			}
 			//Si las viejas contraseñas y la repetición de la nueva coinciden, se actualiza
 			if (userToEdit.getPassword().equals(password) && newPassword.equals(newPassword2)) {
 				userClone.setPassword(newPassword);
-				Log.debug("Modificada la password de [%s]",
+				Log.info("Modificada la password de [%s]",
 						userClone.getLogin());
 			}
 			//Las viejas password no coinciden
@@ -95,7 +95,7 @@ public class EditarUsuarioAction implements Accion {
 			}
 			if (!userToEdit.getLogin().equals(newLogin)){
 				userClone.setLogin(newLogin);
-				Log.debug("Modificado el login de [%s] con el valor [%s]", login, newLogin);
+				Log.info("Modificado el login de [%s] con el valor [%s]", login, newLogin);
 			}
 			try {
 				UserService userService = Services.getUserService();
@@ -110,6 +110,8 @@ public class EditarUsuarioAction implements Accion {
 				else{
 					request.setAttribute("userToEdit", userClone);
 				}	
+				Log.info("Se ha editado correctamente el usuario.");
+				
 			} catch (BusinessException b) {
 				request.setAttribute("error", "Algo ha ocurrido actualizando los datos del usuario: "
 						+ b.getMessage());

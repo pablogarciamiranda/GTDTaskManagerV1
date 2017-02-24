@@ -33,12 +33,15 @@ public class CambiarEstadoAction implements Accion {
 			if (adminService.findUserById(idUser).getStatus().equals(UserStatus.ENABLED)){
 				adminService.disableUser(idUser);
 				request.setAttribute("message", "El usuario con id " + id + " se ha desactivado correctamente.");
+				Log.debug("El usuario con id " + id + " se ha desactivado correctamente.");
 			}
 			////Si el usuario está desactivado, activalo
 			else{
 				adminService.enableUser(idUser);
 				request.setAttribute("message", "El usuario con id " + id + " se ha activado correctamente.");
+				Log.info("El usuario con id " + id + " se ha activado correctamente.");
 			}
+			
 			listOfUsers = adminService.findAllUsers();
 		} catch (BusinessException b) {
 			request.setAttribute("error", b.getMessage());

@@ -29,6 +29,7 @@ public class ListarUsuariosAction implements Accion{
 			try {
 				listOfUsers = adminService.findAllUsers();
 				session.setAttribute("listOfUsers", listOfUsers);
+				Log.info("Lista de usuarios ejecutada correctamente");
 				return "EXITO";
 			} catch (BusinessException b) {
 				Log.debug(

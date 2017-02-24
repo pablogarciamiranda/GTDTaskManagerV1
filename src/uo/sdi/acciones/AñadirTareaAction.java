@@ -60,6 +60,7 @@ public class AñadirTareaAction implements Accion {
 				request.getRequestDispatcher("listarTareasInbox").forward(
 						request, response);
 			}
+			Log.info("Se ha añadido la tarea '" + task.getTitle() + "'");
 
 		} catch (BusinessException | ServletException | IOException b) {
 			request.setAttribute("error", b.getMessage());

@@ -32,11 +32,21 @@ public class MostrarUsuarioAction implements Accion{
 				Long userId = Long.parseLong(id);
 				
 				userToEdit = adminService.findUserById(userId);
-				session.setAttribute("userToEdit", userToEdit);
+				if (userToEdit != null)
+					session.setAttribute("userToEdit", userToEdit);
+				else{
+					request.setAttribute("error", "El usuario no existe.");
+					return "FRACASO";
+				}
 			}
 			else{
 				userToEdit = userService.findLoggableUser(login);
-				session.setAttribute("userToEdit", userToEdit);
+				if (userToEdit != null)
+					session.setAttribute("userToEdit", userToEdit);
+				else {
+					request.setAttribute("error", "El usuario no existe.");
+					return "FRACASO";
+				}
 			}
 			
 			

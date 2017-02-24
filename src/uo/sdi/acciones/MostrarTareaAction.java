@@ -34,6 +34,11 @@ public class MostrarTareaAction implements Accion {
 			Task task = taskService.findTaskById(taskid);
 			session.setAttribute("task", task);
 			
+			if (task == null){
+				request.setAttribute("error", "La tarea no existe.");
+				return "FRACASO";
+			}
+			
 			//Categoría de la tarea
 			session.setAttribute("selectedCategory", task.getCategoryId());
 			

@@ -64,9 +64,7 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 			jspSiguiente="/login.jsp"; //$NON-NLS-1$
 			
 		} catch(Exception e) {
-			
-			request.getSession().invalidate();
-			
+						
 			Log.error("Se ha producido alguna excepción no manejada [%s]", //$NON-NLS-1$
 					e.getMessage());
 			request.setAttribute("mensajeParaElUsuario",  //$NON-NLS-1$

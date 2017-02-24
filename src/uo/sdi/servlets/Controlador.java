@@ -65,7 +65,7 @@ public class Controlador extends javax.servlet.http.HttpServlet {
 			
 		} catch(Exception e) {
 			
-			//request.getSession().invalidate();
+			request.getSession().invalidate();
 			
 			Log.error("Se ha producido alguna excepción no manejada [%s]", //$NON-NLS-1$
 					e.getMessage());

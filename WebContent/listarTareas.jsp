@@ -122,15 +122,20 @@
 							<c:if
 								test="${listaMostrada eq 'Hoy' or listaMostrada eq 'Semana' }">
 								<!-- Aqui iria el nombre de la categoria -->
-								<c:forEach var="category" items="${listaCategorias}" varStatus="i">
-									<c:if test= "${category.id == task.categoryId}">
-										<td>${category.name}</td>
-									</c:if>
-									
-									
-									
-								</c:forEach>
-								
+								<c:choose>
+									<c:when test="${task.categoryId == null}">
+										<td>Inbox</td>
+									</c:when>
+									<c:otherwise>
+										<c:forEach var="category" items="${listaCategorias}"
+											varStatus="i">
+											<c:if test="${category.id == task.categoryId}">
+												<td>${category.name}</td>
+											</c:if>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
+
 							</c:if>
 							<c:choose>
 								<c:when test="${empty task.planned}">
@@ -159,7 +164,8 @@
 										</c:otherwise>
 									</c:choose>
 									<input type="hidden" name="taskId" value="${task.id}">
-									<button id="terminar_tarea_${task.title}" type="submit" class="btn btn-primary">Finished</button>
+									<button id="terminar_tarea_${task.title}" type="submit"
+										class="btn btn-primary">Finished</button>
 								</form>
 							</td>
 						</tr>
